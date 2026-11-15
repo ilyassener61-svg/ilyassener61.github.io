@@ -3,84 +3,258 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>İlyas Sener | Kalemin Dilinden</title>
+<title>İlyas Şener | Kalemin Dilinden</title>
 <style>
-:root {
-    --bg: #0f1115; --panel: #171a21; --panel2: #1e222b; 
-    --text: #e8eaed; --muted: #9aa0a6; 
-    --accent: #c9a227; --accent2: #e0b84c; --border: #2a2f3a;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); }
-a { color: inherit; text-decoration: none; }
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e8eaed;
+    --muted:#9aa0a6; --accent:#c9a227; --accent2:#e0b84c; --border:#2a2f3a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh}
+  a{color:inherit;text-decoration:none}
 
-/* LOGO ALANI */
-.logo-area {
-    text-align: center; padding: 30px 20px 20px; border-bottom: 1px solid var(--border);
-}
-.logo-area img {
-    width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
-    border: 2px solid var(--accent); box-shadow: 0 0 15px rgba(201, 162, 39, 0.3);
-    background: #0b0d12;
-}
-.logo-title {
-    font-size: 1.6rem; letter-spacing: 2px; color: var(--accent2); margin-top: 15px; text-transform: uppercase; font-weight: bold;
-}
-.logo-subtitle {
+  /* ===== LOGO ALANI ===== */
+  .logo-area{
+    text-align:center; padding:30px 20px 20px; border-bottom:1px solid var(--border); margin-bottom:10px;
+  }
+  .logo-area img{
+    width: 140px; height: 140px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--accent); box-shadow: 0 0 20px rgba(201,162,39,.4);
+    background: #000;
+  }
+  .logo-title{
+    font-size: 1.5rem; letter-spacing: 2px; color: var(--accent2); margin-top: 15px; font-weight: 600;
+    text-transform: uppercase;
+  }
+  .logo-subtitle{
     font-size: 0.8rem; letter-spacing: 3px; color: var(--muted); margin-top: 5px; text-transform: uppercase;
-}
+  }
 
-/* MENÜ BUTONU */
-.menu-btn {
-    position: absolute; top: 20px; left: 20px; background: var(--accent); color: var(--bg);
-    border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-size: 20px; font-weight: bold;
-}
+  /* ===== KENAR ÇUBUĞU ===== */
+  aside{width:280px;background:var(--panel);border-right:1px solid var(--border);padding:0 0 24px 0;position:fixed;top:0;bottom:0;overflow-y:auto;transition:transform .3s}
+  .nav-group{margin-bottom:8px}
+  .nav-group > span{display:block;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent2);padding:15px 24px 6px; font-weight: 600;}
+  .nav-group a{display:block;padding:9px 24px;font-size:.9rem;color:var(--text);border-left:3px solid transparent;transition:.2s}
+  .nav-group a:hover{background:var(--panel2);border-left-color:var(--accent);color:var(--accent2)}
 
-/* İÇERİK */
-.container { max-width: 600px; margin: 0 auto; padding: 20px; }
-.card {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px;
-}
-.card h2 { font-size: 1.2rem; color: var(--accent2); margin-bottom: 10px; }
-.card p { font-size: 0.9rem; color: var(--muted); margin-bottom: 15px; line-height: 1.5; }
-.btn {
-    display: inline-block; padding: 10px 20px; border: 1px solid var(--accent); color: var(--accent);
-    border-radius: 6px; font-weight: bold; text-align: center;
-}
+  /* ===== İÇERİK ===== */
+  main{margin-left:280px;flex:1;padding:40px;max-width:1100px}
+  .page{display:none;animation:fade .35s ease}
+  .page.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  h2{font-size:1.9rem;margin-bottom:8px;color:var(--accent)}
+  h2 + .sub{color:var(--muted);margin-bottom:28px;font-size:.95rem}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:18px; transition:.3s;}
+  .card:hover{border-color:var(--accent); transform: translateY(-2px);}
+  .card h3{font-size:1.1rem;margin-bottom:8px; color: var(--accent2);}
+  .card p{color:var(--muted);font-size:.9rem;line-height:1.6}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+  .badge{display:inline-block;background:var(--panel2);border:1px solid var(--border);color:var(--accent2);font-size:.72rem;padding:3px 10px;border-radius:20px;margin:0 6px 6px 0}
+  .btn{display:inline-block;background:var(--accent);color:#111;font-weight:600;padding:10px 22px;border-radius:8px;margin-top:14px;font-size:.9rem;border:none;cursor:pointer}
+  .btn:hover{background:var(--accent2)}
+  .btn.ghost{background:transparent;color:var(--accent2);border:1px solid var(--accent)}
+  .placeholder{border:1px dashed var(--border);border-radius:10px;padding:30px;text-align:center;color:var(--muted);font-size:.85rem; background: rgba(201,162,39,0.05);}
+  form input,form textarea{width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:11px;margin-bottom:12px;font-family:inherit;font-size:.9rem}
+  form textarea{min-height:110px;resize:vertical}
+
+  /* ===== MOBİL ===== */
+  .menu-btn{display:none;position:fixed;top:16px;left:16px;z-index:100;background:var(--accent);color:#111;border:none;width:44px;height:44px;border-radius:10px;font-size:1.3rem;cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,.5);}
+  @media(max-width:900px){
+    aside{transform:translateX(-100%);z-index:99}
+    aside.open{transform:none}
+    main{margin-left:0;padding:80px 20px 40px}
+    .menu-btn{display:block}
+  }
 </style>
 </head>
 <body>
 
-<button class="menu-btn">≡</button>
+<button class="menu-btn" onclick="document.querySelector('aside').classList.toggle('open')">☰</button>
 
-<div class="logo-area">
-    <img src="logo.jpg" alt="İlyas Sener Logo">
-    <div class="logo-title">İLYAS SENER</div>
-    <div class="logo-subtitle">KALEMİN DİLİNDEN</div>
-</div>
+<!-- ================= KENAR ÇUBUĞU ================= -->
+<aside>
+  <div class="logo-area">
+    <!-- Logonuzun dosya adı logo.jpg ise bu satır doğru çalışır -->
+    <img src="logo.jpg" alt="İlyas Şener Logo">
+    <div class="logo-title">İlyas Şener</div>
+    <div class="logo-subtitle">Kalemin Dilinden</div>
+  </div>
 
-<div class="container">
-    <h1 style="color: var(--accent2); font-size: 2rem; margin-bottom: 20px; margin-top: 20px;">Profil & Hesap</h1>
-    <p style="color: var(--muted); margin-bottom: 20px;">Hesap bilgilerinizi ve tercihlerinizi buradan yönetin.</p>
+  <div class="nav-group">
+    <span>📚 Eserlerim</span>
+    <a href="#" data-page="eserler">Romanlar</a>
+    <a href="#" data-page="eserler">Şiirler</a>
+    <a href="#" data-page="eserler">Çocuk kitapları</a>
+    <a href="#" data-page="eserler">Çocuk şarkıları</a>
+    <a href="#" data-page="eserler">Çocuk filmleri</a>
+    <a href="#" data-page="eserler">Klipler</a>
+    <a href="#" data-page="eserler">Bestelerim</a>
+    <a href="#" data-page="eserler">Müzik</a>
+    <a href="#" data-page="eserler">Resimler</a>
+  </div>
 
-    <div class="card">
-        <h2>Profil düzenle</h2>
-        <p>Ad, fotoğraf, biyografi ve iletişim bilgilerinizi güncelleyin.</p>
-        <a href="#" class="btn">Düzenle</a>
+  <div class="nav-group">
+    <span>🛒 Satış &amp; Sipariş</span>
+    <a href="#" data-page="magaza">Sesli dinleme ve Okumalı satış</a>
+    <a href="#" data-page="magaza">Sipariş verme</a>
+    <a href="#" data-page="magaza">Ödemeler</a>
+    <a href="#" data-page="magaza">Abonelikler</a>
+    <a href="#" data-page="magaza">Bağış</a>
+  </div>
+
+  <div class="nav-group">
+    <span>👥 Topluluk &amp; Etkileşim</span>
+    <a href="#" data-page="topluluk">Sizden gelenler</a>
+    <a href="#" data-page="topluluk">Günlük akış</a>
+    <a href="#" data-page="topluluk">Gönderi</a>
+    <a href="#" data-page="topluluk">Hikaye ekle</a>
+    <a href="#" data-page="topluluk">Yorumlar</a>
+    <a href="#" data-page="topluluk">Mesaj ve yanıtlar</a>
+    <a href="#" data-page="topluluk">Takip et</a>
+    <a href="#" data-page="topluluk">Gruplar</a>
+    <a href="#" data-page="topluluk">Beğenme ve paylaşım sayısı</a>
+    <a href="#" data-page="topluluk">Paylaşım ve yeniden kullanım</a>
+  </div>
+
+  <div class="nav-group">
+    <span>👤 Profil &amp; Hesap</span>
+    <a href="#" data-page="hesabim">Profil düzenle</a>
+    <a href="#" data-page="hesabim">Profil paylaş</a>
+    <a href="#" data-page="hesabim">Güncelleme</a>
+    <a href="#" data-page="hesabim">Dosya yükleme</a>
+    <a href="#" data-page="hesabim">İçerik tercihleri</a>
+    <a href="#" data-page="hesabim">Engellemeler</a>
+    <a href="#" data-page="hesabim">Paylaşım kabul onayı</a>
+  </div>
+
+  <div class="nav-group">
+    <span>🌐 İletişim &amp; Bağlantılar</span>
+    <a href="#" data-page="iletisim">Yazar hakkında</a>
+    <a href="#" data-page="iletisim">İletişim</a>
+    <a href="#" data-page="iletisim">Sosyal medya linkleri</a>
+    <a href="#" data-page="iletisim">Yabancı dil çevirisi</a>
+  </div>
+
+  <div class="nav-group">
+    <span>📢 Diğer</span>
+    <a href="#" data-page="diger">Reklam</a>
+    <a href="#" data-page="diger">Kısa yol</a>
+  </div>
+</aside>
+
+<!-- ================= İÇERİK ================= -->
+<main>
+
+  <!-- ESERLER -->
+  <section class="page active" id="eserler">
+    <h2>Eserlerim</h2>
+    <p class="sub">Roman, şiir, çocuk kitabı, şarkı, beste, klip, film ve resimlerinizi keşfedin.</p>
+    <div class="grid">
+      <div class="card"><h3>Romanlar</h3><p>Yayınlanmış ve taslak romanlarınız.</p><span class="badge">İncele</span><br><a href="#" class="btn ghost">Görüntüle</a></div>
+      <div class="card"><h3>Şiirler</h3><p>Şiir koleksiyonunuz ve yeni yazılar.</p><span class="badge">Oku</span><br><a href="#" class="btn ghost">Görüntüle</a></div>
+      <div class="card"><h3>Çocuk Kitapları</h3><p>Minik okurlar için hikâyeler.</p><span class="badge">İncele</span><br><a href="#" class="btn ghost">Görüntüle</a></div>
+      <div class="card"><h3>Çocuk Şarkıları</h3><p>Çocuklar için eğlenceli ve öğretici şarkılar.</p><span class="badge">Dinle</span><br><a href="#" class="btn ghost">Dinle</a></div>
+      <div class="card"><h3>Çocuk Filmleri</h3><p>Animasyon ve kısa filmler.</p><span class="badge">İzle</span><br><a href="#" class="btn ghost">İzle</a></div>
+      <div class="card"><h3>Klipler</h3><p>Video klipler ve görsel çalışmalar.</p><span class="badge">İzle</span><br><a href="#" class="btn ghost">İzle</a></div>
+      <div class="card"><h3>Bestelerim</h3><p>Özgün müzik besteleri ve notalar.</p><span class="badge">İncele</span><br><a href="#" class="btn ghost">Görüntüle</a></div>
+      <div class="card"><h3>Müzik</h3><p>Ses kayıtları ve albümler.</p><span class="badge">Dinle</span><br><a href="#" class="btn ghost">Dinle</a></div>
+      <div class="card"><h3>Resimler</h3><p>Galeri ve illüstrasyonlar.</p><span class="badge">Galeri</span><br><a href="#" class="btn ghost">Galeri</a></div>
     </div>
+  </section>
 
-    <div class="card">
-        <h2>Profil paylaş</h2>
-        <p>Profil bağlantınızı kopyalayarak okuyucularınızla paylaşın.</p>
-        <a href="#" class="btn">Bağlantıyı Kopyala</a>
+  <!-- MAĞAZA -->
+  <section class="page" id="magaza">
+    <h2>Satış &amp; Sipariş</h2>
+    <p class="sub">Eserlerinizi satışa sunun, siparişleri ve ödemeleri yönetin.</p>
+    <div class="grid">
+      <div class="card"><h3>Sesli dinleme ve Okumalı satış</h3><p>Sesli kitap, e-kitap ve basılı kitap satışları.</p><button class="btn ghost">Satışa Sun</button></div>
+      <div class="card"><h3>Sipariş verme</h3><p>Müşterilerin sipariş oluşturma ekranı.</p><button class="btn ghost">Sipariş Formu</button></div>
+      <div class="card"><h3>Ödemeler</h3><p>Geçmiş ödemeler ve fatura durumu.</p><button class="btn ghost">Raporlar</button></div>
+      <div class="card"><h3>Abonelikler</h3><p>Özel içeriklere erişim için abonelik paketleri.</p><button class="btn ghost">Paketleri Gör</button></div>
+      <div class="card"><h3>Bağış</h3><p>Projenize destek olmak isteyenler için bağış alanı.</p><button class="btn ghost">Bağış Yap</button></div>
     </div>
+    <div class="placeholder" style="margin-top:18px">💡 Not: Ücretsiz sürümde gerçek ödeme entegrasyonu yoktur. Siparişler e-posta ile alınabilir; ileride iyzico/PayPal gibi bir servis eklenebilir.</div>
+  </section>
 
-    <div class="card">
-        <h2>Güncelleme</h2>
-        <p>En son güncellemeleri ve haberleri buradan takip edin.</p>
-        <a href="#" class="btn">İncele</a>
+  <!-- TOPLULUK -->
+  <section class="page" id="topluluk">
+    <h2>Topluluk &amp; Etkileşim</h2>
+    <p class="sub">Okuyucularınızla etkileşime geçin, geri bildirimleri yönetin.</p>
+    <div class="grid">
+      <div class="card"><h3>Sizden gelenler</h3><p>Okuyucu mesajları ve öneriler.</p><button class="btn ghost">Gelen Kutusu</button></div>
+      <div class="card"><h3>Günlük akış</h3><p>Günlük yazılar ve paylaşımlar.</p><button class="btn ghost">Akışı Aç</button></div>
+      <div class="card"><h3>Gönderi</h3><p>Yeni bir gönderi oluşturun ve paylaşın.</p><button class="btn ghost">Gönderi Oluştur</button></div>
+      <div class="card"><h3>Hikaye ekle</h3><p>Kısa hikâye veya güncelleme paylaşın.</p><button class="btn ghost">Hikaye Ekle</button></div>
+      <div class="card"><h3>Yorumlar</h3><p>Eser yorumlarını onaylayın veya yanıtlayın.</p><button class="btn ghost">Yorumları Yönet</button></div>
+      <div class="card"><h3>Mesaj ve yanıtlar</h3><p>Doğrudan mesajları ve yanıtları görüntüleyin.</p><button class="btn ghost">Mesajlar</button></div>
+      <div class="card"><h3>Takip et</h3><p>Takip ettiğiniz ve sizi takip edenler.</p><button class="btn ghost">Listeler</button></div>
+      <div class="card"><h3>Gruplar</h3><p>Okuyucu gruplarını yönetin.</p><button class="btn ghost">Gruplar</button></div>
+      <div class="card"><h3>Beğenme ve paylaşım sayısı</h3><p>Etkileşim istatistikleri.</p><button class="btn ghost">İstatistikler</button></div>
+      <div class="card"><h3>Paylaşım ve yeniden kullanım</h3><p>İçerik kullanım izinleri.</p><button class="btn ghost">İzinler</button></div>
     </div>
-</div>
+  </section>
 
+  <!-- HESABIM -->
+  <section class="page" id="hesabim">
+    <h2>Profil &amp; Hesap</h2>
+    <p class="sub">Hesap bilgilerinizi ve tercihlerinizi buradan yönetin.</p>
+    <div class="grid">
+      <div class="card"><h3>Profil düzenle</h3><p>Ad, fotoğraf, biyografi ve iletişim bilgilerinizi güncelleyin.</p><button class="btn ghost">Düzenle</button></div>
+      <div class="card"><h3>Profil paylaş</h3><p>Profil bağlantınızı kopyalayarak okuyucularınızla paylaşın.</p><button class="btn ghost">Bağlantıyı Kopyala</button></div>
+      <div class="card"><h3>Güncelleme</h3><p>Yeni eser ve duyurularınızı takipçilerinize ulaştırın.</p><button class="btn ghost">Güncelleme Yayınla</button></div>
+      <div class="card"><h3>Dosya yükleme</h3><p>Kapak, ses, video ve resim yükleyin.</p><button class="btn ghost">Dosya Yükle</button></div>
+      <div class="card"><h3>İçerik tercihleri</h3><p>Hangi tür içerikleri görmek istediğinizi belirleyin.</p><button class="btn ghost">Tercihler</button></div>
+      <div class="card"><h3>Engellemeler</h3><p>Engellenen kullanıcıları görüntüleyin.</p><button class="btn ghost">Liste</button></div>
+      <div class="card"><h3>Paylaşım kabul onayı</h3><p>Paylaşım izin taleplerini onaylayın.</p><button class="btn ghost">Talepler</button></div>
+    </div>
+  </section>
+
+  <!-- İLETİŞİM -->
+  <section class="page" id="iletisim">
+    <h2>Hakkında &amp; İletişim</h2>
+    <p class="sub">Kendinizi tanıtın, okuyucularınızla iletişim kurun.</p>
+    <div class="grid">
+      <div class="card"><h3>Yazar Hakkında</h3><p>Biyografi, kariyer ve ödüller.</p><button class="btn ghost">Düzenle</button></div>
+      <div class="card"><h3>Sosyal Medya Linkleri</h3><p>Instagram, X, YouTube, TikTok bağlantıları.</p><button class="btn ghost">Linkleri Düzenle</button></div>
+      <div class="card"><h3>Yabancı Dil Çevirisi</h3><p>Eserlerinizi farklı dillere çevirin.</p><button class="btn ghost">Çeviri Yap</button></div>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h3>İletişim Formu</h3>
+      <p style="margin-bottom:14px">Bana mesaj bırakın, en kısa sürede dönüş yapacağım.</p>
+      <form onsubmit="event.preventDefault();alert('Mesajınız alındı! (Demo)');this.reset();">
+        <input type="text" placeholder="Adınız" required>
+        <input type="email" placeholder="E-posta adresiniz" required>
+        <textarea placeholder="Mesajınız..." required></textarea>
+        <button class="btn" type="submit">Mesaj Gönder</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- DİĞER -->
+  <section class="page" id="diger">
+    <h2>Diğer</h2>
+    <p class="sub">Reklam ve kısayol işlemleri.</p>
+    <div class="grid">
+      <div class="card"><h3>Reklam Ver</h3><p>Kampanya oluşturun ve bütçe belirleyin.</p><button class="btn ghost">Reklam Oluştur</button></div>
+      <div class="card"><h3>Kısa yol</h3><p>Sık kullanılan işlemlere hızlı erişim.</p><button class="btn ghost">Kısayollar</button></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Menü tıklamaları: ilgili sayfayı göster
+  document.querySelectorAll('aside a[data-page]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById(link.dataset.page);
+      if(target) target.classList.add('active');
+      // mobilde menüyü kapat
+      if(window.innerWidth <= 900) document.querySelector('aside').classList.remove('open');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+</script>
 </body>
 </html>
