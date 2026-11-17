@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
- <meta name="google-site-verification" content="i4VvX-updUsCVeGkf5i2B11U8w-nBVCM8lQ2NdG5mdo" /> 
+<meta name="google-site-verification" content="i4VvX-updUsCVeGkf5i2B11U8w-nBVCM8lQ2NdG5mdo" /> 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>İlyas Şener | Kalemin Dilinden</title>
@@ -11,15 +11,18 @@
     --muted:#9aa0a6; --accent:#c9a227; --accent2:#e0b84c; --border:#2a2f3a;
   }
   *{box-sizing:border-box;margin:0;padding:0}
+  
   body{
-  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-  background: url('arkaplan.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color:var(--text);
-  display:flex;
-  min-height:100vh;
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    background: url('arkaplan.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color:var(--text);
+    display:flex;
+    min-height:100vh;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.8); /* Yazıların resim üzerinde okunması için hafif gölge */
   }
-a{color:inherit;text-decoration:none}
+  
+  a{color:inherit;text-decoration:none}
 
   /* ===== LOGO ALANI ===== */
   .logo-area{
@@ -39,11 +42,18 @@ a{color:inherit;text-decoration:none}
   }
 
   /* ===== KENAR ÇUBUĞU ===== */
-  aside{width:280px; background: transparent; border-right:1px solid var(--border);padding:0 0 24px 0;position:fixed;top:0;bottom:0;overflow-y:auto;transition:transform .3s}
+  aside{
+    width:280px; 
+    background: transparent; /* Menü arka planı tamamen saydam */
+    backdrop-filter: blur(5px); /* Hafif cam efekti */
+    border-right:1px solid var(--border);
+    padding:0 0 24px 0;
+    position:fixed; top:0; bottom:0; overflow-y:auto; transition:transform .3s
+  }
   .nav-group{margin-bottom:8px}
   .nav-group > span{display:block;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent2);padding:15px 24px 6px; font-weight: 600;}
   .nav-group a{display:block;padding:9px 24px;font-size:.9rem;color:var(--text);border-left:3px solid transparent;transition:.2s}
-  .nav-group a:hover{background:var(--panel2);border-left-color:var(--accent);color:var(--accent2)}
+  .nav-group a:hover{background:rgba(30, 34, 43, 0.5);border-left-color:var(--accent);color:var(--accent2)}
 
   /* ===== İÇERİK ===== */
   main{margin-left:280px;flex:1;padding:40px;max-width:1100px}
@@ -52,23 +62,25 @@ a{color:inherit;text-decoration:none}
   @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   h2{font-size:1.9rem;margin-bottom:8px;color:var(--accent)}
   h2 + .sub{color:var(--muted);margin-bottom:28px;font-size:.95rem}
+  
+  /* Kartlar tamamen şeffaf, sadece yazılar var */
   .card{background: transparent; border: none; padding:22px 0; margin-bottom:18px; transition:.3s;}
-  .card:hover{border-color:var(--accent); transform: translateY(-2px);}
+  
   .card h3{font-size:1.1rem;margin-bottom:8px; color: var(--accent2);}
-  .card p{color:var(--muted);font-size:.9rem;line-height:1.6}
+  .card p{color:var(--text);font-size:.9rem;line-height:1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.9);}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-  .badge{display:inline-block;background:var(--panel2);border:1px solid var(--border);color:var(--accent2);font-size:.72rem;padding:3px 10px;border-radius:20px;margin:0 6px 6px 0}
-  .btn{display:inline-block;background:var(--accent);color:#111;font-weight:600;padding:10px 22px;border-radius:8px;margin-top:14px;font-size:.9rem;border:none;cursor:pointer}
-  .btn:hover{background:var(--accent2)}
-  .btn.ghost{background:transparent;color:var(--accent2);border:1px solid var(--accent)}
-  .placeholder{border:1px dashed var(--border);border-radius:10px;padding:30px;text-align:center;color:var(--muted);font-size:.85rem; background: rgba(201,162,39,0.05);}
-  form input,form textarea{width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:11px;margin-bottom:12px;font-family:inherit;font-size:.9rem}
+  .badge{display:inline-block;background:rgba(30, 34, 43, 0.7);border:1px solid var(--border);color:var(--accent2);font-size:.72rem;padding:3px 10px;border-radius:20px;margin:0 6px 6px 0}
+  .btn{display:inline-block;background:rgba(201, 162, 39, 0.2);color:var(--accent2);font-weight:600;padding:10px 22px;border-radius:8px;margin-top:14px;font-size:.9rem;border:1px solid var(--accent);cursor:pointer; text-shadow: none; transition: 0.2s;}
+  .btn:hover{background:var(--accent); color:#111;}
+  .btn.ghost{background:rgba(15, 17, 21, 0.6);color:var(--accent2);border:1px solid var(--accent)}
+  
+  form input,form textarea{width:100%;background:rgba(30, 34, 43, 0.8);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:11px;margin-bottom:12px;font-family:inherit;font-size:.9rem; text-shadow: none;}
   form textarea{min-height:110px;resize:vertical}
 
   /* ===== MOBİL ===== */
-  .menu-btn{display:none;position:fixed;top:16px;left:16px;z-index:100;background:var(--accent);color:#111;border:none;width:44px;height:44px;border-radius:10px;font-size:1.3rem;cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,.5);}
+  .menu-btn{display:none;position:fixed;top:16px;left:16px;z-index:100;background:var(--accent);color:#111;border:none;width:44px;height:44px;border-radius:10px;font-size:1.3rem;cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,.5); text-shadow: none;}
   @media(max-width:900px){
-    aside{transform:translateX(-100%);z-index:99}
+    aside{transform:translateX(-100%);z-index:99; background: rgba(15, 17, 21, 0.95);}
     aside.open{transform:none}
     main{margin-left:0;padding:80px 20px 40px}
     .menu-btn{display:block}
@@ -82,7 +94,6 @@ a{color:inherit;text-decoration:none}
 <!-- ================= KENAR ÇUBUĞU ================= -->
 <aside>
   <div class="logo-area">
-    <!-- Logonuzun dosya adı logo.jpg ise bu satır doğru çalışır -->
     <img src="logo.jpg" alt="İlyas Şener Logo">
     <div class="logo-title">İlyas Şener</div>
     <div class="logo-subtitle">Kalemin Dilinden</div>
@@ -179,8 +190,8 @@ a{color:inherit;text-decoration:none}
       <div class="card"><h3>Sipariş verme</h3><p>Müşterilerin sipariş oluşturma ekranı.</p><button class="btn ghost">Sipariş Formu</button></div>
       <div class="card"><h3>Ödemeler</h3><p>Geçmiş ödemeler ve fatura durumu.</p><button class="btn ghost">Raporlar</button></div>
       <div class="card"><h3>Abonelikler</h3><p>Özel içeriklere erişim için abonelik paketleri.</p><button class="btn ghost">Paketleri Gör</button></div>
-          <div class="card"><h3>Bağış / Destek</h3><p>Projeme destek olmak isterseniz bana e-posta gönderin.</p><a href="mailto:ilyassener61@gmail.com?subject=Bağış Hakkında" class="btn ghost">E-posta Gönder</a></div>
-  </div>
+      <div class="card"><h3>Bağış / Destek</h3><p>Projeme destek olmak isterseniz bana e-posta gönderin.</p><a href="mailto:ilyassener61@gmail.com?subject=Bağış Hakkında" class="btn ghost">E-posta Gönder</a></div>
+    </div>
   </section>
 
   <!-- TOPLULUK -->
