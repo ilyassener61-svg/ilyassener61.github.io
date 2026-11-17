@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+u<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta name="google-site-verification" content="i4VvX-updUsCVeGkf5i2B11U8w-nBVCM8lQ2NdG5mdo" /> 
@@ -80,10 +80,15 @@
   
   @media(max-width:900px){
     aside{
-      transform:translateX(-100%); 
-      z-index:99; 
-      background: transparent; /* Mobilde menü tamamen şeffaf */
-      border-right: none; /* Mobilde kenarlık kaldırıldı */
+  transform: translateX(-100%); 
+  z-index: 99; 
+  background: transparent; 
+  display: none; /* Menüyü tamamen gizle */
+}
+aside.open{
+  transform: none;
+  display: block; /* Sadece butona basınca göster */
+}
     }
     aside.open{transform:none}
     main{margin-left:0;padding:80px 20px 40px} /* Menünün altında kalmaması için boşluk */
