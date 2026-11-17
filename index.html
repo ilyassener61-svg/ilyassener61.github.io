@@ -80,14 +80,14 @@
   
   @media(max-width:900px){
     aside{
-      transform: translateX(-100%); 
-      z-index: 99; 
-      background: transparent; 
-      display: none; /* Menüyü tamamen gizle */
-    }
-    aside.open{
-      transform: none;
-      display: block; /* Sadece butona basınca göster */
+  transform: translateX(-100%); 
+  z-index: 99; 
+  display: none; /* Menü varsayılan olarak gizli */
+}
+aside.open{
+  transform: none;
+  display: block; /* Butona basınca görünür */
+}
     }
     main{margin-left:0;padding:80px 20px 40px}
     .menu-btn{display:block}
