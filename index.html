@@ -60,11 +60,16 @@
   .page.active{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   h2{font-size:1.9rem;margin-bottom:8px;color:var(--accent)}
-  h2 + .sub{color:var(--muted);margin-bottom:28px;font-size:.95rem}
+  
+  /* ALTIN RENK YAPILAN YER 1: Sayfa Alt Başlığı */
+  h2 + .sub{color:var(--accent2);margin-bottom:28px;font-size:.95rem; font-weight: 500;}
   
   .card{background: transparent; border: none; padding:22px 0; margin-bottom:18px; transition:.3s;}
   .card h3{font-size:1.1rem;margin-bottom:8px; color: var(--accent2);}
-  .card p{color:var(--text);font-size:.9rem;line-height:1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.9);}
+  
+  /* ALTIN RENK YAPILAN YER 2: Kart İçindeki Açıklamalar */
+  .card p{color:var(--accent2);font-size:.9rem;line-height:1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); font-weight: 400;}
+  
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
   .badge{display:inline-block;background:rgba(30, 34, 43, 0.6);border:1px solid var(--border);color:var(--accent2);font-size:.72rem;padding:3px 10px;border-radius:20px;margin:0 6px 6px 0}
   
@@ -75,17 +80,17 @@
   form input,form textarea{width:100%;background:rgba(30, 34, 43, 0.7);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:11px;margin-bottom:12px;font-family:inherit;font-size:.9rem; text-shadow: none;}
   form textarea{min-height:110px;resize:vertical}
 
-  /* ===== MOBİL UYUMLULUK (KESİN ÇÖZÜM) ===== */
+  /* ===== MOBİL UYUMLULUK ===== */
   .menu-btn{display:none;position:fixed;top:16px;left:16px;z-index:1000;background:var(--accent);color:#111;border:none;width:44px;height:44px;border-radius:10px;font-size:1.3rem;cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,.5); text-shadow: none;}
   
   @media(max-width:900px){
     body {
-      display: block !important; /* Flexbox'ı mobilde iptal et */
+      display: block !important;
     }
     aside {
       transform: translateX(-100%) !important; 
       z-index: 999; 
-      background: rgba(15, 17, 21, 0.95) !important; /* Mobil menü okunabilsin diye hafif koyu */
+      background: rgba(15, 17, 21, 0.95) !important; /* Mobil menü koyu arka plan (1. resimdeki gibi) */
       backdrop-filter: blur(5px);
       border-right: none;
     }
@@ -93,7 +98,7 @@
       transform: translateX(0) !important;
     }
     main {
-      margin-left: 0 !important; /* Sol boşluğu zorla sıfırla */
+      margin-left: 0 !important; 
       width: 100% !important;
       padding: 80px 15px 40px !important;
     }
