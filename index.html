@@ -389,36 +389,33 @@ function googleTranslateElementInit() {
   </div>
 </section>
 <script>
-  // RESİMLER KLASÖRÜNÜN YOLU
-const klasor = "resimler/"; 
+  // 1. RESİMLER KLASÖRÜNÜN YOLU (Önce bunu test edeceğiz)
+  const klasor = "./resimler/";
 
-// RESİM LİSTESİ (GitHub'daki gerçek isimler)
-// RESİM LİSTESİ (GitHub'daki gerçek isimler)
-const klasor = "./resimler/";
-// RESİM LİSTESİ (GitHub'daki gerçek isimler)
+  // 2. RESİM LİSTESİ
+  const fotograflar = [
+    "47e15afd-faca-401a-89d9-5bd8055c8928.jpeg",
+    "IMG_0005.jpeg",
+    "IMG_0042.jpeg",
+    "IMG_0043.jpeg",
+    "IMG_0047.jpeg",
+    "IMG_0049.jpeg",
+    "IMG_0050.jpeg",
+    "IMG_0051.jpeg",
+    "IMG_0058.png",
+    "IMG_0082.png",
+    "IMG_0083.jpeg",
+    "IMG_0729.jpeg",
+    "IMG_0739.jpeg",
+    "IMG_0758.jpeg",
+    "IMG_0759.jpeg",
+    "IMG_9501.jpeg",
+    "IMG_9606.jpeg",
+    "IMG_9607.jpeg",
+    "IMG_9997.jpeg",
+    "IMG_9998.jpeg"
+  ];
 
-const fotograflar = [
-  "47e15afd-faca-401a-89d9-5bd8055c8928.jpeg",
-  "IMG_0005.jpeg",
-  "IMG_0042.jpeg",
-  "IMG_0043.jpeg",
-  "IMG_0047.jpeg",
-  "IMG_0049.jpeg",
-  "IMG_0050.jpeg",
-  "IMG_0051.jpeg",
-  "IMG_0058.png",
-  "IMG_0082.png",
-  "IMG_0083.jpeg",
-  "IMG_0729.jpeg",
-  "IMG_0739.jpeg",
-  "IMG_0758.jpeg",
-  "IMG_0759.jpeg",
-  "IMG_9501.jpeg",
-  "IMG_9606.jpeg",
-  "IMG_9607.jpeg",
-  "IMG_9997.jpeg",
-  "IMG_9998.jpeg"
-];
   function galeriRenderEt() {
     const kapsayici = document.getElementById("galeri-kutulari");
     if (!kapsayici) return;
@@ -434,7 +431,6 @@ const fotograflar = [
       baslik.style.color = "#c9a227"; 
 
       const gorsel = document.createElement("img");
-      // Burada "resimler/" ile resim adı birleşiyor
       gorsel.src = `${klasor}${dosyaAdi}`; 
       gorsel.alt = `Galeri ${indeks + 1}`;
       gorsel.style.maxWidth = "100%";
