@@ -388,9 +388,16 @@ function googleTranslateElementInit() {
 </section>
 
 <script>
-  const klasor = "";
+  // Resimler aynı klasörde olduğu için boş bırakıyoruz
+  const klasor = ""; 
+  
+  // Sitede görünmesini istediğiniz resimlerin isimleri
   const fotograflar = [
-    "1794760460171.jpg"
+    "1794760460171.jpg",
+    "1794941632408.jpg",
+    "1794941654786.jpg",
+    "yeni-foto.jpg"
+    // Diğer resimleri de buraya virgülle ekleyebilirsiniz
   ];
 
   function galeriRenderEt() {
@@ -405,13 +412,15 @@ function googleTranslateElementInit() {
 
       const baslik = document.createElement("h3");
       baslik.textContent = `Galeri ${indeks + 1}`;
+      baslik.style.color = "#c9a227"; 
 
       const gorsel = document.createElement("img");
-      gorsel.src = `${klasor}${dosyaAdi}`;
+      gorsel.src = `${klasor}${dosyaAdi}`; 
       gorsel.alt = `Galeri ${indeks + 1}`;
       gorsel.style.maxWidth = "100%";
       gorsel.style.height = "auto";
       gorsel.style.display = "block";
+      gorsel.style.borderRadius = "8px"; 
 
       kart.appendChild(baslik);
       kart.appendChild(gorsel);
