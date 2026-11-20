@@ -389,25 +389,14 @@ function googleTranslateElementInit() {
   </div>
 </section>
 <script>
-  const klasor = "resimler/";
+  // RESİMLER KLASÖRÜNÜN YOLU
+  const klasor = "resimler/"; 
   
-  // TÜM RESİMLERİN LİSTESİ (GitHub'daki isimleriyle birebir aynı olmalı)
+  // RESİM LİSTESİ (Tırnak içine resimlerin gerçek isimlerini yazın)
   const fotograflar = [
-    "1794760460171.jpg",
-    "1794941632408.jpg",
-    "1794941654786.jpg",
-    "1795022368643.jpg",
-    "1795024467452.jpg",
-    "1795024665882.jpg",
-    "1795111162234.jpg",
-    "1795111195362.jpg",
-    "1795111207967.jpg",
-    "IMG-20261015-WA0012.jpg",
-    "IMG-20261016-WA0006.jpg",
-    "IMG-20261016-WA0007.jpg",
-    "IMG-20261016-WA0008.jpg",
-    "IMG-20261113-WA0002.jpg",
-    "IMG_20261016_090639.jpg"
+    "BURAYA_1_RESMIN_ADI.jpg",
+    "BURAYA_2_RESMIN_ADI.jpg" 
+    // Diğer resimleri de virgülle alt alta ekleyin
   ];
 
   function galeriRenderEt() {
@@ -425,6 +414,7 @@ function googleTranslateElementInit() {
       baslik.style.color = "#c9a227"; 
 
       const gorsel = document.createElement("img");
+      // Burada "resimler/" ile resim adı birleşiyor
       gorsel.src = `${klasor}${dosyaAdi}`; 
       gorsel.alt = `Galeri ${indeks + 1}`;
       gorsel.style.maxWidth = "100%";
