@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta name="google-site-verification" content="i4VvX-updUsCVeGkf5i2B11U8w-nBVCM8lQ2NdG
-  5mdo" /> 
+<meta name="google-site-verification" content="i4VvX-updUsCVeGkf5i2B11U8w-nBVCM8lQ2NdG 5mdo" /> 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>İlyas Şener </title>
@@ -62,13 +61,11 @@
   @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   h2{font-size:1.9rem;margin-bottom:8px;color:var(--accent)}
   
-  /* ALTIN RENK YAPILAN YER 1: Sayfa Alt Başlığı */
   h2 + .sub{color:var(--accent2);margin-bottom:28px;font-size:.95rem; font-weight: 500;}
   
   .card{background: transparent; border: none; padding:22px 0; margin-bottom:18px; transition:.3s;}
   .card h3{font-size:1.1rem;margin-bottom:8px; color: var(--accent2);}
   
-  /* ALTIN RENK YAPILAN YER 2: Kart İçindeki Açıklamalar */
   .card p{color:var(--accent2);font-size:.9rem;line-height:1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); font-weight: 400;}
   
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
@@ -78,34 +75,42 @@
   .btn:hover{background:var(--accent); color:#111;}
   .btn.ghost{background:rgba(15, 17, 21, 0.4);color:var(--accent2);border:1px solid var(--accent)}
   
-  form input,form textarea{width:100%;background:rgba(30, 34, 43, 0.7);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:11px;margin-bottom:12px;font-family:inherit;font-size:.9rem; text-shadow: none;}
-  form textarea{min-height:110px;resize:vertical}
+  /* ===== YENİ EKLENEN PROFİL DÜZENLEME FORMU STİLLERİ ===== */
+  .profil-form-kapsayici {
+      background-color: var(--panel);
+      border: 1px solid rgba(201, 162, 39, 0.3); 
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(201, 162, 39, 0.1);
+      max-width: 800px;
+  }
+  .form-grubu { display: flex; gap: 20px; flex-wrap: wrap; }
+  .form-alani { flex: 1; min-width: 250px; display: flex; flex-direction: column; margin-bottom: 20px; }
+  .form-alani label { margin-bottom: 8px; font-size: 14px; color: #cccccc; font-weight: 500; }
+  .form-alani input, .form-alani textarea {
+      background-color: #2a2a2a; border: 1px solid #444; border-radius: 8px;
+      padding: 12px; color: white; font-size: 15px; transition: all 0.3s ease;
+  }
+  .form-alani input:focus, .form-alani textarea:focus {
+      outline: none; border-color: var(--accent); box-shadow: 0 0 8px rgba(201, 162, 39, 0.3);
+  }
+  .form-alani textarea { resize: vertical; min-height: 100px; font-family: inherit; }
+  .kaydet-buton {
+      background-color: transparent; color: var(--accent); border: 2px solid var(--accent);
+      padding: 12px 30px; font-size: 16px; font-weight: bold; border-radius: 8px;
+      cursor: pointer; transition: all 0.3s ease; letter-spacing: 1px;
+  }
+  .kaydet-buton:hover { background-color: var(--accent); color: #111; box-shadow: 0 0 15px rgba(201, 162, 39, 0.5); }
 
   /* ===== MOBİL UYUMLULUK ===== */
   .menu-btn{display:none;position:fixed;top:16px;left:16px;z-index:1000;background:var(--accent);color:#111;border:none;width:44px;height:44px;border-radius:10px;font-size:1.3rem;cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,.5); text-shadow: none;}
   
   @media(max-width:900px){
-    body {
-      display: block !important;
-    }
-    aside {
-      transform: translateX(-100%) !important; 
-      z-index: 999; 
-      background: rgba(15, 17, 21, 0.95) !important; /* Mobil menü koyu arka plan (1. resimdeki gibi) */
-      backdrop-filter: blur(5px);
-      border-right: none;
-    }
-    aside.open {
-      transform: translateX(0) !important;
-    }
-    main {
-      margin-left: 0 !important; 
-      width: 100% !important;
-      padding: 80px 15px 40px !important;
-    }
-    .menu-btn {
-      display: block !important;
-    }
+    body { display: block !important; }
+    aside { transform: translateX(-100%) !important; z-index: 999; background: rgba(15, 17, 21, 0.95) !important; backdrop-filter: blur(5px); border-right: none; }
+    aside.open { transform: translateX(0) !important; }
+    main { margin-left: 0 !important; width: 100% !important; padding: 80px 15px 40px !important; }
+    .menu-btn { display: block !important; }
   }
 </style>
 </head>
@@ -234,72 +239,95 @@
     </div>
   </section>
 
-  <!-- HESABIM -->
+  <!-- HESABIM (PROFİL DÜZENLEME FORMU EKLENDİ) -->
   <section class="page" id="hesabim">
     <h2>Profil &amp; Hesap</h2>
     <p class="sub">Hesap bilgilerinizi ve tercihlerinizi buradan yönetin.</p>
-    <div class="grid">
-      <div class="card"><h3>Profil düzenle</h3><p>Ad, fotoğraf, biyografi ve iletişim bilgilerinizi güncelleyin.</p><button class="btn ghost">Düzenle</button></div>
+    
+    <div class="profil-form-kapsayici">
+        <div class="profil-ust" style="text-align:center; margin-bottom: 30px;">
+            <img src="logo.jpg" alt="İlyas Şener Logo" class="ana-logo" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);">
+            <h3 style="color: var(--accent2); margin-top: 15px; font-size: 1.5rem;">İLYAS ŞENER</h3>
+            <p style="color: var(--muted); font-style: italic; font-size: 0.9rem;">Kalemin Dilinden</p>
+        </div>
+
+        <form action="#" method="POST">
+            <div class="form-grubu">
+                <div class="form-alani">
+                    <label for="adsoyad">Ad Soyad / Mahlas</label>
+                    <input type="text" id="adsoyad" name="adsoyad" value="İlyas Şener" placeholder="Adınızı girin">
+                </div>
+                <div class="form-alani">
+                    <label for="kullaniciadi">Kullanıcı Adı (URL)</label>
+                    <input type="text" id="kullaniciadi" name="kullaniciadi" value="ilyassener" placeholder="Kullanıcı adınızı girin">
+                </div>
+            </div>
+
+            <div class="form-alani">
+                <label for="biyografi">Hakkımda / Biyografi</label>
+                <textarea id="biyografi" name="biyografi" placeholder="Kendinizden kısaca bahsedin...">Yazmak, unutmamak için tutulan bir nöbettir. Çünkü yazmak, gelecek nesillere bırakılan bir emanettir.</textarea>
+            </div>
+
+            <div class="form-grubu">
+                <div class="form-alani">
+                    <label for="eposta">E-posta Adresi</label>
+                    <input type="email" id="eposta" name="eposta" placeholder="ornek@mail.com">
+                </div>
+                <div class="form-alani">
+                    <label for="sosyalmedya">Sosyal Medya (Instagram)</label>
+                    <input type="text" id="sosyalmedya" name="sosyalmedya" value="instagram.com/ilyas.sener">
+                </div>
+            </div>
+
+            <div style="text-align: right; border-top: 1px solid rgba(201, 162, 39, 0.2); padding-top: 20px; margin-top: 10px;">
+                <button type="submit" class="kaydet-buton">DEĞİŞİKLİKLERİ KAYDET</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="grid" style="margin-top: 40px; opacity: 0.8;">
       <div class="card"><h3>Profil paylaş</h3><p>Profil bağlantınızı kopyalayarak okuyucularınızla paylaşın.</p><button class="btn ghost">Bağlantıyı Kopyala</button></div>
-      <div class="card"><h3>Güncelleme</h3><p>Yeni eser ve duyurularınızı takipçilerinize ulaştırın.</p><button class="btn ghost">Güncelleme Yayınla</button></div>
       <div class="card"><h3>Dosya yükleme</h3><p>Kapak, ses, video ve resim yükleyin.</p><button class="btn ghost">Dosya Yükle</button></div>
-      <div class="card"><h3>İçerik tercihleri</h3><p>Hangi tür içerikleri görmek istediğinizi belirleyin.</p><button class="btn ghost">Tercihler</button></div>
       <div class="card"><h3>Engellemeler</h3><p>Engellenen kullanıcıları görüntüleyin.</p><button class="btn ghost">Liste</button></div>
-      <div class="card"><h3>Paylaşım kabul onayı</h3><p>Paylaşım izin taleplerini onaylayın.</p><button class="btn ghost">Talepler</button></div>
     </div>
   </section>
-<!-- Hakkında Bölümü -->
-<div style="background-color: #111111; border: 2px solid #d4af37; border-radius: 20px; max-width: 900px; margin: 40px auto; padding: 40px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); text-align: center; position: relative; z-index: 10;">
-    
-    <!-- Yazar Resmi -->
-  <div style="margin-bottom: 30px;">
-    <img src="IMG_0816.png" alt="İlyas Şener" style="max-width: 100%; height: auto; border-radius: 15px; border: 2px solid #d4af37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);">
+
+  <!-- HAKKINDA -->
+  <div style="background-color: #111111; border: 2px solid #d4af37; border-radius: 20px; max-width: 900px; margin: 40px auto; padding: 40px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); text-align: center; position: relative; z-index: 10;">
+    <div style="margin-bottom: 30px;">
+      <img src="IMG_0816.png" alt="İlyas Şener" style="max-width: 100%; height: auto; border-radius: 15px; border: 2px solid #d4af37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);">
+    </div>
+      <h2 style="color: #d4af37; font-family: 'Georgia', serif; font-size: 2.2em; letter-spacing: 3px; margin-bottom: 30px; text-transform: uppercase;">Yazarın Hayat Hikâyesi</h2>
+      <div style="text-align: left; color: #f5e5b3; font-family: 'Georgia', serif; line-height: 1.8; font-size: 1.1em; padding: 0 10px;">
+          <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 30px;">Kendi Kalemimden</h3>
+          <p>1961’de Konya’nın Kulu ilçesinde, dokuz kardeşli mütevazı bir ailenin çocuğu olarak dünyaya geldim. Kuyu suyunun serinliğinde, toprağın kokusunda, yoksulluğun terbiyesinde büyüdüm.</p>
+          <p>Genç yaşta gurbet yoluna düştüm ve 1980’de İsveç’e yerleştim. Memleket özlemi, yüreğimde hiç sönmeyen bir ateş oldu. O ateşin dumanı beni türkülere, şiirlere ve hikâyelere sürükledi. Şiirle başlayan yazarlık serüvenim; masallara, romanlara ve çocuklar için hazırladığım kitaplık bir seriye dönüştü.</p>
+          <p>Her satırımda bir yaşam izi, her kitabımda okuyana uzanan bir dost eli var. Kalemimi hiç bırakmadım; çünkü yazmak, Allah’ın bana verdiği en kıymetli emanet.</p>
+          <blockquote style="font-style: italic; font-size: 1.3em; text-align: center; color: #d4af37; margin: 40px 0; padding: 20px; border-left: 4px solid #d4af37; background-color: rgba(212, 175, 55, 0.1); border-radius: 5px;">
+              “Yazmak, Unutmamak İçin Tutulan Bir Nöbettir.”
+          </blockquote>
+          <p>Benim hikâyem satırlara sığmaz. Ama her kitabım, hayatın içinden bir nefes ve okuyana uzanan bir dost elidir. Bir yazar ve şair olarak amacım; kelimelerle okurun kalbine dokunmak, unuttuğumuz o saf duyguları yeniden hatırlatmaktır. Eserlerimde aşkı, hasreti, memleket duygusunu ve insanın sessiz çığlığını işlerken, aslında her bir okura bir dost eli uzatıyorum.</p>
+          <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 50px;">Yazarlık Serüveni</h3>
+          <p>Yazarlık serüvenim, müziğe olan tutkumla çok küçük yaşlarda başladı. Her ne kadar babamın karşı çıkması nedeniyle bu tutku bir süre sekteye uğramış gibi görünse de aslında hiçbir zaman içimden silinmedi. İçimde bir güfte gibi hep varlığını korudu.</p>
+          <p>Gurbete gidişimle birlikte bu birikim kaleme dökülmeye başladı ve yazmak, hayatımın vazgeçilmez bir parçası hâline geldi. Şiirle başlayan bu yolculuk, zamanla şarkı sözlerine, masallara, romanlara ve çocuk kitaplarına uzandı.</p>
+          <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 50px;">İlhamımı Nereden Alırım?</h3>
+          <p>İlham, herkese nasip olmayan özel bir duygudur. Ben de bunu Allah’ın bana verdiği bir lütuf olarak görüyorum. İlhamımı gurbetten, doğadan, insandan, çocuklardan, hayattan, ayrılıklardan, aşk yaşayanlardan, ağlayıp acı çekenlerden, özlem duyanlardan, vatan hasretinden; anne, baba ve evlat acısından alıyorum.</p>
+          <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 50px;">Bir Ömür ve Onlarca Kitap</h3>
+          <p style="text-align: center; font-size: 1.2em; font-weight: bold; color: #d4af37;">Topraktan kelimeye, hasretten hikâyeye…</p>
+          <div style="background-color: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 10px; border-left: 5px solid #d4af37; margin: 30px 0;">
+              <ul style="list-style-type: none; padding-left: 0;">
+                  <li style="margin-bottom: 15px;">🖋️ Bugüne kadar <strong>2.000’in üzerinde</strong> şiir ve şarkı sözü kaleme aldım.</li>
+                  <li style="margin-bottom: 15px;">🎵 <strong>400’ün üzerinde</strong> eserim bestelendi.</li>
+                  <li>📚 Edebiyat yolculuğumda <strong>8 roman</strong>, <strong>14 şiir kitabı</strong> ve <strong>42 çocuk kitabı</strong>yla okurlarımla buluştum.</li>
+              </ul>
+          </div>
+          <div style="margin-top: 60px; text-align: center;">
+              <p style="font-size: 2em; color: #d4af37; margin-bottom: 5px; font-style: italic;">İlyas Şener</p>
+              <p style="color: #f5e5b3; font-weight: bold; letter-spacing: 1px;">Yazar · Şair · Söz Yazarı · Bestekâr</p>
+          </div>
+      </div>
   </div>
 
-    <h2 style="color: #d4af37; font-family: 'Georgia', serif; font-size: 2.2em; letter-spacing: 3px; margin-bottom: 30px; text-transform: uppercase;">Yazarın Hayat Hikâyesi</h2>
-    
-    <div style="text-align: left; color: #f5e5b3; font-family: 'Georgia', serif; line-height: 1.8; font-size: 1.1em; padding: 0 10px;">
-        
-        <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 30px;">Kendi Kalemimden</h3>
-        <p>1961’de Konya’nın Kulu ilçesinde, dokuz kardeşli mütevazı bir ailenin çocuğu olarak dünyaya geldim. Kuyu suyunun serinliğinde, toprağın kokusunda, yoksulluğun terbiyesinde büyüdüm.</p>
-        
-        <p>Genç yaşta gurbet yoluna düştüm ve 1980’de İsveç’e yerleştim. Memleket özlemi, yüreğimde hiç sönmeyen bir ateş oldu. O ateşin dumanı beni türkülere, şiirlere ve hikâyelere sürükledi. Şiirle başlayan yazarlık serüvenim; masallara, romanlara ve çocuklar için hazırladığım kitaplık bir seriye dönüştü.</p>
-
-        <p>Her satırımda bir yaşam izi, her kitabımda okuyana uzanan bir dost eli var. Kalemimi hiç bırakmadım; çünkü yazmak, Allah’ın bana verdiği en kıymetli emanet.</p>
-
-        <blockquote style="font-style: italic; font-size: 1.3em; text-align: center; color: #d4af37; margin: 40px 0; padding: 20px; border-left: 4px solid #d4af37; background-color: rgba(212, 175, 55, 0.1); border-radius: 5px;">
-            “Yazmak, Unutmamak İçin Tutulan Bir Nöbettir.”
-        </blockquote>
-
-        <p>Benim hikâyem satırlara sığmaz. Ama her kitabım, hayatın içinden bir nefes ve okuyana uzanan bir dost elidir. Bir yazar ve şair olarak amacım; kelimelerle okurun kalbine dokunmak, unuttuğumuz o saf duyguları yeniden hatırlatmaktır. Eserlerimde aşkı, hasreti, memleket duygusunu ve insanın sessiz çığlığını işlerken, aslında her bir okura bir dost eli uzatıyorum.</p>
-
-        <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 50px;">Yazarlık Serüveni</h3>
-        <p>Yazarlık serüvenim, müziğe olan tutkumla çok küçük yaşlarda başladı. Her ne kadar babamın karşı çıkması nedeniyle bu tutku bir süre sekteye uğramış gibi görünse de aslında hiçbir zaman içimden silinmedi. İçimde bir güfte gibi hep varlığını korudu.</p>
-        
-        <p>Gurbete gidişimle birlikte bu birikim kaleme dökülmeye başladı ve yazmak, hayatımın vazgeçilmez bir parçası hâline geldi. Şiirle başlayan bu yolculuk, zamanla şarkı sözlerine, masallara, romanlara ve çocuk kitaplarına uzandı.</p>
-
-        <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 50px;">İlhamımı Nereden Alırım?</h3>
-        <p>İlham, herkese nasip olmayan özel bir duygudur. Ben de bunu Allah’ın bana verdiği bir lütuf olarak görüyorum. İlhamımı gurbetten, doğadan, insandan, çocuklardan, hayattan, ayrılıklardan, aşk yaşayanlardan, ağlayıp acı çekenlerden, özlem duyanlardan, vatan hasretinden; anne, baba ve evlat acısından alıyorum.</p>
-
-        <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 50px;">Bir Ömür ve Onlarca Kitap</h3>
-        <p style="text-align: center; font-size: 1.2em; font-weight: bold; color: #d4af37;">Topraktan kelimeye, hasretten hikâyeye…</p>
-        
-        <div style="background-color: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 10px; border-left: 5px solid #d4af37; margin: 30px 0;">
-            <ul style="list-style-type: none; padding-left: 0;">
-                <li style="margin-bottom: 15px;">🖋️ Bugüne kadar <strong>2.000’in üzerinde</strong> şiir ve şarkı sözü kaleme aldım.</li>
-                <li style="margin-bottom: 15px;">🎵 <strong>400’ün üzerinde</strong> eserim bestelendi.</li>
-                <li>📚 Edebiyat yolculuğumda <strong>8 roman</strong>, <strong>14 şiir kitabı</strong> ve <strong>42 çocuk kitabı</strong>yla okurlarımla buluştum.</li>
-            </ul>
-        </div>
-
-        <div style="margin-top: 60px; text-align: center;">
-            <p style="font-size: 2em; color: #d4af37; margin-bottom: 5px; font-style: italic;">İlyas Şener</p>
-            <p style="color: #f5e5b3; font-weight: bold; letter-spacing: 1px;">Yazar · Şair · Söz Yazarı · Bestekâr</p>
-        </div>
-
-    </div>
-</div>
-    
   <!-- İLETİŞİM -->
   <section class="page" id="iletisim">
     <h2>Hakkında &amp; İletişim</h2>
@@ -337,22 +365,19 @@
 </main>
 
 <script>
-  // Menü tıklamaları: ilgili sayfayı göster
   document.querySelectorAll('aside a[data-page]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       const target = document.getElementById(link.dataset.page);
       if(target) target.classList.add('active');
-      // mobilde menüyü kapat
       if(window.innerWidth <= 900) document.querySelector('aside').classList.remove('open');
       window.scrollTo({top:0, behavior:'smooth'});
     });
   });
 </script>
-<!-- ================= DİL ÇEVİRİ VE İLETİŞİM BAŞLANGIÇ ================= -->
 
-<!-- 1. ULUSLARARASI DİL SEÇİCİ (GENİŞ KAPSAMLI) -->
+<!-- DİL ÇEVİRİ VE İLETİŞİM -->
 <div style="text-align: center; margin: 30px 0; padding: 15px; background: #171a21; border-radius: 8px; border: 1px solid #2a2f3a; max-width: 350px; margin-left: auto; margin-right: auto;">
     <label for="language-select" style="color: #c9a227; font-weight: bold; display: block; margin-bottom: 10px;">🌐 DİL SEÇİN / SELECT LANGUAGE</label>
     <select id="language-select" onchange="translatePage(this.value)" style="width: 100%; padding: 10px; border-radius: 5px; background-color: #0f1115; color: #e8eaed; border: 1px solid #c9a227; font-size: 16px;">
@@ -375,26 +400,19 @@
     </select>
 </div>
 
-<!-- Çeviri Motoru (Sayfayı yeniden yüklemeden çevirir) -->
 <script type="text/javascript">
 function translatePage(lang) {
-    // Google Translate'in sayfa içi çeviri yapan gizli fonksiyonunu tetikler
     var select = document.getElementById('language-select');
     var iframe = document.querySelector('.goog-te-banner-frame');
-    
     if (lang === 'tr') {
-        // Eğer Türkçe seçilirse sayfayı yenile (orijinal hale dön)
         window.location.reload();
     } else {
-        // Google Translate çerezi ile dili değiştir
         document.cookie = "googtrans=/tr/" + lang + "; path=/";
         document.cookie = "googtrans=/tr/" + lang + "; domain=" + window.location.hostname + "; path=/";
-        window.location.reload(); // Sayfayı seçilen dilde yeniden yükle
+        window.location.reload(); 
     }
 }
 </script>
-
-<!-- Google Translate Altyapısını Gizlice Yükle (Böylece çerez yöntemi çalışır) -->
 <div id="google_translate_element" style="display:none;"></div>
 <script type="text/javascript">
 function googleTranslateElementInit() {
@@ -403,20 +421,15 @@ function googleTranslateElementInit() {
 </script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<!-- 2. İLETİŞİM VE SOSYAL MEDYA -->
 <div class="contact-section" style="padding: 30px 15px; text-align: center; border-top: 1px solid #2a2f3a; margin-top: 30px; background-color: #0f1115; width: 100%; box-sizing: border-box;">
-    
     <h2 style="color: #c9a227; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 20px;">📞 İLETİŞİM</h2>
-    
     <div style="display: flex; flex-direction: column; gap: 12px; align-items: center; margin-bottom: 35px;">
         <a href="mailto:ilyas.sener@hotmail.com" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📧 Hotmail: ilyas.sener@hotmail.com</a>
         <a href="mailto:ilyassener61@gmail.com" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📧 Gmail: ilyassener61@gmail.com</a>
         <a href="https://wa.me/905517309638" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📱 WhatsApp (TR): +90 551 730 96 38</a>
         <a href="https://wa.me/46739786837" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📱 WhatsApp (SE): +46 73 978 68 37</a>
     </div>
-
     <h2 style="color: #c9a227; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 20px;">🔗 SOSYAL MEDYA</h2>
-    
     <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
         <a href="https://www.instagram.com/ilyas.sener" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📸 Instagram (@ilyas.sener)</a>
         <a href="https://www.instagram.com/yazarilyassener" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📸 Instagram (@yazarilyassener)</a>
@@ -426,61 +439,37 @@ function googleTranslateElementInit() {
         <a href="https://suno.com/invite/@ilyassener61" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">🎶 Suno</a>
         <a href="https://www.youtube.com/@ilyassener1" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">▶️ YouTube</a>
     </div>
-
 </div>
-<!-- ================= DİL ÇEVİRİ VE İLETİŞİM BİTİŞ ================= -->
-  <section id="galeri-bolumu" style="padding: 20px;">
-  
+
+<section id="galeri-bolumu" style="padding: 20px;">
   <h2>GALERİ</h2>
   <button id="galeri-ac-btn" type="button" onclick="galeriAc()">Galeriyi Aç</button>
   <button id="galeri-kapat-btn" type="button" onclick="galeriKapat()" style="display: none;">Galeriyi Kapat</button>
-
   <div id="galeri-icerik" style="display: none; margin-top: 16px;">
     <div id="galeri-kutulari"></div>
   </div>
 </section>
 <script>
-  // 1. RESİMLER KLASÖRÜNÜN YOLU (Önce bunu test edeceğiz)
   const klasor = "./resimler/";
-
-  // 2. RESİM LİSTESİ
   const fotograflar = [
     "47e15afd-faca-401a-89d9-5bd8055c8928.jpeg",
-    "IMG_0005.jpeg",
-    "IMG_0042.jpeg",
-    "IMG_0043.jpeg",
-    "IMG_0047.jpeg",
-    "IMG_0049.jpeg",
-    "IMG_0050.jpeg",
-    "IMG_0051.jpeg",
-    "IMG_0058.png",
-    "IMG_0082.png",
-    "IMG_0083.jpeg",
-    "IMG_0729.jpeg",
-    "IMG_0739.jpeg",
-    "IMG_0758.jpeg",
-    "IMG_0759.jpeg",
-    "IMG_9501.jpeg",
-    "IMG_9606.jpeg",
-    "IMG_9607.jpeg",
-    "IMG_9997.jpeg",
-    "IMG_9998.jpeg"
+    "IMG_0005.jpeg", "IMG_0042.jpeg", "IMG_0043.jpeg", "IMG_0047.jpeg",
+    "IMG_0049.jpeg", "IMG_0050.jpeg", "IMG_0051.jpeg", "IMG_0058.png",
+    "IMG_0082.png", "IMG_0083.jpeg", "IMG_0729.jpeg", "IMG_0739.jpeg",
+    "IMG_0758.jpeg", "IMG_0759.jpeg", "IMG_9501.jpeg", "IMG_9606.jpeg",
+    "IMG_9607.jpeg", "IMG_9997.jpeg", "IMG_9998.jpeg"
   ];
 
   function galeriRenderEt() {
     const kapsayici = document.getElementById("galeri-kutulari");
     if (!kapsayici) return;
-
     kapsayici.innerHTML = "";
-
     fotograflar.forEach((dosyaAdi, indeks) => {
       const kart = document.createElement("div");
       kart.style.marginBottom = "16px";
-
       const baslik = document.createElement("h3");
       baslik.textContent = `Galeri ${indeks + 1}`;
       baslik.style.color = "#c9a227"; 
-
       const gorsel = document.createElement("img");
       gorsel.src = `${klasor}${dosyaAdi}`; 
       gorsel.alt = `Galeri ${indeks + 1}`;
@@ -488,7 +477,6 @@ function googleTranslateElementInit() {
       gorsel.style.height = "auto";
       gorsel.style.display = "block";
       gorsel.style.borderRadius = "8px"; 
-
       kart.appendChild(baslik);
       kart.appendChild(gorsel);
       kapsayici.appendChild(kart);
@@ -508,3 +496,6 @@ function googleTranslateElementInit() {
     document.getElementById("galeri-kapat-btn").style.display = "none";
   }
 </script>
+
+</body>
+</html>
