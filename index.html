@@ -303,7 +303,16 @@
           <button type="button" class="btn ghost" onclick="linkKopyala()" id="kopyalaBtn" style="margin-top: 0;">Kopyala</button>
         </div>
       </div>
-      <div class="card"><h3>Dosya yükleme</h3><p>Kapak, ses, video ve resim yükleyin.</p><button class="btn ghost">Dosya Yükle</button></div>
+      <div class="card">
+  <h3>Dosya yükleme</h3>
+  <p>Kapak, ses, video ve resim yükleyin.</p>
+  <form action="https://formspree.io/f/xwloadgv" method="POST" enctype="multipart/form-data" style="margin-top: 15px;">
+    <input type="file" name="dosya" id="dosyaInput" style="display: none;" onchange="dosyaSecildi()">
+    <label for="dosyaInput" class="btn ghost" style="display: inline-block; text-align: center; cursor: pointer;">Dosya Seç</label>
+    <span id="dosyaAdi" style="display: block; margin-top: 10px; font-size: 14px; color: var(--accent2);"></span>
+    <button type="submit" class="btn" style="margin-top: 10px; display: none;" id="dosyaGonderBtn">Gönder</button>
+  </form>
+</div>
       <div class="card"><h3>Engellemeler</h3><p>Engellenen kullanıcıları görüntüleyin.</p><button class="btn ghost">Liste</button></div>
     </div>
   </section>
