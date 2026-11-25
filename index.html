@@ -63,7 +63,7 @@
   
   h2 + .sub{color:var(--accent2);margin-bottom:28px;font-size:.95rem; font-weight: 500;}
   
-  /* Kartlara hafif koyu cam efekti eklendi (Yazıların okunması için) */
+  /* Kartlara hafif koyu cam efekti */
   .card{
     background: rgba(15, 17, 21, 0.75); 
     backdrop-filter: blur(5px);
@@ -247,7 +247,7 @@
     </div>
   </section>
 
-  <!-- HESABIM (PROFİL DÜZENLEME FORMU EKLENDİ) -->
+  <!-- HESABIM (PROFİL DÜZENLEME FORMU) -->
   <section class="page" id="hesabim">
     <h2>Profil &amp; Hesap</h2>
     <p class="sub">Hesap bilgilerinizi ve tercihlerinizi buradan yönetin.</p>
@@ -293,7 +293,7 @@
         </form>
     </div>
 
-    <!-- ALT KARTLAR -->
+    <!-- ALT KARTLAR (Sadece Profil Paylaş ve Engellemeler kaldı) -->
     <div class="grid" style="margin-top: 40px; opacity: 0.9;">
       <div class="card">
         <h3>Profil paylaş</h3>
@@ -303,16 +303,6 @@
           <button type="button" class="btn ghost" onclick="linkKopyala()" id="kopyalaBtn" style="margin-top: 0;">Kopyala</button>
         </div>
       </div>
-      <div class="card">
-  <h3>Dosya yükleme</h3>
-  <p>Kapak, ses, video ve resim yükleyin.</p>
-  <form action="https://formspree.io/f/xwloadgv" method="POST" enctype="multipart/form-data" style="margin-top: 15px;">
-    <input type="file" name="dosya" id="dosyaInput" style="display: none;" onchange="dosyaSecildi()">
-    <label for="dosyaInput" class="btn ghost" style="display: inline-block; text-align: center; cursor: pointer;">Dosya Seç</label>
-    <span id="dosyaAdi" style="display: block; margin-top: 10px; font-size: 14px; color: var(--accent2);"></span>
-    <button type="submit" class="btn" style="margin-top: 10px; display: none;" id="dosyaGonderBtn">Gönder</button>
-  </form>
-</div>
       <div class="card"><h3>Engellemeler</h3><p>Engellenen kullanıcıları görüntüleyin.</p><button class="btn ghost">Liste</button></div>
     </div>
   </section>
@@ -519,27 +509,24 @@ function googleTranslateElementInit() {
   }
 </script>
 
-<!-- ================= KOPYALAMA FONKSİYONU (DÜZELTİLDİ) ================= -->
+<!-- ================= KOPYALAMA FONKSİYONU ================= -->
 <script>
   function linkKopyala() {
     var kopyalanacakLink = document.getElementById("profilLink");
     var buton = document.getElementById("kopyalaBtn");
     
-    // Linki seç
     kopyalanacakLink.select();
-    kopyalanacakLink.setSelectionRange(0, 99999); // Mobil cihazlar için gerekli
+    kopyalanacakLink.setSelectionRange(0, 99999);
 
     try {
-      // Tüm tarayıcılarda çalışan eski ama en garantili kopyalama yöntemi
       var basarili = document.execCommand("copy");
       
       if (basarili) {
         var eskiYazi = buton.innerHTML;
         buton.innerHTML = "Kopyalandı! ✓";
-        buton.style.color = "#4CAF50"; // Yeşil yap
+        buton.style.color = "#4CAF50";
         buton.style.borderColor = "#4CAF50";
         
-        // 2 saniye sonra butonu eski haline getir
         setTimeout(function() {
           buton.innerHTML = eskiYazi;
           buton.style.color = "";
@@ -553,20 +540,6 @@ function googleTranslateElementInit() {
     }
   }
 </script>
-<script>
-  function dosyaSecildi() {
-    var input = document.getElementById('dosyaInput');
-    var yazi = document.getElementById('dosyaAdi');
-    var btn = document.getElementById('dosyaGonderBtn');
-    
-    if (input.files && input.files.length > 0) {
-      yazi.textContent = "Seçilen dosya: " + input.files[0].name;
-      btn.style.display = 'inline-block'; // Gönder butonunu görünür yap
-    } else {
-      yazi.textContent = "";
-      btn.style.display = 'none';
-    }
-  }
-</script>
+
 </body>
 </html>
