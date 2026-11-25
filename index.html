@@ -448,7 +448,10 @@ function googleTranslateElementInit() {
   <button id="galeri-ac-btn" type="button" onclick="galeriAc()">Galeriyi Aç</button>
   <button id="galeri-kapat-btn" type="button" onclick="galeriKapat()" style="display: none;">Galeriyi Kapat</button>
   <div id="galeri-icerik" style="display: none; margin-top: 16px;">
-    <div id="galeri-kutulari"></div>
+    <div id="galeri-kutulari">
+    <!-- Sadece bu tek resmi test ediyoruz -->
+    <img src="./resimler/IMG_0005.jpeg" alt="Test Resmi" style="width: 100%; max-width: 300px;">
+</div>
   </div>
 </section>
 <script>
@@ -529,7 +532,7 @@ function googleTranslateElementInit() {
     document.getElementById("galeri-ac-btn").style.display = "none";
     document.getElementById("galeri-kapat-btn").style.display = "inline-block";
   }
-
+un
   function galeriKapat() {
     document.getElementById("galeri-icerik").style.display = "none";
     document.getElementById("galeri-ac-btn").style.display = "inline-block";
