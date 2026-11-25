@@ -515,27 +515,37 @@ function googleTranslateElementInit() {
 </script>
 <!-- ================= GALERİ BÖLÜMÜ BİTİŞ ================= -->
 <script>
+  <script>
   function linkKopyala() {
-    var linkKutusu = document.getElementById("profilLink");
-    var buton = document.getElementById("kopyalaBtn");
+    var kopyalanacakLink = document.getElementById("profilLink");
     
-    linkKutusu.select();
-    linkKutusu.setSelectionRange(0, 99999);
-    
-    navigator.clipboard.writeText(linkKutusu.value).then(function() {
-      var eskiYazi = buton.innerHTML;
-      buton.innerHTML = "Kopyalandı! ✓";
-      buton.style.color = "#4CAF50";
-      buton.style.borderColor = "#4CAF50";
+    // Linki seç
+    kopyalanacakLink.select();
+    kopyalanacakLink.setSelectionRange(0, 99999); // Mobil cihazlar için gerekli
+
+    try {
+      // Tüm tarayıcılarda çalışan eski ama en garantili kopyalama yöntemi
+      var basarili = document.execCommand("copy");
       
-      setTimeout(function() {
-        buton.innerHTML = eskiYazi;
-        buton.style.color = "";
-        buton.style.borderColor = "";
-      }, 2000);
-    }).catch(function(err) {
-      alert("Link kopyalanamadı, lütfen manuel kopyalayın.");
-    });
+      if (basarili) {
+        var buton = document.getElementById("kopyalaBtn");
+        var eskiYazi = buton.innerHTML;
+        buton.innerHTML = "Kopyalandı! ✓";
+        buton.style.color = "#4CAF50"; // Yeşil yap
+        buton.style.borderColor = "#4CAF50";
+        
+        // 2 saniye sonra butonu eski haline getir
+        setTimeout(function() {
+          buton.innerHTML = eskiYazi;
+          buton.style.color = "";
+          buton.style.borderColor = "";
+        }, 2000);
+      } else {
+        alert("Kopyalama başarısız oldu. Lütfen yazıyı manuel olarak seçip kopyalayın.");
+      }
+    } catch (err) {
+      alert("Tarayıcınız otomatik kopyalamayı desteklemiyor.");
+    }
   }
 </script>
 </body>
