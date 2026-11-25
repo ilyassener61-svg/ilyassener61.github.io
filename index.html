@@ -553,6 +553,20 @@ function googleTranslateElementInit() {
     }
   }
 </script>
-
+<script>
+  function dosyaSecildi() {
+    var input = document.getElementById('dosyaInput');
+    var yazi = document.getElementById('dosyaAdi');
+    var btn = document.getElementById('dosyaGonderBtn');
+    
+    if (input.files && input.files.length > 0) {
+      yazi.textContent = "Seçilen dosya: " + input.files[0].name;
+      btn.style.display = 'inline-block'; // Gönder butonunu görünür yap
+    } else {
+      yazi.textContent = "";
+      btn.style.display = 'none';
+    }
+  }
+</script>
 </body>
 </html>
