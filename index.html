@@ -63,10 +63,18 @@
   
   h2 + .sub{color:var(--accent2);margin-bottom:28px;font-size:.95rem; font-weight: 500;}
   
-  .card{background: transparent; border: none; padding:22px 0; margin-bottom:18px; transition:.3s;}
+  /* Kartlara hafif koyu cam efekti eklendi (Yazıların okunması için) */
+  .card{
+    background: rgba(15, 17, 21, 0.75); 
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(201, 162, 39, 0.2); 
+    border-radius: 12px; 
+    padding: 22px; 
+    margin-bottom: 18px; 
+    transition: .3s;
+  }
   .card h3{font-size:1.1rem;margin-bottom:8px; color: var(--accent2);}
-  
-  .card p{color:var(--accent2);font-size:.9rem;line-height:1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); font-weight: 400;}
+  .card p{color:#cccccc;font-size:.9rem;line-height:1.6; font-weight: 400;}
   
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
   .badge{display:inline-block;background:rgba(30, 34, 43, 0.6);border:1px solid var(--border);color:var(--accent2);font-size:.72rem;padding:3px 10px;border-radius:20px;margin:0 6px 6px 0}
@@ -121,7 +129,6 @@
 <!-- ================= KENAR ÇUBUĞU ================= -->
 <aside>
   <div class="logo-area">
-    <!-- LOGO BURADA GÜNCELLENDİ -->
     <img src="https://i.hizliresim.com/d9n9co7y.jpg" alt="İlyas Şener Logo">
     <div class="logo-title">İlyas Şener</div>
     <div class="logo-subtitle">Kalemin Dilinden</div>
@@ -236,14 +243,7 @@
       <div class="card"><h3>Takip et</h3><p>Takip ettiğiniz ve sizi takip edenler.</p><button class="btn ghost">Listeler</button></div>
       <div class="card"><h3>Gruplar</h3><p>Okuyucu gruplarını yönetin.</p><button class="btn ghost">Gruplar</button></div>
       <div class="card"><h3>Beğenme ve paylaşım sayısı</h3><p>Etkileşim istatistikleri.</p><button class="btn ghost">İstatistikler</button></div>
-     <div class="card">
-  <h3>Profil paylaş</h3>
-  <p>Profil bağlantınızı kopyalayarak okuyucularınızla paylaşın.</p>
-  <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-    <input type="text" id="profilLink" value="https://ilyassener.info" readonly style="flex: 1; min-width: 200px; background: #1e222b; color: white; border: 1px solid #444; padding: 10px; border-radius: 8px; font-size: 14px;">
-    <button class="btn ghost" onclick="linkKopyala()" id="kopyalaBtn" style="margin-top: 0;">Kopyala</button>
-  </div>
-</div>
+      <div class="card"><h3>Paylaşım ve yeniden kullanım</h3><p>İçerik kullanım izinleri.</p><button class="btn ghost">İzinler</button></div>
     </div>
   </section>
 
@@ -254,7 +254,6 @@
     
     <div class="profil-form-kapsayici">
         <div class="profil-ust" style="text-align:center; margin-bottom: 30px;">
-            <!-- LOGO BURADA GÜNCELLENDİ -->
             <img src="https://i.hizliresim.com/d9n9co7y.jpg" alt="İlyas Şener Logo" class="ana-logo" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);">
             <h3 style="color: var(--accent2); margin-top: 15px; font-size: 1.5rem;">İLYAS ŞENER</h3>
             <p style="color: var(--muted); font-style: italic; font-size: 0.9rem;">Kalemin Dilinden</p>
@@ -294,15 +293,16 @@
         </form>
     </div>
 
-    <div class="grid" style="margin-top: 40px; opacity: 0.8;">
+    <!-- ALT KARTLAR -->
+    <div class="grid" style="margin-top: 40px; opacity: 0.9;">
       <div class="card">
-      <h3>Profil paylaş</h3>
-      <p>Profil bağlantınızı kopyalayarak okuyucularınızla paylaşın.</p>
-      <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-        <input type="text" id="profilLink" value="https://ilyassener.info" readonly style="flex: 1; min-width: 200px; background: #1e222b; color: white; border: 1px solid #444; padding: 10px; border-radius: 8px; font-size: 14px;">
-        <button class="btn ghost" onclick="linkKopyala()" id="kopyalaBtn" style="margin-top: 0;">Kopyala</button>
+        <h3>Profil paylaş</h3>
+        <p>Profil bağlantınızı kopyalayarak okuyucularınızla paylaşın.</p>
+        <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+          <input type="text" id="profilLink" value="https://ilyassener.info" readonly style="flex: 1; min-width: 200px; background: #1e222b; color: white; border: 1px solid #444; padding: 10px; border-radius: 8px; font-size: 14px;">
+          <button type="button" class="btn ghost" onclick="linkKopyala()" id="kopyalaBtn" style="margin-top: 0;">Kopyala</button>
+        </div>
       </div>
-    </div>
       <div class="card"><h3>Dosya yükleme</h3><p>Kapak, ses, video ve resim yükleyin.</p><button class="btn ghost">Dosya Yükle</button></div>
       <div class="card"><h3>Engellemeler</h3><p>Engellenen kullanıcıları görüntüleyin.</p><button class="btn ghost">Liste</button></div>
     </div>
@@ -359,10 +359,10 @@
     <div class="card" style="margin-top:18px">
       <h3>İletişim Formu</h3>
       <p style="margin-bottom:14px">Bana mesaj bırakın, en kısa sürede dönüş yapacağım.</p>
-      <form onsubmit="event.preventDefault();alert('Mesajınız alındı! (Demo)');this.reset();">
-        <input type="text" placeholder="Adınız" required>
-        <input type="email" placeholder="E-posta adresiniz" required>
-        <textarea placeholder="Mesajınız..." required></textarea>
+      <form action="https://formspree.io/f/xwloadgv" method="POST">
+        <input type="text" name="isim" placeholder="Adınız" required>
+        <input type="email" name="email" placeholder="E-posta adresiniz" required>
+        <textarea name="mesaj" placeholder="Mesajınız..." required></textarea>
         <button class="btn" type="submit">Mesaj Gönder</button>
       </form>
     </div>
@@ -380,6 +380,7 @@
 
 </main>
 
+<!-- ================= SAYFA GEÇİŞ SCRİPTİ ================= -->
 <script>
   document.querySelectorAll('aside a[data-page]').forEach(link => {
     link.addEventListener('click', e => {
@@ -393,7 +394,7 @@
   });
 </script>
 
-<!-- DİL ÇEVİRİ VE İLETİŞİM -->
+<!-- ================= DİL ÇEVİRİ ================= -->
 <div style="text-align: center; margin: 30px 0; padding: 15px; background: #171a21; border-radius: 8px; border: 1px solid #2a2f3a; max-width: 350px; margin-left: auto; margin-right: auto;">
     <label for="language-select" style="color: #c9a227; font-weight: bold; display: block; margin-bottom: 10px;">🌐 DİL SEÇİN / SELECT LANGUAGE</label>
     <select id="language-select" onchange="translatePage(this.value)" style="width: 100%; padding: 10px; border-radius: 5px; background-color: #0f1115; color: #e8eaed; border: 1px solid #c9a227; font-size: 16px;">
@@ -418,8 +419,6 @@
 
 <script type="text/javascript">
 function translatePage(lang) {
-    var select = document.getElementById('language-select');
-    var iframe = document.querySelector('.goog-te-banner-frame');
     if (lang === 'tr') {
         window.location.reload();
     } else {
@@ -437,6 +436,7 @@ function googleTranslateElementInit() {
 </script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+<!-- ================= İLETİŞİM & SOSYAL MEDYA ================= -->
 <div class="contact-section" style="padding: 30px 15px; text-align: center; border-top: 1px solid #2a2f3a; margin-top: 30px; background-color: #0f1115; width: 100%; box-sizing: border-box;">
     <h2 style="color: #c9a227; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 20px;">📞 İLETİŞİM</h2>
     <div style="display: flex; flex-direction: column; gap: 12px; align-items: center; margin-bottom: 35px;">
@@ -457,7 +457,7 @@ function googleTranslateElementInit() {
     </div>
 </div>
 
-<!-- ================= GALERİ BÖLÜMÜ BAŞLANGIÇ ================= -->
+<!-- ================= GALERİ BÖLÜMÜ ================= -->
 <section id="galeri-bolumu" style="padding: 20px;">
   <h2>GALERİ</h2>
   <button id="galeri-ac-btn" type="button" onclick="galeriAc()" class="btn">Galeriyi Aç</button>
@@ -469,26 +469,23 @@ function googleTranslateElementInit() {
 </section>
 
 <script>
-  // Fonksiyonların sayfa yüklendiğinde hazır olmasını sağlıyoruz
   function galeriAc() {
     const kapsayici = document.getElementById("galeri-kutulari");
-    
-    // Resim listesi (Tüm dosya adları kontrol edildi)
     const fotograflar = [
-    "47e15afd-faca-401a-89d9-5bd8055c8928.jpeg", 
-    "IMG_0005.jpeg", "IMG_0042.jpeg", "IMG_0043.jpeg", "IMG_0047.jpeg", 
-    "IMG_0049.jpeg", "IMG_0050.jpeg", "IMG_0051.jpeg", 
-    "IMG_0058.png", "IMG_0082.png", "IMG_0083.jpeg", "IMG_0729.jpeg", "IMG_0739.jpeg", 
-    "IMG_0758.jpeg", "IMG_0759.jpeg", "IMG_9501.jpeg", "IMG_9606.jpeg", "IMG_9607.jpeg", "IMG_9997.jpeg", "IMG_9998.jpeg",  
-    "1795379949507.jpg", "1795434920066.jpg", 
-    "IMG_0178.jpg", "IMG_20260608_163735.jpg", "IMG_0111.png", 
-    "IMG_0048.jpeg", "IMG_0007.jpeg", "IMG_0010.jpeg", "IMG_0011.jpeg", 
-    "IMG_0012.jpeg", "IMG_0004.jpeg", "IMG_9500.jpeg", "IMG_9497.jpeg", 
-    "IMG_9496.jpeg", "IMG_9489.jpeg", "IMG_9474.jpeg", 
-    "IMG_9467.jpeg", "IMG_9468.jpeg", 
-    "IMG_0041.jpeg", "IMG_0179.jpeg"
-  ];
-    // HTML'i tek seferde oluşturup sayfaya basıyoruz (Daha hızlı ve hatasızdır)
+      "47e15afd-faca-401a-89d9-5bd8055c8928.jpeg", 
+      "IMG_0005.jpeg", "IMG_0042.jpeg", "IMG_0043.jpeg", "IMG_0047.jpeg", 
+      "IMG_0049.jpeg", "IMG_0050.jpeg", "IMG_0051.jpeg", 
+      "IMG_0058.png", "IMG_0082.png", "IMG_0083.jpeg", "IMG_0729.jpeg", "IMG_0739.jpeg", 
+      "IMG_0758.jpeg", "IMG_0759.jpeg", "IMG_9501.jpeg", "IMG_9606.jpeg", "IMG_9607.jpeg", "IMG_9997.jpeg", "IMG_9998.jpeg",  
+      "1795379949507.jpg", "1795434920066.jpg", 
+      "IMG_0178.jpg", "IMG_20260608_163735.jpg", "IMG_0111.png", 
+      "IMG_0048.jpeg", "IMG_0007.jpeg", "IMG_0010.jpeg", "IMG_0011.jpeg", 
+      "IMG_0012.jpeg", "IMG_0004.jpeg", "IMG_9500.jpeg", "IMG_9497.jpeg", 
+      "IMG_9496.jpeg", "IMG_9489.jpeg", "IMG_9474.jpeg", 
+      "IMG_9467.jpeg", "IMG_9468.jpeg", 
+      "IMG_0041.jpeg", "IMG_0179.jpeg"
+    ];
+    
     let htmlIcerik = "";
     for (let i = 0; i < fotograflar.length; i++) {
       htmlIcerik += `
@@ -501,7 +498,6 @@ function googleTranslateElementInit() {
 
     kapsayici.innerHTML = htmlIcerik;
     
-    // Butonları ve içeriği göster/gizle
     document.getElementById("galeri-icerik").style.display = "block";
     document.getElementById("galeri-ac-btn").style.display = "none";
     document.getElementById("galeri-kapat-btn").style.display = "inline-block";
@@ -513,11 +509,12 @@ function googleTranslateElementInit() {
     document.getElementById("galeri-kapat-btn").style.display = "none";
   }
 </script>
-<!-- ================= GALERİ BÖLÜMÜ BİTİŞ ================= -->
+
+<!-- ================= KOPYALAMA FONKSİYONU (DÜZELTİLDİ) ================= -->
 <script>
-  <script>
   function linkKopyala() {
     var kopyalanacakLink = document.getElementById("profilLink");
+    var buton = document.getElementById("kopyalaBtn");
     
     // Linki seç
     kopyalanacakLink.select();
@@ -528,7 +525,6 @@ function googleTranslateElementInit() {
       var basarili = document.execCommand("copy");
       
       if (basarili) {
-        var buton = document.getElementById("kopyalaBtn");
         var eskiYazi = buton.innerHTML;
         buton.innerHTML = "Kopyalandı! ✓";
         buton.style.color = "#4CAF50"; // Yeşil yap
@@ -548,5 +544,6 @@ function googleTranslateElementInit() {
     }
   }
 </script>
+
 </body>
 </html>
