@@ -52,7 +52,7 @@
   .nav-group{margin-bottom:8px}
   .nav-group > span{display:block;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent2);padding:15px 24px 6px; font-weight: 600;}
   .nav-group a{display:block;padding:9px 24px;font-size:.9rem;color:var(--text);border-left:3px solid transparent;transition:.2s}
-  .nav-group a:hover{background:rgba(30, 34, 43, 0.4);border-left-color:var(--accent);color:var(--accent2)}
+  .nav-group a:hover, .nav-group a.active-link{background:rgba(30, 34, 43, 0.55);border-left-color:var(--accent);color:var(--accent2)}
 
   /* ===== İÇERİK ===== */
   main{margin-left:280px;flex:1;padding:40px;max-width:1100px}
@@ -82,6 +82,13 @@
   .btn{display:inline-block;background:rgba(201, 162, 39, 0.1);color:var(--accent2);font-weight:600;padding:10px 22px;border-radius:8px;margin-top:14px;font-size:.9rem;border:1px solid var(--accent);cursor:pointer; text-shadow: none; transition: 0.2s;}
   .btn:hover{background:var(--accent); color:#111;}
   .btn.ghost{background:rgba(15, 17, 21, 0.4);color:var(--accent2);border:1px solid var(--accent)}
+
+  /* İletişim formu alanları */
+  #iletisim form input, #iletisim form textarea{
+    width:100%; background:#1e222b; border:1px solid #444; border-radius:8px;
+    padding:12px; color:#fff; font-size:15px; margin-bottom:12px; font-family:inherit;
+  }
+  #iletisim form textarea{min-height:100px; resize:vertical;}
   
   /* ===== YENİ EKLENEN PROFİL DÜZENLEME FORMU STİLLERİ ===== */
   .profil-form-kapsayici {
@@ -109,6 +116,21 @@
       cursor: pointer; transition: all 0.3s ease; letter-spacing: 1px;
   }
   .kaydet-buton:hover { background-color: var(--accent); color: #111; box-shadow: 0 0 15px rgba(201, 162, 39, 0.5); }
+
+  /* ===== BÖLÜM / İŞLEM PENCERESİ (MODAL) ===== */
+  .modal-backdrop{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75);
+    z-index:2000; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-backdrop.active{display:flex;}
+  .modal-box{
+    background:#171a21; border:1px solid var(--accent); border-radius:14px;
+    max-width:520px; width:100%; padding:26px; box-shadow:0 15px 40px rgba(0,0,0,0.85);
+    text-shadow:none;
+  }
+  .modal-box h3{color:var(--accent2); font-size:1.3rem; margin-bottom:10px;}
+  .modal-box p{color:#d4d7dd; font-size:0.95rem; line-height:1.6; margin-bottom:18px;}
+  .modal-actions{display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;}
 
   /* ===== MOBİL UYUMLULUK ===== */
   .menu-btn{display:none;position:fixed;top:16px;left:16px;z-index:1001;background:var(--accent);color:#111;border:none;width:44px;height:44px;border-radius:10px;font-size:1.3rem;cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,.5); text-shadow: none;}
@@ -141,63 +163,63 @@
 
   <div class="nav-group">
     <span>📚 Eserlerim</span>
-    <a href="#" data-page="eserler">Romanlar</a>
-    <a href="#" data-page="eserler">Şiirler</a>
-    <a href="#" data-page="eserler">Çocuk kitapları</a>
-    <a href="#" data-page="eserler">Çocuk şarkıları</a>
-    <a href="#" data-page="eserler">Çocuk filmleri</a>
-    <a href="#" data-page="eserler">Klipler</a>
-    <a href="#" data-page="eserler">Bestelerim</a>
-    <a href="#" data-page="eserler">Müzik</a>
-    <a href="#" data-page="eserler">Resimler</a>
+    <a href="#" data-page="eserler" data-topic="Romanlar">Romanlar</a>
+    <a href="#" data-page="eserler" data-topic="Şiirler">Şiirler</a>
+    <a href="#" data-page="eserler" data-topic="Çocuk kitapları">Çocuk kitapları</a>
+    <a href="#" data-page="eserler" data-topic="Çocuk şarkıları">Çocuk şarkıları</a>
+    <a href="#" data-page="eserler" data-topic="Çocuk filmleri">Çocuk filmleri</a>
+    <a href="#" data-page="eserler" data-topic="Klipler">Klipler</a>
+    <a href="#" data-page="eserler" data-topic="Bestelerim">Bestelerim</a>
+    <a href="#" data-page="eserler" data-topic="Müzik">Müzik</a>
+    <a href="#" data-page="eserler" data-topic="Resimler">Resimler</a>
   </div>
 
   <div class="nav-group">
     <span>🛒 Satış &amp; Sipariş</span>
-    <a href="#" data-page="magaza">Sesli dinleme ve Okumalı satış</a>
-    <a href="#" data-page="magaza">Sipariş verme</a>
-    <a href="#" data-page="magaza">Ödemeler</a>
-    <a href="#" data-page="magaza">Abonelikler</a>
-    <a href="#" data-page="magaza">Bağış</a>
+    <a href="#" data-page="magaza" data-topic="Sesli dinleme ve Okumalı satış">Sesli dinleme ve Okumalı satış</a>
+    <a href="#" data-page="magaza" data-topic="Sipariş verme">Sipariş verme</a>
+    <a href="#" data-page="magaza" data-topic="Ödemeler">Ödemeler</a>
+    <a href="#" data-page="magaza" data-topic="Abonelikler">Abonelikler</a>
+    <a href="#" data-page="magaza" data-topic="Bağış">Bağış</a>
   </div>
 
   <div class="nav-group">
     <span>👥 Topluluk &amp; Etkileşim</span>
-    <a href="#" data-page="topluluk">Sizden gelenler</a>
-    <a href="#" data-page="topluluk">Günlük akış</a>
-    <a href="#" data-page="topluluk">Gönderi</a>
-    <a href="#" data-page="topluluk">Hikaye ekle</a>
-    <a href="#" data-page="topluluk">Yorumlar</a>
-    <a href="#" data-page="topluluk">Mesaj ve yanıtlar</a>
-    <a href="#" data-page="topluluk">Takip et</a>
-    <a href="#" data-page="topluluk">Gruplar</a>
-    <a href="#" data-page="topluluk">Beğenme ve paylaşım sayısı</a>
-    <a href="#" data-page="topluluk">Paylaşım ve yeniden kullanım</a>
+    <a href="#" data-page="topluluk" data-topic="Sizden gelenler">Sizden gelenler</a>
+    <a href="#" data-page="topluluk" data-topic="Günlük akış">Günlük akış</a>
+    <a href="#" data-page="topluluk" data-topic="Gönderi">Gönderi</a>
+    <a href="#" data-page="topluluk" data-topic="Hikaye ekle">Hikaye ekle</a>
+    <a href="#" data-page="topluluk" data-topic="Yorumlar">Yorumlar</a>
+    <a href="#" data-page="topluluk" data-topic="Mesaj ve yanıtlar">Mesaj ve yanıtlar</a>
+    <a href="#" data-page="topluluk" data-topic="Takip et">Takip et</a>
+    <a href="#" data-page="topluluk" data-topic="Gruplar">Gruplar</a>
+    <a href="#" data-page="topluluk" data-topic="Beğenme ve paylaşım sayısı">Beğenme ve paylaşım sayısı</a>
+    <a href="#" data-page="topluluk" data-topic="Paylaşım ve yeniden kullanım">Paylaşım ve yeniden kullanım</a>
   </div>
 
   <div class="nav-group">
     <span>👤 Profil &amp; Hesap</span>
-    <a href="#" data-page="hesabim">Profil düzenle</a>
-    <a href="#" data-page="hesabim">Profil paylaş</a>
-    <a href="#" data-page="hesabim">Güncelleme</a>
-    <a href="#" data-page="hesabim">Dosya yükleme</a>
-    <a href="#" data-page="hesabim">İçerik tercihleri</a>
-    <a href="#" data-page="hesabim">Engellemeler</a>
-    <a href="#" data-page="hesabim">Paylaşım kabul onayı</a>
+    <a href="#" data-page="hesabim" data-topic="Profil düzenle">Profil düzenle</a>
+    <a href="#" data-page="hesabim" data-topic="Profil paylaş">Profil paylaş</a>
+    <a href="#" data-page="hesabim" data-topic="Güncelleme">Güncelleme</a>
+    <a href="#" data-page="hesabim" data-topic="Dosya yükleme">Dosya yükleme</a>
+    <a href="#" data-page="hesabim" data-topic="İçerik tercihleri">İçerik tercihleri</a>
+    <a href="#" data-page="hesabim" data-topic="Engellemeler">Engellemeler</a>
+    <a href="#" data-page="hesabim" data-topic="Paylaşım kabul onayı">Paylaşım kabul onayı</a>
   </div>
 
   <div class="nav-group">
     <span>🌐 İletişim &amp; Bağlantılar</span>
-    <a href="#" data-page="iletisim">Yazar hakkında</a>
-    <a href="#" data-page="iletisim">İletişim</a>
-    <a href="#" data-page="iletisim">Sosyal medya linkleri</a>
-    <a href="#" data-page="iletisim">Yabancı dil çevirisi</a>
+    <a href="#" data-page="hayat-hikayesi">Yazar hakkında</a>
+    <a href="#" data-page="iletisim" data-topic="İletişim">İletişim</a>
+    <a href="#" data-page="iletisim" data-topic="Sosyal medya linkleri">Sosyal medya linkleri</a>
+    <a href="#" data-page="iletisim" data-topic="Yabancı dil çevirisi">Yabancı dil çevirisi</a>
   </div>
 
   <div class="nav-group">
     <span>📢 Diğer</span>
-    <a href="#" data-page="diger">Reklam</a>
-    <a href="#" data-page="diger">Kısa yol</a>
+    <a href="#" data-page="diger" data-topic="Reklam">Reklam</a>
+    <a href="#" data-page="diger" data-topic="Kısa yol">Kısa yol</a>
   </div>
 </aside>
 
@@ -226,10 +248,10 @@
     <h2>Satış &amp; Sipariş</h2>
     <p class="sub">Eserlerinizi satışa sunun, siparişleri ve ödemeleri yönetin.</p>
     <div class="grid">
-      <div class="card"><h3>Sesli dinleme ve Okumalı satış</h3><p>Sesli kitap, e-kitap ve basılı kitap satışları.</p><button class="btn ghost">Satışa Sun</button></div>
-      <div class="card"><h3>Sipariş verme</h3><p>Müşterilerin sipariş oluşturma ekranı.</p><button class="btn ghost">Sipariş Formu</button></div>
-      <div class="card"><h3>Ödemeler</h3><p>Geçmiş ödemeler ve fatura durumu.</p><button class="btn ghost">Raporlar</button></div>
-      <div class="card"><h3>Abonelikler</h3><p>Özel içeriklere erişim için abonelik paketleri.</p><button class="btn ghost">Paketleri Gör</button></div>
+      <div class="card"><h3>Sesli dinleme ve Okumalı satış</h3><p>Sesli kitap, e-kitap ve basılı kitap satışları.</p><button type="button" class="btn ghost">Satışa Sun</button></div>
+      <div class="card"><h3>Sipariş verme</h3><p>Müşterilerin sipariş oluşturma ekranı.</p><button type="button" class="btn ghost">Sipariş Formu</button></div>
+      <div class="card"><h3>Ödemeler</h3><p>Geçmiş ödemeler ve fatura durumu.</p><button type="button" class="btn ghost">Raporlar</button></div>
+      <div class="card"><h3>Abonelikler</h3><p>Özel içeriklere erişim için abonelik paketleri.</p><button type="button" class="btn ghost">Paketleri Gör</button></div>
       <div class="card"><h3>Bağış / Destek</h3><p>Projeme destek olmak isterseniz bana e-posta gönderin.</p><a href="mailto:ilyassener61@gmail.com?subject=Bağış Hakkında" class="btn ghost">E-posta Gönder</a></div>
     </div>
   </section>
@@ -239,16 +261,16 @@
     <h2>Topluluk &amp; Etkileşim</h2>
     <p class="sub">Okuyucularınızla etkileşime geçin, geri bildirimleri yönetin.</p>
     <div class="grid">
-      <div class="card"><h3>Sizden gelenler</h3><p>Okuyucu mesajları ve öneriler.</p><button class="btn ghost">Gelen Kutusu</button></div>
-      <div class="card"><h3>Günlük akış</h3><p>Günlük yazılar ve paylaşımlar.</p><button class="btn ghost">Akışı Aç</button></div>
-      <div class="card"><h3>Gönderi</h3><p>Yeni bir gönderi oluşturun ve paylaşın.</p><button class="btn ghost">Gönderi Oluştur</button></div>
-      <div class="card"><h3>Hikaye ekle</h3><p>Kısa hikâye veya güncelleme paylaşın.</p><button class="btn ghost">Hikaye Ekle</button></div>
-      <div class="card"><h3>Yorumlar</h3><p>Eser yorumlarını onaylayın veya yanıtlayın.</p><button class="btn ghost">Yorumları Yönet</button></div>
-      <div class="card"><h3>Mesaj ve yanıtlar</h3><p>Doğrudan mesajları ve yanıtları görüntüleyin.</p><button class="btn ghost">Mesajlar</button></div>
-      <div class="card"><h3>Takip et</h3><p>Takip ettiğiniz ve sizi takip edenler.</p><button class="btn ghost">Listeler</button></div>
-      <div class="card"><h3>Gruplar</h3><p>Okuyucu gruplarını yönetin.</p><button class="btn ghost">Gruplar</button></div>
-      <div class="card"><h3>Beğenme ve paylaşım sayısı</h3><p>Etkileşim istatistikleri.</p><button class="btn ghost">İstatistikler</button></div>
-      <div class="card"><h3>Paylaşım ve yeniden kullanım</h3><p>İçerik kullanım izinleri.</p><button class="btn ghost">İzinler</button></div>
+      <div class="card"><h3>Sizden gelenler</h3><p>Okuyucu mesajları ve öneriler.</p><button type="button" class="btn ghost">Gelen Kutusu</button></div>
+      <div class="card"><h3>Günlük akış</h3><p>Günlük yazılar ve paylaşımlar.</p><button type="button" class="btn ghost">Akışı Aç</button></div>
+      <div class="card"><h3>Gönderi</h3><p>Yeni bir gönderi oluşturun ve paylaşın.</p><button type="button" class="btn ghost">Gönderi Oluştur</button></div>
+      <div class="card"><h3>Hikaye ekle</h3><p>Kısa hikâye veya güncelleme paylaşın.</p><button type="button" class="btn ghost">Hikaye Ekle</button></div>
+      <div class="card"><h3>Yorumlar</h3><p>Eser yorumlarını onaylayın veya yanıtlayın.</p><button type="button" class="btn ghost">Yorumları Yönet</button></div>
+      <div class="card"><h3>Mesaj ve yanıtlar</h3><p>Doğrudan mesajları ve yanıtları görüntüleyin.</p><button type="button" class="btn ghost">Mesajlar</button></div>
+      <div class="card"><h3>Takip et</h3><p>Takip ettiğiniz ve sizi takip edenler.</p><button type="button" class="btn ghost">Listeler</button></div>
+      <div class="card"><h3>Gruplar</h3><p>Okuyucu gruplarını yönetin.</p><button type="button" class="btn ghost">Gruplar</button></div>
+      <div class="card"><h3>Beğenme ve paylaşım sayısı</h3><p>Etkileşim istatistikleri.</p><button type="button" class="btn ghost">İstatistikler</button></div>
+      <div class="card"><h3>Paylaşım ve yeniden kullanım</h3><p>İçerik kullanım izinleri.</p><button type="button" class="btn ghost">İzinler</button></div>
     </div>
   </section>
 
@@ -308,15 +330,16 @@
           <button type="button" class="btn ghost" onclick="linkKopyala()" id="kopyalaBtn" style="margin-top: 0;">Kopyala</button>
         </div>
       </div>
-      <div class="card"><h3>Engellemeler</h3><p>Engellenen kullanıcıları görüntüleyin.</p><button class="btn ghost">Liste</button></div>
+      <div class="card"><h3>Engellemeler</h3><p>Engellenen kullanıcıları görüntüleyin.</p><button type="button" class="btn ghost">Liste</button></div>
     </div>
   </section>
 
-  <!-- HAKKINDA -->
-  <div style="background-color: #111111; border: 2px solid #d4af37; border-radius: 20px; max-width: 900px; margin: 40px auto; padding: 40px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); text-align: center; position: relative; z-index: 10;">
-    <div style="margin-bottom: 30px;">
-      <img src="IMG_0816.png" alt="İlyas Şener" style="max-width: 100%; height: auto; border-radius: 15px; border: 2px solid #d4af37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);">
-    </div>
+  <!-- HAKKINDA / HAYAT HİKÂYESİ -->
+  <section class="page" id="hayat-hikayesi">
+    <div style="background-color: #111111; border: 2px solid #d4af37; border-radius: 20px; max-width: 900px; margin: 10px auto 40px; padding: 40px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); text-align: center; position: relative; z-index: 10;">
+      <div style="margin-bottom: 30px;">
+        <img src="IMG_0816.png" alt="İlyas Şener" style="max-width: 100%; height: auto; border-radius: 15px; border: 2px solid #d4af37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);">
+      </div>
       <h2 style="color: #d4af37; font-family: 'Georgia', serif; font-size: 2.2em; letter-spacing: 3px; margin-bottom: 30px; text-transform: uppercase;">Yazarın Hayat Hikâyesi</h2>
       <div style="text-align: left; color: #f5e5b3; font-family: 'Georgia', serif; line-height: 1.8; font-size: 1.1em; padding: 0 10px;">
           <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 30px;">Kendi Kalemimden</h3>
@@ -346,19 +369,20 @@
               <p style="color: #f5e5b3; font-weight: bold; letter-spacing: 1px;">Yazar · Şair · Söz Yazarı · Bestekâr</p>
           </div>
       </div>
-  </div>
+    </div>
+  </section>
 
   <!-- İLETİŞİM -->
   <section class="page" id="iletisim">
     <h2>Hakkında &amp; İletişim</h2>
     <p class="sub">Kendinizi tanıtın, okuyucularınızla iletişim kurun.</p>
     <div class="grid">
-      <div class="card"><h3>Yazar Hakkında</h3><p>Biyografi, kariyer ve ödüller.</p><button class="btn ghost">Düzenle</button></div>
+      <div class="card"><h3>Yazar Hakkında</h3><p>Biyografi, kariyer ve ödüller.</p><button type="button" class="btn ghost" onclick="openPage('hayat-hikayesi')">Hayat Hikâyesini Aç</button></div>
       <div class="card"><h3>Sosyal Medya Linklerim</h3><p>Beni sosyal medyadan takip edin.</p>
 <a href="https://www.youtube.com/@ilyassener1" target="_blank" class="btn ghost">YouTube</a>
 <a href="https://www.instagram.com/ilyas.sener" target="_blank" class="btn ghost">Instagram</a>
 </div>
-      <div class="card"><h3>Yabancı Dil Çevirisi</h3><p>Eserlerinizi farklı dillere çevirin.</p><button class="btn ghost">Çeviri Yap</button></div>
+      <div class="card"><h3>Yabancı Dil Çevirisi</h3><p>Eserlerinizi farklı dillere çevirin.</p><button type="button" class="btn ghost" onclick="scrollToTranslator()">Çeviri Yap</button></div>
     </div>
     <div class="card" style="margin-top:18px">
       <h3>İletişim Formu</h3>
@@ -377,14 +401,81 @@
     <h2>Diğer</h2>
     <p class="sub">Reklam ve kısayol işlemleri.</p>
     <div class="grid">
-      <div class="card"><h3>Reklam Ver</h3><p>Kampanya oluşturun ve bütçe belirleyin.</p><button class="btn ghost">Reklam Oluştur</button></div>
-      <div class="card"><h3>Kısa yol</h3><p>Sık kullanılan işlemlere hızlı erişim.</p><button class="btn ghost">Kısayollar</button></div>
+      <div class="card"><h3>Reklam Ver</h3><p>Kampanya oluşturun ve bütçe belirleyin.</p><button type="button" class="btn ghost">Reklam Oluştur</button></div>
+      <div class="card"><h3>Kısa yol</h3><p>Sık kullanılan işlemlere hızlı erişim.</p><button type="button" class="btn ghost">Kısayollar</button></div>
     </div>
   </section>
 
+  <!-- ================= DİL ÇEVİRİ ================= -->
+  <div id="dil-ceviri-kutu" style="text-align: center; margin: 30px 0; padding: 15px; background: #171a21; border-radius: 8px; border: 1px solid #2a2f3a; max-width: 350px; margin-left: auto; margin-right: auto;">
+      <label for="language-select" style="color: #c9a227; font-weight: bold; display: block; margin-bottom: 10px;">🌐 DİL SEÇİN / SELECT LANGUAGE</label>
+      <select id="language-select" onchange="translatePage(this.value)" style="width: 100%; padding: 10px; border-radius: 5px; background-color: #0f1115; color: #e8eaed; border: 1px solid #c9a227; font-size: 16px;">
+          <option value="tr">🇹🇷 Türkçe (Orijinal)</option>
+          <option value="en">🇬🇧 English (İngilizce)</option>
+          <option value="zh-CN">🇨🇳 中文 (Çince)</option>
+          <option value="ja">🇯🇵 日本語 (Japonca)</option>
+          <option value="ko">🇰🇷 한국어 (Korece)</option>
+          <option value="de">🇩🇪 Deutsch (Almanca)</option>
+          <option value="fr">🇫🇷 Français (Fransızca)</option>
+          <option value="es">🇪🇸 Español (İspanyolca)</option>
+          <option value="it">🇮🇹 Italiano (İtalyanca)</option>
+          <option value="pt">🇵🇹 Português (Portekizce)</option>
+          <option value="ru">🇷🇺 Русский (Rusça)</option>
+          <option value="ar">🇸🇦 العربية (Arapça)</option>
+          <option value="sv">🇸🇪 Svenska (İsveççe)</option>
+          <option value="nl">🇳🇱 Nederlands (Hollandaca)</option>
+          <option value="pl">🇵🇱 Polski (Lehçe)</option>
+          <option value="hi">🇮🇳 हिन्दी (Hintçe)</option>
+      </select>
+  </div>
+
+  <!-- ================= GALERİ BÖLÜMÜ ================= -->
+  <section id="galeri-bolumu" style="padding: 20px;">
+    <h2>GALERİ</h2>
+    <button id="galeri-ac-btn" type="button" onclick="galeriAc()" class="btn">Galeriyi Aç</button>
+    <button id="galeri-kapat-btn" type="button" onclick="galeriKapat()" class="btn" style="display: none;">Galeriyi Kapat</button>
+
+    <div id="galeri-icerik" style="display: none; margin-top: 16px;">
+      <div id="galeri-kutulari"></div>
+    </div>
+  </section>
+
+  <!-- ================= İLETİŞİM & SOSYAL MEDYA ================= -->
+  <div class="contact-section" style="padding: 30px 15px; text-align: center; border-top: 1px solid #2a2f3a; margin-top: 30px; background-color: #0f1115; width: 100%; box-sizing: border-box;">
+      <h2 style="color: #c9a227; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 20px;">📞 İLETİŞİM</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px; align-items: center; margin-bottom: 35px;">
+          <a href="mailto:ilyas.sener@hotmail.com" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📧 Hotmail: ilyas.sener@hotmail.com</a>
+          <a href="mailto:ilyassener61@gmail.com" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📧 Gmail: ilyassener61@gmail.com</a>
+          <a href="https://wa.me/905517309638" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📱 WhatsApp (TR): +90 551 730 96 38</a>
+          <a href="https://wa.me/46739786837" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📱 WhatsApp (SE): +46 73 978 68 37</a>
+      </div>
+      <h2 style="color: #c9a227; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 20px;">🔗 SOSYAL MEDYA</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+          <a href="https://www.instagram.com/ilyas.sener" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📸 Instagram (@ilyas.sener)</a>
+          <a href="https://www.instagram.com/yazarilyassener" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📸 Instagram (@yazarilyassener)</a>
+          <a href="https://www.facebook.com/ilyassener6157" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📘 Facebook</a>
+          <a href="https://www.tiktok.com/@ilyassener.com" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">🎵 TikTok 1</a>
+          <a href="https://www.tiktok.com/@ilyassener.com1" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">🎵 TikTok 2</a>
+          <a href="https://suno.com/invite/@ilyassener61" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">🎶 Suno</a>
+          <a href="https://www.youtube.com/@ilyassener1" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">▶️ YouTube</a>
+      </div>
+  </div>
+
 </main>
 
-<!-- ================= SAYFA GEÇİŞ SCRİPTİ ================= -->
+<!-- ================= BÖLÜM BİLGİ / İŞLEM PENCERESİ ================= -->
+<div class="modal-backdrop" id="bolumModal" onclick="closeBolumModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <h3 id="modalBaslik">Bölüm</h3>
+    <p id="modalAciklama">Bu alan yakında güncellenecek.</p>
+    <div class="modal-actions">
+      <a href="#iletisim" id="modalIletisimBtn" class="btn" onclick="openPage('iletisim'); closeBolumModal();">Mesaj / Talep Gönder</a>
+      <button type="button" class="btn ghost" onclick="closeBolumModal()">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SAYFA GEÇİŞ & ETKİLEŞİM SCRİPTİ ================= -->
 <script>
   function toggleMenu(forceState) {
     const aside = document.getElementById('sideMenu');
@@ -394,44 +485,74 @@
     if (backdrop) backdrop.classList.toggle('active', nextState && window.innerWidth <= 900);
   }
 
+  function openPage(pageId, activeLinkEl) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById(pageId);
+    if (target) target.classList.add('active');
+
+    document.querySelectorAll('aside a[data-page]').forEach(a => a.classList.remove('active-link'));
+    if (activeLinkEl) activeLinkEl.classList.add('active-link');
+
+    if (window.innerWidth <= 900) toggleMenu(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showBolumBilgi(baslik, aciklama) {
+    document.getElementById('modalBaslik').textContent = baslik;
+    document.getElementById('modalAciklama').textContent = aciklama;
+    document.getElementById('bolumModal').classList.add('active');
+  }
+
+  function closeBolumModal() {
+    document.getElementById('bolumModal').classList.remove('active');
+  }
+
+  function scrollToTranslator() {
+    const el = document.getElementById('dil-ceviri-kutu');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+
   document.querySelectorAll('aside a[data-page]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      const target = document.getElementById(link.dataset.page);
-      if(target) target.classList.add('active');
-      if(window.innerWidth <= 900) toggleMenu(false);
-      window.scrollTo({top:0, behavior:'smooth'});
+      const pageId = link.dataset.page;
+      const topic = link.dataset.topic;
+      openPage(pageId, link);
+
+      if (topic && pageId !== 'hayat-hikayesi') {
+        const heading = document.querySelector(`#${pageId} h2`);
+        const sub = document.querySelector(`#${pageId} .sub`);
+        if (heading) heading.textContent = topic;
+        if (sub) sub.textContent = `"${topic}" bölümünü görüntülüyorsunuz.`;
+      } else if (pageId === 'eserler') {
+        document.querySelector('#eserler h2').textContent = 'Eserlerim';
+        document.querySelector('#eserler .sub').textContent = 'Roman, şiir, çocuk kitabı, şarkı, beste, klip, film ve resimlerinizi keşfedin.';
+      }
+    });
+  });
+
+  // Kart içindeki işlevsiz buton ve # linklerine tıklama desteği
+  document.querySelectorAll('main .card a.btn, main .card button.btn').forEach(btn => {
+    const href = btn.getAttribute('href');
+    if (href && (href.startsWith('mailto:') || href.startsWith('http'))) return;
+    if (btn.id === 'kopyalaBtn') return;
+    if (btn.hasAttribute('onclick')) return;
+
+    btn.addEventListener('click', e => {
+      if (href === '#') e.preventDefault();
+      const card = btn.closest('.card');
+      const title = card ? card.querySelector('h3')?.textContent : 'Bölüm';
+      const desc = card ? card.querySelector('p')?.textContent : 'İçerik hazırlanıyor.';
+      showBolumBilgi(`${title} — ${btn.textContent.trim()}`, `${desc} Bu bölüm için yeni içerik veya düzenleme eklemek isterseniz İletişim formunu kullanabilirsiniz.`);
     });
   });
 </script>
 
-<!-- ================= DİL ÇEVİRİ ================= -->
-<div style="text-align: center; margin: 30px 0; padding: 15px; background: #171a21; border-radius: 8px; border: 1px solid #2a2f3a; max-width: 350px; margin-left: auto; margin-right: auto;">
-    <label for="language-select" style="color: #c9a227; font-weight: bold; display: block; margin-bottom: 10px;">🌐 DİL SEÇİN / SELECT LANGUAGE</label>
-    <select id="language-select" onchange="translatePage(this.value)" style="width: 100%; padding: 10px; border-radius: 5px; background-color: #0f1115; color: #e8eaed; border: 1px solid #c9a227; font-size: 16px;">
-        <option value="tr">🇹🇷 Türkçe (Orijinal)</option>
-        <option value="en">🇬🇧 English (İngilizce)</option>
-        <option value="zh-CN">🇨🇳 中文 (Çince)</option>
-        <option value="ja">🇯🇵 日本語 (Japonca)</option>
-        <option value="ko">🇰🇷 한국어 (Korece)</option>
-        <option value="de">🇩🇪 Deutsch (Almanca)</option>
-        <option value="fr">🇫🇷 Français (Fransızca)</option>
-        <option value="es">🇪🇸 Español (İspanyolca)</option>
-        <option value="it">🇮🇹 Italiano (İtalyanca)</option>
-        <option value="pt">🇵🇹 Português (Portekizce)</option>
-        <option value="ru">🇷🇺 Русский (Rusça)</option>
-        <option value="ar">🇸🇦 العربية (Arapça)</option>
-        <option value="sv">🇸🇪 Svenska (İsveççe)</option>
-        <option value="nl">🇳🇱 Nederlands (Hollandaca)</option>
-        <option value="pl">🇵🇱 Polski (Lehçe)</option>
-        <option value="hi">🇮🇳 हिन्दी (Hintçe)</option>
-    </select>
-</div>
-
+<!-- ================= DİL ÇEVİRİ SCRİPTİ ================= -->
 <script type="text/javascript">
 function translatePage(lang) {
     if (lang === 'tr') {
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         window.location.reload();
     } else {
         document.cookie = "googtrans=/tr/" + lang + "; path=/";
@@ -448,38 +569,7 @@ function googleTranslateElementInit() {
 </script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<!-- ================= İLETİŞİM & SOSYAL MEDYA ================= -->
-<div class="contact-section" style="padding: 30px 15px; text-align: center; border-top: 1px solid #2a2f3a; margin-top: 30px; background-color: #0f1115; width: 100%; box-sizing: border-box;">
-    <h2 style="color: #c9a227; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 20px;">📞 İLETİŞİM</h2>
-    <div style="display: flex; flex-direction: column; gap: 12px; align-items: center; margin-bottom: 35px;">
-        <a href="mailto:ilyas.sener@hotmail.com" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📧 Hotmail: ilyas.sener@hotmail.com</a>
-        <a href="mailto:ilyassener61@gmail.com" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📧 Gmail: ilyassener61@gmail.com</a>
-        <a href="https://wa.me/905517309638" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📱 WhatsApp (TR): +90 551 730 96 38</a>
-        <a href="https://wa.me/46739786837" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📱 WhatsApp (SE): +46 73 978 68 37</a>
-    </div>
-    <h2 style="color: #c9a227; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 20px;">🔗 SOSYAL MEDYA</h2>
-    <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
-        <a href="https://www.instagram.com/ilyas.sener" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📸 Instagram (@ilyas.sener)</a>
-        <a href="https://www.instagram.com/yazarilyassener" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📸 Instagram (@yazarilyassener)</a>
-        <a href="https://www.facebook.com/ilyassener6157" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">📘 Facebook</a>
-        <a href="https://www.tiktok.com/@ilyassener.com" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">🎵 TikTok 1</a>
-        <a href="https://www.tiktok.com/@ilyassener.com1" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">🎵 TikTok 2</a>
-        <a href="https://suno.com/invite/@ilyassener61" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">🎶 Suno</a>
-        <a href="https://www.youtube.com/@ilyassener1" target="_blank" style="color: #e8eaed; text-decoration: none; background: #171a21; padding: 12px 20px; border-radius: 8px; width: 100%; max-width: 320px; display: block; border: 1px solid #2a2f3a; font-size: 15px;">▶️ YouTube</a>
-    </div>
-</div>
-
-<!-- ================= GALERİ BÖLÜMÜ ================= -->
-<section id="galeri-bolumu" style="padding: 20px;">
-  <h2>GALERİ</h2>
-  <button id="galeri-ac-btn" type="button" onclick="galeriAc()" class="btn">Galeriyi Aç</button>
-  <button id="galeri-kapat-btn" type="button" onclick="galeriKapat()" class="btn" style="display: none;">Galeriyi Kapat</button>
-
-  <div id="galeri-icerik" style="display: none; margin-top: 16px;">
-    <div id="galeri-kutulari"></div>
-  </div>
-</section>
-
+<!-- ================= GALERİ SCRİPTİ ================= -->
 <script>
   function galeriAc() {
     const kapsayici = document.getElementById("galeri-kutulari");
