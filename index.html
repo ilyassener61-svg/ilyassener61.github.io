@@ -172,4 +172,778 @@
   .menu-backdrop.active{display:block;}
   
   @media(max-width:900px){
-    body { display: block !important
+    body { display: block !important; }
+    aside { transform: translateX(-100%) !important; z-index: 999; background: rgba(15, 17, 21, 0.98) !important; backdrop-filter: blur(5px); border-right: none; }
+    aside.open { transform: translateX(0) !important; }
+    main { margin-left: 0 !important; width: 100% !important; padding: 80px 15px 60px !important; }
+    .menu-btn { display: block !important; }
+    .profil-form-kapsayici { padding: 20px 15px; }
+    .kaydet-buton { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<button class="menu-btn" type="button" onclick="toggleMenu()">☰</button>
+<div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu(false)"></div>
+
+<!-- ================= KENAR ÇUBUĞU ================= -->
+<aside id="sideMenu">
+  <div class="logo-area">
+    <img src="https://i.hizliresim.com/d9n9co7y.jpg" alt="İlyas Şener Logo">
+    <div class="logo-title" id="sidebarLogoTitle">İlyas Şener</div>
+    <div class="logo-subtitle">Kalemin Dilinden</div>
+  </div>
+
+  <div class="nav-group">
+    <span>📚 Eserlerim</span>
+    <a href="#" data-page="eserler" data-topic="Romanlar">Romanlar</a>
+    <a href="#" data-page="eserler" data-topic="Şiirler">Şiirler</a>
+    <a href="#" data-page="eserler" data-topic="Çocuk kitapları">Çocuk kitapları</a>
+    <a href="#" data-page="eserler" data-topic="Çocuk şarkıları">Çocuk şarkıları</a>
+    <a href="#" data-page="eserler" data-topic="Çocuk filmleri">Çocuk filmleri</a>
+    <a href="#" data-page="eserler" data-topic="Klipler">Klipler</a>
+    <a href="#" data-page="eserler" data-topic="Bestelerim">Bestelerim</a>
+    <a href="#" data-page="eserler" data-topic="Müzik">Müzik</a>
+    <a href="#" data-page="eserler" data-topic="Resimler" data-target-el="galeri-bolumu">Resimler</a>
+  </div>
+
+  <div class="nav-group">
+    <span>🛒 Satış &amp; Sipariş</span>
+    <a href="#" data-page="magaza" data-topic="Sesli dinleme ve Okumalı satış">Sesli dinleme ve Okumalı satış</a>
+    <a href="#" data-page="magaza" data-topic="Sipariş verme">Sipariş verme</a>
+    <a href="#" data-page="magaza" data-topic="Ödemeler">Ödemeler</a>
+    <a href="#" data-page="magaza" data-topic="Abonelikler">Abonelikler</a>
+    <a href="#" data-page="magaza" data-topic="Bağış">Bağış</a>
+  </div>
+
+  <div class="nav-group">
+    <span>👥 Topluluk &amp; Etkileşim</span>
+    <a href="#" data-page="topluluk" data-topic="Sizden gelenler">Sizden gelenler</a>
+    <a href="#" data-page="topluluk" data-topic="Günlük akış">Günlük akış</a>
+    <a href="#" data-page="topluluk" data-topic="Gönderi">Gönderi</a>
+    <a href="#" data-page="topluluk" data-topic="Hikaye ekle">Hikaye ekle</a>
+    <a href="#" data-page="topluluk" data-topic="Yorumlar">Yorumlar</a>
+    <a href="#" data-page="topluluk" data-topic="Mesaj ve yanıtlar">Mesaj ve yanıtlar</a>
+    <a href="#" data-page="topluluk" data-topic="Takip et">Takip et</a>
+    <a href="#" data-page="topluluk" data-topic="Gruplar">Gruplar</a>
+    <a href="#" data-page="topluluk" data-topic="Beğenme ve paylaşım sayısı">Beğenme ve paylaşım sayısı</a>
+    <a href="#" data-page="topluluk" data-topic="Paylaşım ve yeniden kullanım">Paylaşım ve yeniden kullanım</a>
+  </div>
+
+  <div class="nav-group">
+    <span>👤 Profil &amp; Hesap</span>
+    <a href="#" data-page="hesabim" data-topic="Profil düzenle" data-target-el="kart-profil-duzenle">Profil düzenle</a>
+    <a href="#" data-page="hesabim" data-topic="Profil paylaş" data-target-el="kart-profil-paylas">Profil paylaş</a>
+    <a href="#" data-page="hesabim" data-topic="Güncelleme" data-target-el="kart-guncelleme">Güncelleme</a>
+    <a href="#" data-page="hesabim" data-topic="Dosya yükleme" data-target-el="kart-dosya-yukleme">Dosya yükleme</a>
+    <a href="#" data-page="hesabim" data-topic="İçerik tercihleri" data-target-el="kart-icerik-tercihleri">İçerik tercihleri</a>
+    <a href="#" data-page="hesabim" data-topic="Engellemeler" data-target-el="kart-engellemeler">Engellemeler</a>
+    <a href="#" data-page="hesabim" data-topic="Paylaşım kabul onayı" data-target-el="kart-paylasim-onayi">Paylaşım kabul onayı</a>
+  </div>
+
+  <div class="nav-group">
+    <span>🌐 İletişim &amp; Bağlantılar</span>
+    <a href="#" data-page="hayat-hikayesi">Yazar hakkında</a>
+    <a href="#" data-page="iletisim" data-topic="İletişim" data-target-el="iletisim-bilgileri-kutu">İletişim</a>
+    <a href="#" data-page="iletisim" data-topic="Sosyal medya linkleri" data-target-el="sosyal-medya-kutu">Sosyal medya linkleri</a>
+    <a href="#" data-page="iletisim" data-topic="Yabancı dil çevirisi" data-target-el="dil-ceviri-kutu">Yabancı dil çevirisi</a>
+  </div>
+
+  <div class="nav-group">
+    <span>📢 Diğer</span>
+    <a href="#" data-page="diger" data-topic="Reklam">Reklam</a>
+    <a href="#" data-page="diger" data-topic="Kısa yol">Kısa yol</a>
+  </div>
+</aside>
+
+<!-- ================= İÇERİK ================= -->
+<main>
+
+  <!-- ESERLER & GALERİ -->
+  <section class="page active" id="eserler">
+    <h2>Eserlerim</h2>
+    <p class="sub">Roman, şiir, çocuk kitabı, şarkı, beste, klip, film ve resimlerinizi keşfedin.</p>
+    <div class="grid">
+      <div class="card"><h3>Romanlar</h3><p>Yayınlanmış ve taslak romanlarınız.</p><span class="badge">İncele</span><br><a href="#" class="btn ghost">Görüntüle</a></div>
+      <div class="card"><h3>Şiirler</h3><p>Şiir koleksiyonunuz ve yeni yazılar.</p><span class="badge">Oku</span><br><a href="#" class="btn ghost">Görüntüle</a></div>
+      <div class="card"><h3>Çocuk Kitapları</h3><p>Minik okurlar için hikâyeler.</p><span class="badge">İncele</span><br><a href="#" class="btn ghost">Görüntüle</a></div>
+      <div class="card"><h3>Çocuk Şarkıları</h3><p>Çocuklar için eğlenceli ve öğretici şarkılar.</p><span class="badge">Dinle</span><br><a href="#" class="btn ghost">Dinle</a></div>
+      <div class="card"><h3>Çocuk Filmleri</h3><p>Animasyon ve kısa filmler.</p><span class="badge">İzle</span><br><a href="#" class="btn ghost">İzle</a></div>
+      <div class="card"><h3>Klipler</h3><p>Video klipler ve görsel çalışmalar.</p><span class="badge">İzle</span><br><a href="#" class="btn ghost">İzle</a></div>
+      <div class="card"><h3>Bestelerim</h3><p>Özgün müzik besteleri ve notalar.</p><span class="badge">İncele</span><br><a href="#" class="btn ghost">Görüntüle</a></div>
+      <div class="card"><h3>Müzik</h3><p>Ses kayıtları ve albümler.</p><span class="badge">Dinle</span><br><a href="#" class="btn ghost">Dinle</a></div>
+      <div class="card"><h3>Resimler</h3><p>Galeri ve illüstrasyonlar.</p><span class="badge">Galeri</span><br><button type="button" class="btn ghost" onclick="galeriAc()">Galeri</button></div>
+    </div>
+
+    <!-- GALERİ (Sadece Eserlerim sekmesi içinde) -->
+    <div id="galeri-bolumu" class="card" style="margin-top: 24px;">
+      <h3>GALERİ</h3>
+      <p>Fotoğraf ve çizim galerisini açıp kapatabilirsiniz.</p>
+      <button id="galeri-ac-btn" type="button" onclick="galeriAc()" class="btn">Galeriyi Aç</button>
+      <button id="galeri-kapat-btn" type="button" onclick="galeriKapat()" class="btn" style="display: none;">Galeriyi Kapat</button>
+
+      <div id="galeri-icerik" style="display: none; margin-top: 16px;">
+        <div id="galeri-kutulari"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAĞAZA -->
+  <section class="page" id="magaza">
+    <h2>Satış &amp; Sipariş</h2>
+    <p class="sub">Eserlerinizi satışa sunun, siparişleri ve ödemeleri yönetin.</p>
+    <div class="grid">
+      <div class="card"><h3>Sesli dinleme ve Okumalı satış</h3><p>Sesli kitap, e-kitap ve basılı kitap satışları.</p><button type="button" class="btn ghost">Satışa Sun</button></div>
+      <div class="card"><h3>Sipariş verme</h3><p>Müşterilerin sipariş oluşturma ekranı.</p><button type="button" class="btn ghost">Sipariş Formu</button></div>
+      <div class="card"><h3>Ödemeler</h3><p>Geçmiş ödemeler ve fatura durumu.</p><button type="button" class="btn ghost">Raporlar</button></div>
+      <div class="card"><h3>Abonelikler</h3><p>Özel içeriklere erişim için abonelik paketleri.</p><button type="button" class="btn ghost">Paketleri Gör</button></div>
+      <div class="card"><h3>Bağış / Destek</h3><p>Projeme destek olmak isterseniz bana e-posta gönderin.</p><a href="mailto:ilyassener61@gmail.com?subject=Bağış Hakkında" class="btn ghost">E-posta Gönder</a></div>
+    </div>
+  </section>
+
+  <!-- TOPLULUK -->
+  <section class="page" id="topluluk">
+    <h2>Topluluk &amp; Etkileşim</h2>
+    <p class="sub">Okuyucularınızla etkileşime geçin, geri bildirimleri yönetin.</p>
+    <div class="grid">
+      <div class="card"><h3>Sizden gelenler</h3><p>Okuyucu mesajları ve öneriler.</p><button type="button" class="btn ghost">Gelen Kutusu</button></div>
+      <div class="card"><h3>Günlük akış</h3><p>Günlük yazılar ve paylaşımlar.</p><button type="button" class="btn ghost">Akışı Aç</button></div>
+      <div class="card"><h3>Gönderi</h3><p>Yeni bir gönderi oluşturun ve paylaşın.</p><button type="button" class="btn ghost">Gönderi Oluştur</button></div>
+      <div class="card"><h3>Hikaye ekle</h3><p>Kısa hikâye veya güncelleme paylaşın.</p><button type="button" class="btn ghost">Hikaye Ekle</button></div>
+      <div class="card"><h3>Yorumlar</h3><p>Eser yorumlarını onaylayın veya yanıtlayın.</p><button type="button" class="btn ghost">Yorumları Yönet</button></div>
+      <div class="card"><h3>Mesaj ve yanıtlar</h3><p>Doğrudan mesajları ve yanıtları görüntüleyin.</p><button type="button" class="btn ghost">Mesajlar</button></div>
+      <div class="card"><h3>Takip et</h3><p>Takip ettiğiniz ve sizi takip edenler.</p><button type="button" class="btn ghost">Listeler</button></div>
+      <div class="card"><h3>Gruplar</h3><p>Okuyucu gruplarını yönetin.</p><button type="button" class="btn ghost">Gruplar</button></div>
+      <div class="card"><h3>Beğenme ve paylaşım sayısı</h3><p>Etkileşim istatistikleri.</p><button type="button" class="btn ghost">İstatistikler</button></div>
+      <div class="card"><h3>Paylaşım ve yeniden kullanım</h3><p>İçerik kullanım izinleri.</p><button type="button" class="btn ghost">İzinler</button></div>
+    </div>
+  </section>
+
+  <!-- HESABIM (ZİYARETÇİ + YÖNETİCİ MODU) -->
+  <section class="page" id="hesabim">
+    <h2>Profil &amp; Hesap</h2>
+    <p class="sub">Hesap bilgilerinizi ve tercihlerinizi buradan yönetin.</p>
+    
+    <!-- ZİYARETÇİLERE AÇIK: PROFİL DÜZENLE / TALEP FORMU -->
+    <div class="profil-form-kapsayici" id="kart-profil-duzenle">
+        <div class="profil-ust" style="text-align:center; margin-bottom: 30px;">
+            <img src="https://i.hizliresim.com/d9n9co7y.jpg" alt="İlyas Şener Logo" class="ana-logo" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);">
+            <h3 id="profilBaslikAd" style="color: var(--accent2); margin-top: 15px; font-size: 1.5rem;">İLYAS ŞENER</h3>
+            <p style="color: var(--muted); font-style: italic; font-size: 0.9rem;">Kalemin Dilinden</p>
+        </div>
+
+        <form id="profilDuzenleForm" action="https://formspree.io/f/xwloadgv" method="POST">
+            <div class="form-grubu">
+                <div class="form-alani">
+                    <label for="adsoyad">Ad Soyad / Mahlas</label>
+                    <input type="text" id="adsoyad" name="adsoyad" value="İlyas Şener" placeholder="Adınızı girin">
+                </div>
+                <div class="form-alani">
+                    <label for="kullaniciadi">Kullanıcı Adı (URL)</label>
+                    <input type="text" id="kullaniciadi" name="kullaniciadi" value="ilyassener" placeholder="Kullanıcı adınızı girin">
+                </div>
+            </div>
+
+            <div class="form-alani">
+                <label for="biyografi">Hakkımda / Biyografi</label>
+                <textarea id="biyografi" name="biyografi" placeholder="Kendinizden kısaca bahsedin...">Yazmak, unutmamak için tutulan bir nöbettir. Çünkü yazmak, gelecek nesillere bırakılan bir emanettir.</textarea>
+            </div>
+
+            <div class="form-grubu">
+                <div class="form-alani">
+                    <label for="eposta">E-posta Adresi</label>
+                    <input type="email" id="eposta" name="eposta" placeholder="ornek@mail.com">
+                </div>
+                <div class="form-alani">
+                    <label for="sosyalmedya">Sosyal Medya (Instagram)</label>
+                    <input type="text" id="sosyalmedya" name="sosyalmedya" value="instagram.com/ilyas.sener">
+                </div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-top: 1px solid rgba(201, 162, 39, 0.2); padding-top: 20px; margin-top: 10px;">
+                <span id="profilKayitDurumu" style="color:#7cd992; font-size:0.88rem;"></span>
+                <button type="submit" class="kaydet-buton">DEĞİŞİKLİKLERİ KAYDET</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- YÖNETİCİ MODU KONTROL ÇUBUĞU -->
+    <div class="yonetici-bar">
+      <div>
+        <strong style="color:var(--accent2);">🔐 Yönetici İşlemleri</strong>
+        <p id="yoneticiDurumMetni" style="color:#cccccc; font-size:0.85rem; margin-top:4px;">Güncelleme, dosya yükleme, engellemeler ve onay ayarları yalnızca yöneticiye açıktır.</p>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <button type="button" class="btn ghost" id="adminAcBtn" style="margin-top:0;" onclick="yoneticiModuAc()">Yönetici Modunu Aç</button>
+        <button type="button" class="btn ghost" id="adminKapatBtn" style="margin-top:0; display:none;" onclick="yoneticiModuKapat()">Modu Kilitle</button>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top: 24px; opacity: 0.98;">
+      <!-- ZİYARETÇİYE AÇIK: PROFİL PAYLAŞ -->
+      <div class="card" id="kart-profil-paylas">
+        <h3>Profil paylaş</h3>
+        <p>Profil bağlantınızı kopyalayarak okuyucularınızla paylaşın.</p>
+        <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+          <input type="text" id="profilLink" value="https://ilyassener.info" readonly style="flex: 1; min-width: 170px; background: #1e222b; color: white; border: 1px solid #444; padding: 10px; border-radius: 8px; font-size: 14px;">
+          <button type="button" class="btn ghost" onclick="linkKopyala()" id="kopyalaBtn" style="margin-top: 0;">Kopyala</button>
+        </div>
+      </div>
+
+      <!-- ZİYARETÇİYE AÇIK: İÇERİK TERCİHLERİ -->
+      <div class="card" id="kart-icerik-tercihleri">
+        <h3>İçerik tercihleri</h3>
+        <p>Bu cihaz için dil ve galeri görünüm tercihinizi seçin.</p>
+        <select id="tercihDil" class="mini-select">
+          <option value="tr">Türkçe (Varsayılan)</option>
+          <option value="sv">Svenska</option>
+          <option value="en">English</option>
+        </select>
+        <select id="tercihGaleri" class="mini-select">
+          <option value="kapali">Galeri başlangıçta kapalı</option>
+          <option value="acik">Galeri başlangıçta açık</option>
+        </select>
+        <button type="button" class="btn ghost" onclick="tercihKaydet()">Tercihleri Kaydet</button>
+        <div id="tercihDurum" class="durum-notu"></div>
+      </div>
+
+      <!-- YÖNETİCİYE ÖZEL: GÜNCELLEME -->
+      <div class="card" id="kart-guncelleme">
+        <h3>Güncelleme</h3>
+        <p>Yönetici güncelleme notları (sadece yönetici modunda düzenlenebilir).</p>
+        <div class="admin-only-box">
+          <input type="text" id="guncellemeNotInput" class="mini-input" placeholder="Yeni güncelleme notu yazın...">
+          <button type="button" class="btn ghost" onclick="guncellemeEkle()">Güncelleme Ekle</button>
+        </div>
+        <ul id="guncellemeListesi" class="mini-list"></ul>
+      </div>
+
+      <!-- YÖNETİCİYE ÖZEL: DOSYA YÜKLEME -->
+      <div class="card" id="kart-dosya-yukleme">
+        <h3>Dosya yükleme</h3>
+        <p>Görsel veya dosya önizleme alanı (yalnızca yönetici modunda aktif).</p>
+        <div class="admin-only-box">
+          <input type="file" id="dosyaYukleInput" class="mini-input" onchange="dosyaOnizle()">
+          <div id="dosyaOnizlemeAlani" style="margin-top:10px; font-size:0.85rem; color:#d4d7dd;"></div>
+        </div>
+      </div>
+
+      <!-- YÖNETİCİYE ÖZEL: ENGELLERMELER -->
+      <div class="card" id="kart-engellemeler">
+        <h3>Engellemeler</h3>
+        <p>Yönetici engel listesi (yalnızca yönetici modunda düzenlenebilir).</p>
+        <div class="admin-only-box">
+          <input type="text" id="engelInput" class="mini-input" placeholder="Kullanıcı adı veya e-posta...">
+          <button type="button" class="btn ghost" onclick="engelEkle()">Listeye Ekle</button>
+        </div>
+        <ul id="engelListesi" class="mini-list"></ul>
+      </div>
+
+      <!-- YÖNETİCİYE ÖZEL: PAYLAŞIM KABUL ONAYI -->
+      <div class="card" id="kart-paylasim-onayi">
+        <h3>Paylaşım kabul onayı</h3>
+        <p>Eser paylaşım ve alıntılama onay kuralı.</p>
+        <div class="admin-only-box">
+          <select id="paylasimOnaySecim" class="mini-select">
+            <option value="kaynak-gostererek">Kaynak gösterilerek paylaşıma açık</option>
+            <option value="onay-gerekli">Paylaşım öncesi yazılı onay gerekli</option>
+            <option value="kapali">Yeniden paylaşıma kapalı</option>
+          </select>
+          <button type="button" class="btn ghost" onclick="paylasimOnayKaydet()">Onayı Kaydet</button>
+        </div>
+        <div id="paylasimOnayOzeti" class="durum-notu"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HAKKINDA / HAYAT HİKÂYESİ -->
+  <section class="page" id="hayat-hikayesi">
+    <div style="background-color: #111111; border: 2px solid #d4af37; border-radius: 20px; max-width: 900px; margin: 10px auto 40px; padding: 40px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); text-align: center; position: relative; z-index: 10;">
+      <div style="margin-bottom: 30px;">
+        <img src="IMG_0816.png" alt="İlyas Şener" style="max-width: 100%; height: auto; border-radius: 15px; border: 2px solid #d4af37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);">
+      </div>
+      <h2 style="color: #d4af37; font-family: 'Georgia', serif; font-size: 2.2em; letter-spacing: 3px; margin-bottom: 30px; text-transform: uppercase;">Yazarın Hayat Hikâyesi</h2>
+      <div style="text-align: left; color: #f5e5b3; font-family: 'Georgia', serif; line-height: 1.8; font-size: 1.1em; padding: 0 10px;">
+          <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 30px;">Kendi Kalemimden</h3>
+          <p>1961’de Konya’nın Kulu ilçesinde, dokuz kardeşli mütevazı bir ailenin çocuğu olarak dünyaya geldim. Kuyu suyunun serinliğinde, toprağın kokusunda, yoksulluğun terbiyesinde büyüdüm.</p>
+          <p>Genç yaşta gurbet yoluna düştüm ve 1980’de İsveç’e yerleştim. Memleket özlemi, yüreğimde hiç sönmeyen bir ateş oldu. O ateşin dumanı beni türkülere, şiirlere ve hikâyelere sürükledi. Şiirle başlayan yazarlık serüvenim; masallara, romanlara ve çocuklar için hazırladığım kitaplık bir seriye dönüştü.</p>
+          <p>Her satırımda bir yaşam izi, her kitabımda okuyana uzanan bir dost eli var. Kalemimi hiç bırakmadım; çünkü yazmak, Allah’ın bana verdiği en kıymetli emanet.</p>
+          <blockquote style="font-style: italic; font-size: 1.3em; text-align: center; color: #d4af37; margin: 40px 0; padding: 20px; border-left: 4px solid #d4af37; background-color: rgba(212, 175, 55, 0.1); border-radius: 5px;">
+              “Yazmak, Unutmamak İçin Tutulan Bir Nöbettir.”
+          </blockquote>
+          <p>Benim hikâyem satırlara sığmaz. Ama her kitabım, hayatın içinden bir nefes ve okuyana uzanan bir dost elidir. Bir yazar ve şair olarak amacım; kelimelerle okurun kalbine dokunmak, unuttuğumuz o saf duyguları yeniden hatırlatmaktır. Eserlerimde aşkı, hasreti, memleket duygusunu ve insanın sessiz çığlığını işlerken, aslında her bir okura bir dost eli uzatıyorum.</p>
+          <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 50px;">Yazarlık Serüveni</h3>
+          <p>Yazarlık serüvenim, müziğe olan tutkumla çok küçük yaşlarda başladı. Her ne kadar babamın karşı çıkması nedeniyle bu tutku bir süre sekteye uğramış gibi görünse de aslında hiçbir zaman içimden silinmedi. İçimde bir güfte gibi hep varlığını korudu.</p>
+          <p>Gurbete gidişimle birlikte bu birikim kaleme dökülmeye başladı ve yazmak, hayatımın vazgeçilmez bir parçası hâline geldi. Şiirle başlayan bu yolculuk, zamanla şarkı sözlerine, masallara, romanlara ve çocuk kitaplarına uzandı.</p>
+          <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 50px;">İlhamımı Nereden Alırım?</h3>
+          <p>İlham, herkese nasip olmayan özel bir duygudur. Ben de bunu Allah’ın bana verdiği bir lütuf olarak görüyorum. İlhamımı gurbetten, doğadan, insandan, çocuklardan, hayattan, ayrılıklardan, aşk yaşayanlardan, ağlayıp acı çekenlerden, özlem duyanlardan, vatan hasretinden; anne, baba ve evlat acısından alıyorum.</p>
+          <h3 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-top: 50px;">Bir Ömür ve Onlarca Kitap</h3>
+          <p style="text-align: center; font-size: 1.2em; font-weight: bold; color: #d4af37;">Topraktan kelimeye, hasretten hikâyeye…</p>
+          <div style="background-color: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 10px; border-left: 5px solid #d4af37; margin: 30px 0;">
+              <ul style="list-style-type: none; padding-left: 0;">
+                  <li style="margin-bottom: 15px;">🖋️ Bugüne kadar <strong>2.000’in üzerinde</strong> şiir ve şarkı sözü kaleme aldım.</li>
+                  <li style="margin-bottom: 15px;">🎵 <strong>400’ün üzerinde</strong> eserim bestelendi.</li>
+                  <li>📚 Edebiyat yolculuğumda <strong>8 roman</strong>, <strong>14 şiir kitabı</strong> ve <strong>42 çocuk kitabı</strong>yla okurlarımla buluştum.</li>
+              </ul>
+          </div>
+          <div style="margin-top: 60px; text-align: center;">
+              <p style="font-size: 2em; color: #d4af37; margin-bottom: 5px; font-style: italic;">İlyas Şener</p>
+              <p style="color: #f5e5b3; font-weight: bold; letter-spacing: 1px;">Yazar · Şair · Söz Yazarı · Bestekâr</p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- İLETİŞİM -->
+  <section class="page" id="iletisim">
+    <h2>Hakkında &amp; İletişim</h2>
+    <p class="sub">Kendinizi tanıtın, okuyucularınızla iletişim kurun.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Yazar Hakkında</h3>
+        <p>Biyografi, kariyer ve ödüller.</p>
+        <button type="button" class="btn ghost" onclick="openPage('hayat-hikayesi')">Hayat Hikâyesini Aç</button>
+      </div>
+
+      <div class="card" id="sosyal-medya-kutu">
+        <h3>Sosyal Medya Linklerim</h3>
+        <p>Beni sosyal medyadan takip edin.</p>
+        <div class="iletisim-liste">
+          <a href="https://www.instagram.com/ilyas.sener" target="_blank">📸 Instagram (@ilyas.sener)</a>
+          <a href="https://www.instagram.com/yazarilyassener" target="_blank">📸 Instagram (@yazarilyassener)</a>
+          <a href="https://www.facebook.com/ilyassener6157" target="_blank">📘 Facebook</a>
+          <a href="https://www.tiktok.com/@ilyassener.com" target="_blank">🎵 TikTok 1</a>
+          <a href="https://www.tiktok.com/@ilyassener.com1" target="_blank">🎵 TikTok 2</a>
+          <a href="https://suno.com/invite/@ilyassener61" target="_blank">🎶 Suno</a>
+          <a href="https://www.youtube.com/@ilyassener1" target="_blank">▶️ YouTube</a>
+        </div>
+      </div>
+
+      <div class="card" id="dil-ceviri-kutu">
+        <h3>Yabancı Dil Çevirisi</h3>
+        <p>Sayfayı seçtiğiniz dile çevirin.</p>
+        <label for="language-select" style="color: #c9a227; font-weight: bold; display: block; margin-top: 10px; margin-bottom: 8px; font-size:0.85rem;">🌐 DİL SEÇİN / SELECT LANGUAGE</label>
+        <select id="language-select" onchange="translatePage(this.value)" style="width: 100%; padding: 10px; border-radius: 5px; background-color: #0f1115; color: #e8eaed; border: 1px solid #c9a227; font-size: 15px;">
+            <option value="tr">🇹🇷 Türkçe (Orijinal)</option>
+            <option value="en">🇬🇧 English (İngilizce)</option>
+            <option value="zh-CN">🇨🇳 中文 (Çince)</option>
+            <option value="ja">🇯🇵 日本語 (Japonca)</option>
+            <option value="ko">🇰🇷 한국어 (Korece)</option>
+            <option value="de">🇩🇪 Deutsch (Almanca)</option>
+            <option value="fr">🇫🇷 Français (Fransızca)</option>
+            <option value="es">🇪🇸 Español (İspanyolca)</option>
+            <option value="it">🇮🇹 Italiano (İtalyanca)</option>
+            <option value="pt">🇵🇹 Português (Portekizce)</option>
+            <option value="ru">🇷🇺 Русский (Rusça)</option>
+            <option value="ar">🇸🇦 العربية (Arapça)</option>
+            <option value="sv">🇸🇪 Svenska (İsveççe)</option>
+            <option value="nl">🇳🇱 Nederlands (Hollandaca)</option>
+            <option value="pl">🇵🇱 Polski (Lehçe)</option>
+            <option value="hi">🇮🇳 हिन्दी (Hintçe)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card" id="iletisim-bilgileri-kutu" style="margin-top:18px">
+      <h3>📞 İletişim Bilgileri</h3>
+      <div class="iletisim-liste">
+        <a href="mailto:ilyas.sener@hotmail.com">📧 Hotmail: ilyas.sener@hotmail.com</a>
+        <a href="mailto:ilyassener61@gmail.com">📧 Gmail: ilyassener61@gmail.com</a>
+        <a href="https://wa.me/905517309638" target="_blank">📱 WhatsApp (TR): +90 551 730 96 38</a>
+        <a href="https://wa.me/46739786837" target="_blank">📱 WhatsApp (SE): +46 73 978 68 37</a>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3>İletişim Formu</h3>
+      <p style="margin-bottom:14px">Bana mesaj bırakın, en kısa sürede dönüş yapacağım.</p>
+      <form action="https://formspree.io/f/xwloadgv" method="POST">
+        <input type="text" name="isim" placeholder="Adınız" required>
+        <input type="email" name="email" placeholder="E-posta adresiniz" required>
+        <textarea name="mesaj" placeholder="Mesajınız..." required></textarea>
+        <button class="btn" type="submit">Mesaj Gönder</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- DİĞER -->
+  <section class="page" id="diger">
+    <h2>Diğer</h2>
+    <p class="sub">Reklam ve kısayol işlemleri.</p>
+    <div class="grid">
+      <div class="card"><h3>Reklam Ver</h3><p>Kampanya oluşturun ve bütçe belirleyin.</p><button type="button" class="btn ghost">Reklam Oluştur</button></div>
+      <div class="card"><h3>Kısa yol</h3><p>Sık kullanılan işlemlere hızlı erişim.</p><button type="button" class="btn ghost">Kısayollar</button></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= BÖLÜM BİLGİ / İŞLEM PENCERESİ ================= -->
+<div class="modal-backdrop" id="bolumModal" onclick="closeBolumModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <h3 id="modalBaslik">Bölüm</h3>
+    <p id="modalAciklama">Bu alan yakında güncellenecek.</p>
+    <div class="modal-actions">
+      <a href="#iletisim" id="modalIletisimBtn" class="btn" onclick="openPage('iletisim'); closeBolumModal();">Mesaj / Talep Gönder</a>
+      <button type="button" class="btn ghost" onclick="closeBolumModal()">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SAYFA GEÇİŞ & ETKİLEŞİM SCRİPTİ ================= -->
+<script>
+  const YONETICI_SIFRESI = "ilyas2026";
+  let yoneticiAktif = false;
+
+  function toggleMenu(forceState) {
+    const aside = document.getElementById('sideMenu');
+    const backdrop = document.getElementById('menuBackdrop');
+    const nextState = typeof forceState === 'boolean' ? forceState : !aside.classList.contains('open');
+    aside.classList.toggle('open', nextState);
+    if (backdrop) backdrop.classList.toggle('active', nextState && window.innerWidth <= 900);
+  }
+
+  function openPage(pageId, activeLinkEl) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById(pageId);
+    if (target) target.classList.add('active');
+
+    document.querySelectorAll('aside a[data-page]').forEach(a => a.classList.remove('active-link'));
+    if (activeLinkEl) activeLinkEl.classList.add('active-link');
+
+    if (window.innerWidth <= 900) toggleMenu(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function highlightTarget(targetId) {
+    document.querySelectorAll('.card, .profil-form-kapsayici').forEach(el => el.classList.remove('highlight-card'));
+    if (!targetId) return;
+    const targetEl = document.getElementById(targetId);
+    if (targetEl) {
+      targetEl.classList.add('highlight-card');
+      setTimeout(() => {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 150);
+    }
+  }
+
+  function showBolumBilgi(baslik, aciklama) {
+    document.getElementById('modalBaslik').textContent = baslik;
+    document.getElementById('modalAciklama').textContent = aciklama;
+    document.getElementById('bolumModal').classList.add('active');
+  }
+
+  function closeBolumModal() {
+    document.getElementById('bolumModal').classList.remove('active');
+  }
+
+  function yoneticiModuAc() {
+    const girilen = prompt("Yönetici kodunu girin:");
+    if (girilen === null) return;
+    if (girilen === YONETICI_SIFRESI) {
+      yoneticiAktif = true;
+      document.body.classList.add('admin-active');
+      document.getElementById('adminAcBtn').style.display = 'none';
+      document.getElementById('adminKapatBtn').style.display = 'inline-block';
+      document.getElementById('yoneticiDurumMetni').textContent = '✓ Yönetici modu açık: güncelleme, dosya önizleme, engelleme ve onay ayarlarını düzenleyebilirsiniz.';
+      guncellemeCiz();
+      engelCiz();
+    } else {
+      alert("Yönetici kodu hatalı.");
+    }
+  }
+
+  function yoneticiModuKapat() {
+    yoneticiAktif = false;
+    document.body.classList.remove('admin-active');
+    document.getElementById('adminAcBtn').style.display = 'inline-block';
+    document.getElementById('adminKapatBtn').style.display = 'none';
+    document.getElementById('yoneticiDurumMetni').textContent = 'Güncelleme, dosya yükleme, engellemeler ve onay ayarları yalnızca yöneticiye açıktır.';
+    guncellemeCiz();
+    engelCiz();
+  }
+
+  document.querySelectorAll('aside a[data-page]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const pageId = link.dataset.page;
+      const topic = link.dataset.topic;
+      const targetId = link.dataset.targetEl;
+      openPage(pageId, link);
+
+      if (topic && pageId !== 'hayat-hikayesi') {
+        const heading = document.querySelector(`#${pageId} h2`);
+        const sub = document.querySelector(`#${pageId} .sub`);
+        if (heading) heading.textContent = topic;
+        if (sub) sub.textContent = `"${topic}" bölümünü görüntülüyorsunuz.`;
+      } else if (pageId === 'eserler') {
+        document.querySelector('#eserler h2').textContent = 'Eserlerim';
+        document.querySelector('#eserler .sub').textContent = 'Roman, şiir, çocuk kitabı, şarkı, beste, klip, film ve resimlerinizi keşfedin.';
+      }
+
+      if (targetId === 'galeri-bolumu') {
+        galeriAc();
+      }
+      highlightTarget(targetId);
+    });
+  });
+
+  document.querySelectorAll('main .card a.btn, main .card button.btn').forEach(btn => {
+    const href = btn.getAttribute('href');
+    if (href && (href.startsWith('mailto:') || href.startsWith('http'))) return;
+    if (btn.id === 'kopyalaBtn') return;
+    if (btn.hasAttribute('onclick')) return;
+
+    btn.addEventListener('click', e => {
+      if (href === '#') e.preventDefault();
+      const card = btn.closest('.card');
+      const title = card ? card.querySelector('h3')?.textContent : 'Bölüm';
+      const desc = card ? card.querySelector('p')?.textContent : 'İçerik hazırlanıyor.';
+      showBolumBilgi(`${title} — ${btn.textContent.trim()}`, `${desc} Bu bölüm için yeni içerik veya düzenleme eklemek isterseniz İletişim formunu kullanabilirsiniz.`);
+    });
+  });
+
+  /* ===== PROFİL & HESAP İŞLEVLERİ ===== */
+  const profilForm = document.getElementById('profilDuzenleForm');
+  function profilBilgileriniYukle() {
+    const kayitli = JSON.parse(localStorage.getItem('ilyas_profil_bilgi') || 'null');
+    if (!kayitli) return;
+    if (kayitli.adsoyad) {
+      document.getElementById('adsoyad').value = kayitli.adsoyad;
+      document.getElementById('profilBaslikAd').textContent = kayitli.adsoyad.toUpperCase();
+      document.getElementById('sidebarLogoTitle').textContent = kayitli.adsoyad;
+    }
+    if (kayitli.kullaniciadi) document.getElementById('kullaniciadi').value = kayitli.kullaniciadi;
+    if (kayitli.biyografi) document.getElementById('biyografi').value = kayitli.biyografi;
+    if (kayitli.eposta) document.getElementById('eposta').value = kayitli.eposta;
+    if (kayitli.sosyalmedya) document.getElementById('sosyalmedya').value = kayitli.sosyalmedya;
+  }
+
+  profilForm.addEventListener('submit', () => {
+    const veri = {
+      adsoyad: document.getElementById('adsoyad').value.trim(),
+      kullaniciadi: document.getElementById('kullaniciadi').value.trim(),
+      biyografi: document.getElementById('biyografi').value.trim(),
+      eposta: document.getElementById('eposta').value.trim(),
+      sosyalmedya: document.getElementById('sosyalmedya').value.trim()
+    };
+    localStorage.setItem('ilyas_profil_bilgi', JSON.stringify(veri));
+    document.getElementById('profilBaslikAd').textContent = (veri.adsoyad || 'İLYAS ŞENER').toUpperCase();
+    document.getElementById('sidebarLogoTitle').textContent = veri.adsoyad || 'İlyas Şener';
+    document.getElementById('profilKayitDurumu').textContent = '✓ Bilgiler kaydedildi ve gönderiliyor.';
+  });
+
+  function guncellemeCiz() {
+    const liste = JSON.parse(localStorage.getItem('ilyas_guncellemeler') || '["Kalemin Dilinden yayında."]');
+    const ul = document.getElementById('guncellemeListesi');
+    ul.innerHTML = liste.map((item, idx) => {
+      const silBtn = yoneticiAktif
+        ? `<button type="button" class="btn ghost" style="margin-top:0;padding:4px 9px;font-size:0.75rem;" onclick="guncellemeSil(${idx})">Sil</button>`
+        : '';
+      return `<li><span>${item}</span>${silBtn}</li>`;
+    }).join('');
+  }
+  function guncellemeEkle() {
+    if (!yoneticiAktif) return;
+    const inp = document.getElementById('guncellemeNotInput');
+    const val = inp.value.trim();
+    if (!val) return;
+    const liste = JSON.parse(localStorage.getItem('ilyas_guncellemeler') || '[]');
+    liste.unshift(val);
+    localStorage.setItem('ilyas_guncellemeler', JSON.stringify(liste));
+    inp.value = '';
+    guncellemeCiz();
+  }
+  function guncellemeSil(idx) {
+    if (!yoneticiAktif) return;
+    const liste = JSON.parse(localStorage.getItem('ilyas_guncellemeler') || '[]');
+    liste.splice(idx, 1);
+    localStorage.setItem('ilyas_guncellemeler', JSON.stringify(liste));
+    guncellemeCiz();
+  }
+
+  function dosyaOnizle() {
+    if (!yoneticiAktif) return;
+    const input = document.getElementById('dosyaYukleInput');
+    const alan = document.getElementById('dosyaOnizlemeAlani');
+    if (!input.files || !input.files[0]) { alan.innerHTML = ''; return; }
+    const dosya = input.files[0];
+    const kb = (dosya.size / 1024).toFixed(1);
+    let html = `<div><strong>Dosya:</strong> ${dosya.name} (${kb} KB)</div>`;
+    if (dosya.type.startsWith('image/')) {
+      const url = URL.createObjectURL(dosya);
+      html += `<img src="${url}" alt="Önizleme" style="max-width:100%;max-height:150px;border-radius:8px;margin-top:8px;border:1px solid #444;">`;
+    }
+    alan.innerHTML = html;
+  }
+
+  function tercihYukle() {
+    const t = JSON.parse(localStorage.getItem('ilyas_tercihler') || 'null');
+    if (!t) return;
+    document.getElementById('tercihDil').value = t.dil || 'tr';
+    document.getElementById('tercihGaleri').value = t.galeri || 'kapali';
+    if (t.galeri === 'acik') galeriAc();
+  }
+  function tercihKaydet() {
+    const t = {
+      dil: document.getElementById('tercihDil').value,
+      galeri: document.getElementById('tercihGaleri').value
+    };
+    localStorage.setItem('ilyas_tercihler', JSON.stringify(t));
+    document.getElementById('tercihDurum').textContent = '✓ Tercihler bu cihazda kaydedildi.';
+  }
+
+  function engelCiz() {
+    const liste = JSON.parse(localStorage.getItem('ilyas_engeller') || '[]');
+    const ul = document.getElementById('engelListesi');
+    if (!yoneticiAktif) {
+      ul.innerHTML = `<li><span>Kayıtlı engel sayısı: ${liste.length}</span></li>`;
+      return;
+    }
+    ul.innerHTML = liste.length
+      ? liste.map((kisi, idx) => `<li><span>${kisi}</span><button type="button" class="btn ghost" style="margin-top:0;padding:4px 9px;font-size:0.75rem;" onclick="engelSil(${idx})">Kaldır</button></li>`).join('')
+      : '<li><span>Engellenen kullanıcı yok.</span></li>';
+  }
+  function engelEkle() {
+    if (!yoneticiAktif) return;
+    const inp = document.getElementById('engelInput');
+    const val = inp.value.trim();
+    if (!val) return;
+    const liste = JSON.parse(localStorage.getItem('ilyas_engeller') || '[]');
+    if (!liste.includes(val)) liste.push(val);
+    localStorage.setItem('ilyas_engeller', JSON.stringify(liste));
+    inp.value = '';
+    engelCiz();
+  }
+  function engelSil(idx) {
+    if (!yoneticiAktif) return;
+    const liste = JSON.parse(localStorage.getItem('ilyas_engeller') || '[]');
+    liste.splice(idx, 1);
+    localStorage.setItem('ilyas_engeller', JSON.stringify(liste));
+    engelCiz();
+  }
+
+  const onayEtiketleri = {
+    "kaynak-gostererek": "Durum: Kaynak gösterilerek paylaşıma açık",
+    "onay-gerekli": "Durum: Paylaşım öncesi yazılı onay gerekli",
+    "kapali": "Durum: Yeniden paylaşıma kapalı"
+  };
+  function paylasimOnayYukle() {
+    const kayit = localStorage.getItem('ilyas_paylasim_onay') || "kaynak-gostererek";
+    document.getElementById('paylasimOnaySecim').value = kayit;
+    document.getElementById('paylasimOnayOzeti').textContent = onayEtiketleri[kayit] || onayEtiketleri["kaynak-gostererek"];
+  }
+  function paylasimOnayKaydet() {
+    if (!yoneticiAktif) return;
+    const val = document.getElementById('paylasimOnaySecim').value;
+    localStorage.setItem('ilyas_paylasim_onay', val);
+    document.getElementById('paylasimOnayOzeti').textContent = onayEtiketleri[val] + " (Kaydedildi)";
+  }
+
+  profilBilgileriniYukle();
+  guncellemeCiz();
+  tercihYukle();
+  engelCiz();
+  paylasimOnayYukle();
+</script>
+
+<!-- ================= DİL ÇEVİRİ SCRİPTİ ================= -->
+<script type="text/javascript">
+function translatePage(lang) {
+    if (lang === 'tr') {
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.reload();
+    } else {
+        document.cookie = "googtrans=/tr/" + lang + "; path=/";
+        document.cookie = "googtrans=/tr/" + lang + "; domain=" + window.location.hostname + "; path=/";
+        window.location.reload(); 
+    }
+}
+</script>
+<div id="google_translate_element" style="display:none;"></div>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'tr'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- ================= GALERİ SCRİPTİ ================= -->
+<script>
+  function galeriAc() {
+    const kapsayici = document.getElementById("galeri-kutulari");
+    const fotograflar = [
+      "47e15afd-faca-401a-89d9-5bd8055c8928.jpeg", 
+      "IMG_0005.jpeg", "IMG_0042.jpeg", "IMG_0043.jpeg", "IMG_0047.jpeg", 
+      "IMG_0049.jpeg", "IMG_0050.jpeg", "IMG_0051.jpeg", 
+      "IMG_0058.png", "IMG_0082.png", "IMG_0083.jpeg", "IMG_0729.jpeg", "IMG_0739.jpeg", 
+      "IMG_0758.jpeg", "IMG_0759.jpeg", "IMG_9501.jpeg", "IMG_9606.jpeg", "IMG_9607.jpeg", "IMG_9997.jpeg", "IMG_9998.jpeg",  
+      "1795379949507.jpg", "1795434920066.jpg", 
+      "IMG_0178.jpg", "IMG_20260608_163735.jpg", "IMG_0111.png", 
+      "IMG_0048.jpeg", "IMG_0007.jpeg", "IMG_0010.jpeg", "IMG_0011.jpeg", 
+      "IMG_0012.jpeg", "IMG_0004.jpeg", "IMG_9500.jpeg", "IMG_9497.jpeg", 
+      "IMG_9496.jpeg", "IMG_9489.jpeg", "IMG_9474.jpeg", 
+      "IMG_9467.jpeg", "IMG_9468.jpeg", 
+      "IMG_0041.jpeg", "IMG_0179.jpeg"
+    ];
+    
+    let htmlIcerik = "";
+    for (let i = 0; i < fotograflar.length; i++) {
+      htmlIcerik += `
+        <div style="margin-bottom: 16px;">
+          <h3 style="color: #c9a227;">Galeri ${i + 1}</h3>
+          <img src="./resimler/${fotograflar[i]}" alt="Galeri ${i + 1}" style="max-width: 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+      `;
+    }
+
+    kapsayici.innerHTML = htmlIcerik;
+    
+    document.getElementById("galeri-icerik").style.display = "block";
+    document.getElementById("galeri-ac-btn").style.display = "none";
+    document.getElementById("galeri-kapat-btn").style.display = "inline-block";
+  }
+
+  function galeriKapat() {
+    document.getElementById("galeri-icerik").style.display = "none";
+    document.getElementById("galeri-ac-btn").style.display = "inline-block";
+    document.getElementById("galeri-kapat-btn").style.display = "none";
+  }
+</script>
+
+<!-- ================= KOPYALAMA FONKSİYONU ================= -->
+<script>
+  function linkKopyala() {
+    var kopyalanacakLink = document.getElementById("profilLink");
+    var buton = document.getElementById("kopyalaBtn");
+    
+    kopyalanacakLink.select();
+    kopyalanacakLink.setSelectionRange(0, 99999);
+
+    try {
+      var basarili = document.execCommand("copy");
+      
+      if (basarili) {
+        var eskiYazi = buton.innerHTML;
+        buton.innerHTML = "Kopyalandı! ✓";
+        buton.style.color = "#4CAF50";
+        buton.style.borderColor = "#4CAF50";
+        
+        setTimeout(function() {
+          buton.innerHTML = eskiYazi;
+          buton.style.color = "";
+          buton.style.borderColor = "";
+        }, 2000);
+      } else {
+        alert("Kopyalama başarısız oldu. Lütfen yazıyı manuel olarak seçip kopyalayın.");
+      }
+    } catch (err) {
+      alert("Tarayıcınız otomatik kopyalamayı desteklemiyor.");
+    }
+  }
+</script>
+
+</body>
+</html>
