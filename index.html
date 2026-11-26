@@ -65,13 +65,14 @@
   
   /* Kartlara hafif koyu cam efekti */
   .card{
-    background: rgba(15, 17, 21, 0.75); 
+    background: rgba(15, 17, 21, 0.78); 
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(201, 162, 39, 0.2); 
+    border: 1px solid rgba(201, 162, 39, 0.25); 
     border-radius: 12px; 
     padding: 22px; 
     margin-bottom: 18px; 
     transition: .3s;
+    text-shadow: none;
   }
   .card.highlight-card{
     border-color: var(--accent2);
@@ -80,12 +81,24 @@
   .card h3{font-size:1.1rem;margin-bottom:8px; color: var(--accent2);}
   .card p{color:#cccccc;font-size:.9rem;line-height:1.6; font-weight: 400;}
   
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
   .badge{display:inline-block;background:rgba(30, 34, 43, 0.6);border:1px solid var(--border);color:var(--accent2);font-size:.72rem;padding:3px 10px;border-radius:20px;margin:0 6px 6px 0}
   
-  .btn{display:inline-block;background:rgba(201, 162, 39, 0.1);color:var(--accent2);font-weight:600;padding:10px 22px;border-radius:8px;margin-top:14px;font-size:.9rem;border:1px solid var(--accent);cursor:pointer; text-shadow: none; transition: 0.2s;}
+  .btn{display:inline-block;background:rgba(201, 162, 39, 0.12);color:var(--accent2);font-weight:600;padding:9px 18px;border-radius:8px;margin-top:12px;font-size:.88rem;border:1px solid var(--accent);cursor:pointer; text-shadow: none; transition: 0.2s;}
   .btn:hover{background:var(--accent); color:#111;}
-  .btn.ghost{background:rgba(15, 17, 21, 0.4);color:var(--accent2);border:1px solid var(--accent)}
+  .btn.ghost{background:rgba(15, 17, 21, 0.5);color:var(--accent2);border:1px solid var(--accent)}
+
+  .mini-input, .mini-select{
+    width:100%; background:#1e222b; border:1px solid #444; border-radius:8px;
+    padding:9px 11px; color:#fff; font-size:0.9rem; margin-top:10px; font-family:inherit;
+  }
+  .mini-list{list-style:none; margin-top:12px; display:flex; flex-direction:column; gap:8px;}
+  .mini-list li{
+    background:#171a21; border:1px solid #2a2f3a; border-radius:8px;
+    padding:8px 12px; font-size:0.85rem; color:#e8eaed;
+    display:flex; justify-content:space-between; align-items:center; gap:8px;
+  }
+  .durum-notu{margin-top:10px; font-size:0.82rem; color:#7cd992; min-height:18px;}
 
   /* İletişim formu alanları */
   #iletisim form input, #iletisim form textarea{
@@ -109,6 +122,7 @@
       padding: 30px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(201, 162, 39, 0.1);
       max-width: 800px;
+      text-shadow: none;
   }
   .form-grubu { display: flex; gap: 20px; flex-wrap: wrap; }
   .form-alani { flex: 1; min-width: 250px; display: flex; flex-direction: column; margin-bottom: 20px; }
@@ -168,7 +182,7 @@
 <aside id="sideMenu">
   <div class="logo-area">
     <img src="https://i.hizliresim.com/d9n9co7y.jpg" alt="İlyas Şener Logo">
-    <div class="logo-title">İlyas Şener</div>
+    <div class="logo-title" id="sidebarLogoTitle">İlyas Şener</div>
     <div class="logo-subtitle">Kalemin Dilinden</div>
   </div>
 
@@ -297,7 +311,7 @@
     </div>
   </section>
 
-  <!-- HESABIM (PROFİL DÜZENLEME FORMU + DOSYA YÜKLEME + HESAP KARTLARI) -->
+  <!-- HESABIM (DOLDURULMUŞ PROFİL & HESAP BÖLÜMÜ) -->
   <section class="page" id="hesabim">
     <h2>Profil &amp; Hesap</h2>
     <p class="sub">Hesap bilgilerinizi ve tercihlerinizi buradan yönetin.</p>
@@ -305,11 +319,11 @@
     <div class="profil-form-kapsayici" id="kart-profil-duzenle">
         <div class="profil-ust" style="text-align:center; margin-bottom: 30px;">
             <img src="https://i.hizliresim.com/d9n9co7y.jpg" alt="İlyas Şener Logo" class="ana-logo" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);">
-            <h3 style="color: var(--accent2); margin-top: 15px; font-size: 1.5rem;">İLYAS ŞENER</h3>
+            <h3 id="profilBaslikAd" style="color: var(--accent2); margin-top: 15px; font-size: 1.5rem;">İLYAS ŞENER</h3>
             <p style="color: var(--muted); font-style: italic; font-size: 0.9rem;">Kalemin Dilinden</p>
         </div>
 
-        <form action="https://formspree.io/f/xwloadgv" method="POST">
+        <form id="profilDuzenleForm" action="https://formspree.io/f/xwloadgv" method="POST">
             <div class="form-grubu">
                 <div class="form-alani">
                     <label for="adsoyad">Ad Soyad / Mahlas</label>
@@ -337,51 +351,78 @@
                 </div>
             </div>
 
-            <div style="text-align: right; border-top: 1px solid rgba(201, 162, 39, 0.2); padding-top: 20px; margin-top: 10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-top: 1px solid rgba(201, 162, 39, 0.2); padding-top: 20px; margin-top: 10px;">
+                <span id="profilKayitDurumu" style="color:#7cd992; font-size:0.88rem;"></span>
                 <button type="submit" class="kaydet-buton">DEĞİŞİKLİKLERİ KAYDET</button>
             </div>
         </form>
     </div>
 
-    <div class="grid" style="margin-top: 40px; opacity: 0.95;">
+    <div class="grid" style="margin-top: 40px; opacity: 0.98;">
+      <!-- 1. PROFİL PAYLAŞ -->
       <div class="card" id="kart-profil-paylas">
         <h3>Profil paylaş</h3>
         <p>Profil bağlantınızı kopyalayarak okuyucularınızla paylaşın.</p>
         <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-          <input type="text" id="profilLink" value="https://ilyassener.info" readonly style="flex: 1; min-width: 180px; background: #1e222b; color: white; border: 1px solid #444; padding: 10px; border-radius: 8px; font-size: 14px;">
+          <input type="text" id="profilLink" value="https://ilyassener.info" readonly style="flex: 1; min-width: 170px; background: #1e222b; color: white; border: 1px solid #444; padding: 10px; border-radius: 8px; font-size: 14px;">
           <button type="button" class="btn ghost" onclick="linkKopyala()" id="kopyalaBtn" style="margin-top: 0;">Kopyala</button>
         </div>
       </div>
 
+      <!-- 2. GÜNCELLEME -->
       <div class="card" id="kart-guncelleme">
         <h3>Güncelleme</h3>
-        <p>Sayfa ve içerik güncellemelerini kontrol edin.</p>
-        <button type="button" class="btn ghost">Güncellemeleri Kontrol Et</button>
+        <p>Site ve içerik güncellemelerini kaydedin veya görüntüleyin.</p>
+        <input type="text" id="guncellemeNotInput" class="mini-input" placeholder="Yeni güncelleme notu yazın...">
+        <button type="button" class="btn ghost" onclick="guncellemeEkle()">Güncelleme Ekle</button>
+        <ul id="guncellemeListesi" class="mini-list"></ul>
       </div>
 
+      <!-- 3. DOSYA YÜKLEME -->
       <div class="card" id="kart-dosya-yukleme">
         <h3>Dosya yükleme</h3>
-        <p>Yeni görsel, metin veya ses dosyası seçin ve ekleyin.</p>
-        <input type="file" id="dosyaYukleInput" style="width:100%; margin-top:10px; color:#ccc; font-size:0.85rem;">
-        <button type="button" class="btn ghost" onclick="dosyaYukleBilgi()">Dosyayı Hazırla</button>
+        <p>Yeni görsel, metin veya ses dosyası seçip önizleyin.</p>
+        <input type="file" id="dosyaYukleInput" class="mini-input" onchange="dosyaOnizle()">
+        <div id="dosyaOnizlemeAlani" style="margin-top:10px; font-size:0.85rem; color:#d4d7dd;"></div>
       </div>
 
+      <!-- 4. İÇERİK TERCİHLERİ -->
       <div class="card" id="kart-icerik-tercihleri">
         <h3>İçerik tercihleri</h3>
-        <p>Varsayılan dil ve görünüm tercihlerinizi seçin.</p>
-        <button type="button" class="btn ghost">Tercihleri Düzenle</button>
+        <p>Varsayılan dil ve galeri görünüm tercihlerinizi seçin.</p>
+        <select id="tercihDil" class="mini-select">
+          <option value="tr">Türkçe (Varsayılan)</option>
+          <option value="sv">Svenska</option>
+          <option value="en">English</option>
+        </select>
+        <select id="tercihGaleri" class="mini-select">
+          <option value="kapali">Galeri başlangıçta kapalı</option>
+          <option value="acik">Galeri başlangıçta açık</option>
+        </select>
+        <button type="button" class="btn ghost" onclick="tercihKaydet()">Tercihleri Kaydet</button>
+        <div id="tercihDurum" class="durum-notu"></div>
       </div>
 
+      <!-- 5. ENGELLERMELER -->
       <div class="card" id="kart-engellemeler">
         <h3>Engellemeler</h3>
-        <p>Engellenen kullanıcıları görüntüleyin.</p>
-        <button type="button" class="btn ghost">Liste</button>
+        <p>Engellenen kullanıcıları yönetin.</p>
+        <input type="text" id="engelInput" class="mini-input" placeholder="Kullanıcı adı veya e-posta...">
+        <button type="button" class="btn ghost" onclick="engelEkle()">Listeye Ekle</button>
+        <ul id="engelListesi" class="mini-list"></ul>
       </div>
 
+      <!-- 6. PAYLAŞIM KABUL ONAYI -->
       <div class="card" id="kart-paylasim-onayi">
         <h3>Paylaşım kabul onayı</h3>
-        <p>Eserlerin paylaşım ve alıntılanma onay ayarları.</p>
-        <button type="button" class="btn ghost">Onay Ayarları</button>
+        <p>Eserlerinizin paylaşım ve alıntılanma onay durumunu belirleyin.</p>
+        <select id="paylasimOnaySecim" class="mini-select">
+          <option value="kaynak-gostererek">Kaynak gösterilerek paylaşıma açık</option>
+          <option value="onay-gerekli">Paylaşım öncesi yazılı onay gerekli</option>
+          <option value="kapali">Yeniden paylaşıma kapalı</option>
+        </select>
+        <button type="button" class="btn ghost" onclick="paylasimOnayKaydet()">Onayı Kaydet</button>
+        <div id="paylasimOnayDurum" class="durum-notu"></div>
       </div>
     </div>
   </section>
@@ -424,7 +465,7 @@
     </div>
   </section>
 
-  <!-- İLETİŞİM (İLETİŞİM BİLGİLERİ + SOSYAL MEDYA + DİL ÇEVİRİ + FORM) -->
+  <!-- İLETİŞİM -->
   <section class="page" id="iletisim">
     <h2>Hakkında &amp; İletişim</h2>
     <p class="sub">Kendinizi tanıtın, okuyucularınızla iletişim kurun.</p>
@@ -565,15 +606,6 @@
     document.getElementById('bolumModal').classList.remove('active');
   }
 
-  function dosyaYukleBilgi() {
-    const input = document.getElementById('dosyaYukleInput');
-    if (input && input.files && input.files.length > 0) {
-      showBolumBilgi('Dosya Seçildi', `"${input.files[0].name}" dosyası seçildi. Kalıcı yayınlamak için dosyayı projenizin klasörüne ekleyebilirsiniz.`);
-    } else {
-      showBolumBilgi('Dosya Yükleme', 'Lütfen önce yüklemek istediğiniz dosyayı seçin.');
-    }
-  }
-
   document.querySelectorAll('aside a[data-page]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
@@ -613,6 +645,128 @@
       showBolumBilgi(`${title} — ${btn.textContent.trim()}`, `${desc} Bu bölüm için yeni içerik veya düzenleme eklemek isterseniz İletişim formunu kullanabilirsiniz.`);
     });
   });
+
+  /* ===== PROFİL & HESAP YEREL İŞLEVLERİ ===== */
+  const profilForm = document.getElementById('profilDuzenleForm');
+  function profilBilgileriniYukle() {
+    const kayitli = JSON.parse(localStorage.getItem('ilyas_profil_bilgi') || 'null');
+    if (!kayitli) return;
+    if (kayitli.adsoyad) {
+      document.getElementById('adsoyad').value = kayitli.adsoyad;
+      document.getElementById('profilBaslikAd').textContent = kayitli.adsoyad.toUpperCase();
+      document.getElementById('sidebarLogoTitle').textContent = kayitli.adsoyad;
+    }
+    if (kayitli.kullaniciadi) document.getElementById('kullaniciadi').value = kayitli.kullaniciadi;
+    if (kayitli.biyografi) document.getElementById('biyografi').value = kayitli.biyografi;
+    if (kayitli.eposta) document.getElementById('eposta').value = kayitli.eposta;
+    if (kayitli.sosyalmedya) document.getElementById('sosyalmedya').value = kayitli.sosyalmedya;
+  }
+
+  profilForm.addEventListener('submit', () => {
+    const veri = {
+      adsoyad: document.getElementById('adsoyad').value.trim(),
+      kullaniciadi: document.getElementById('kullaniciadi').value.trim(),
+      biyografi: document.getElementById('biyografi').value.trim(),
+      eposta: document.getElementById('eposta').value.trim(),
+      sosyalmedya: document.getElementById('sosyalmedya').value.trim()
+    };
+    localStorage.setItem('ilyas_profil_bilgi', JSON.stringify(veri));
+    document.getElementById('profilBaslikAd').textContent = (veri.adsoyad || 'İLYAS ŞENER').toUpperCase();
+    document.getElementById('sidebarLogoTitle').textContent = veri.adsoyad || 'İlyas Şener';
+    document.getElementById('profilKayitDurumu').textContent = '✓ Bilgiler tarayıcıya kaydedildi ve gönderiliyor.';
+  });
+
+  function guncellemeCiz() {
+    const liste = JSON.parse(localStorage.getItem('ilyas_guncellemeler') || '["Profil ve Hesap bölümü aktif hale getirildi."]');
+    const ul = document.getElementById('guncellemeListesi');
+    ul.innerHTML = liste.map((item, idx) => `<li><span>${item}</span><button type="button" class="btn ghost" style="margin-top:0;padding:4px 9px;font-size:0.75rem;" onclick="guncellemeSil(${idx})">Sil</button></li>`).join('');
+  }
+  function guncellemeEkle() {
+    const inp = document.getElementById('guncellemeNotInput');
+    const val = inp.value.trim();
+    if (!val) return;
+    const liste = JSON.parse(localStorage.getItem('ilyas_guncellemeler') || '[]');
+    liste.unshift(val);
+    localStorage.setItem('ilyas_guncellemeler', JSON.stringify(liste));
+    inp.value = '';
+    guncellemeCiz();
+  }
+  function guncellemeSil(idx) {
+    const liste = JSON.parse(localStorage.getItem('ilyas_guncellemeler') || '[]');
+    liste.splice(idx, 1);
+    localStorage.setItem('ilyas_guncellemeler', JSON.stringify(liste));
+    guncellemeCiz();
+  }
+
+  function dosyaOnizle() {
+    const input = document.getElementById('dosyaYukleInput');
+    const alan = document.getElementById('dosyaOnizlemeAlani');
+    if (!input.files || !input.files[0]) { alan.innerHTML = ''; return; }
+    const dosya = input.files[0];
+    const kb = (dosya.size / 1024).toFixed(1);
+    let html = `<div><strong>Dosya:</strong> ${dosya.name} (${kb} KB)</div>`;
+    if (dosya.type.startsWith('image/')) {
+      const url = URL.createObjectURL(dosya);
+      html += `<img src="${url}" alt="Önizleme" style="max-width:100%;max-height:150px;border-radius:8px;margin-top:8px;border:1px solid #444;">`;
+    }
+    alan.innerHTML = html;
+  }
+
+  function tercihYukle() {
+    const t = JSON.parse(localStorage.getItem('ilyas_tercihler') || 'null');
+    if (!t) return;
+    document.getElementById('tercihDil').value = t.dil || 'tr';
+    document.getElementById('tercihGaleri').value = t.galeri || 'kapali';
+    if (t.galeri === 'acik') galeriAc();
+  }
+  function tercihKaydet() {
+    const t = {
+      dil: document.getElementById('tercihDil').value,
+      galeri: document.getElementById('tercihGaleri').value
+    };
+    localStorage.setItem('ilyas_tercihler', JSON.stringify(t));
+    document.getElementById('tercihDurum').textContent = '✓ Tercihler kaydedildi.';
+  }
+
+  function engelCiz() {
+    const liste = JSON.parse(localStorage.getItem('ilyas_engeller') || '[]');
+    const ul = document.getElementById('engelListesi');
+    ul.innerHTML = liste.length
+      ? liste.map((kisi, idx) => `<li><span>${kisi}</span><button type="button" class="btn ghost" style="margin-top:0;padding:4px 9px;font-size:0.75rem;" onclick="engelSil(${idx})">Kaldır</button></li>`).join('')
+      : '<li><span>Engellenen kullanıcı yok.</span></li>';
+  }
+  function engelEkle() {
+    const inp = document.getElementById('engelInput');
+    const val = inp.value.trim();
+    if (!val) return;
+    const liste = JSON.parse(localStorage.getItem('ilyas_engeller') || '[]');
+    if (!liste.includes(val)) liste.push(val);
+    localStorage.setItem('ilyas_engeller', JSON.stringify(liste));
+    inp.value = '';
+    engelCiz();
+  }
+  function engelSil(idx) {
+    const liste = JSON.parse(localStorage.getItem('ilyas_engeller') || '[]');
+    liste.splice(idx, 1);
+    localStorage.setItem('ilyas_engeller', JSON.stringify(liste));
+    engelCiz();
+  }
+
+  function paylasimOnayYukle() {
+    const kayit = localStorage.getItem('ilyas_paylasim_onay');
+    if (kayit) document.getElementById('paylasimOnaySecim').value = kayit;
+  }
+  function paylasimOnayKaydet() {
+    const val = document.getElementById('paylasimOnaySecim').value;
+    localStorage.setItem('ilyas_paylasim_onay', val);
+    document.getElementById('paylasimOnayDurum').textContent = '✓ Paylaşım onay tercihi kaydedildi.';
+  }
+
+  profilBilgileriniYukle();
+  guncellemeCiz();
+  tercihYukle();
+  engelCiz();
+  paylasimOnayYukle();
 </script>
 
 <!-- ================= DİL ÇEVİRİ SCRİPTİ ================= -->
