@@ -111,23 +111,28 @@
   .kaydet-buton:hover { background-color: var(--accent); color: #111; box-shadow: 0 0 15px rgba(201, 162, 39, 0.5); }
 
   /* ===== MOBİL UYUMLULUK ===== */
-  .menu-btn{display:none;position:fixed;top:16px;left:16px;z-index:1000;background:var(--accent);color:#111;border:none;width:44px;height:44px;border-radius:10px;font-size:1.3rem;cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,.5); text-shadow: none;}
+  .menu-btn{display:none;position:fixed;top:16px;left:16px;z-index:1001;background:var(--accent);color:#111;border:none;width:44px;height:44px;border-radius:10px;font-size:1.3rem;cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,.5); text-shadow: none;}
+  .menu-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:998;}
+  .menu-backdrop.active{display:block;}
   
   @media(max-width:900px){
     body { display: block !important; }
-    aside { transform: translateX(-100%) !important; z-index: 999; background: rgba(15, 17, 21, 0.95) !important; backdrop-filter: blur(5px); border-right: none; }
+    aside { transform: translateX(-100%) !important; z-index: 999; background: rgba(15, 17, 21, 0.96) !important; backdrop-filter: blur(5px); border-right: none; }
     aside.open { transform: translateX(0) !important; }
-    main { margin-left: 0 !important; width: 100% !important; padding: 80px 15px 40px !important; }
+    main { margin-left: 0 !important; width: 100% !important; padding: 80px 15px 60px !important; }
     .menu-btn { display: block !important; }
+    .profil-form-kapsayici { padding: 20px 15px; }
+    .kaydet-buton { width: 100%; text-align: center; }
   }
 </style>
 </head>
 <body>
 
-<button class="menu-btn" onclick="document.querySelector('aside').classList.toggle('open')">☰</button>
+<button class="menu-btn" type="button" onclick="toggleMenu()">☰</button>
+<div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu(false)"></div>
 
 <!-- ================= KENAR ÇUBUĞU ================= -->
-<aside>
+<aside id="sideMenu">
   <div class="logo-area">
     <img src="https://i.hizliresim.com/d9n9co7y.jpg" alt="İlyas Şener Logo">
     <div class="logo-title">İlyas Şener</div>
@@ -381,13 +386,21 @@
 
 <!-- ================= SAYFA GEÇİŞ SCRİPTİ ================= -->
 <script>
+  function toggleMenu(forceState) {
+    const aside = document.getElementById('sideMenu');
+    const backdrop = document.getElementById('menuBackdrop');
+    const nextState = typeof forceState === 'boolean' ? forceState : !aside.classList.contains('open');
+    aside.classList.toggle('open', nextState);
+    if (backdrop) backdrop.classList.toggle('active', nextState && window.innerWidth <= 900);
+  }
+
   document.querySelectorAll('aside a[data-page]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       const target = document.getElementById(link.dataset.page);
       if(target) target.classList.add('active');
-      if(window.innerWidth <= 900) document.querySelector('aside').classList.remove('open');
+      if(window.innerWidth <= 900) toggleMenu(false);
       window.scrollTo({top:0, behavior:'smooth'});
     });
   });
