@@ -47,7 +47,7 @@
     background: #0f1115; 
     border-right:1px solid var(--border);
     padding:0 0 24px 0;
-    position:fixed; top:0; bottom:0; overflow-y:auto; transition:transform .3s
+    position:fixed; top:0; bottom:0; overflow-y:auto; transition:transform .3s; z-index:990;
   }
   .nav-group{margin-bottom:8px}
   .nav-group > span{display:block;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent2);padding:15px 24px 6px; font-weight: 600;}
@@ -73,6 +73,10 @@
     margin-bottom: 18px; 
     transition: .3s;
   }
+  .card.highlight-card{
+    border-color: var(--accent2);
+    box-shadow: 0 0 18px rgba(224, 184, 76, 0.45);
+  }
   .card h3{font-size:1.1rem;margin-bottom:8px; color: var(--accent2);}
   .card p{color:#cccccc;font-size:.9rem;line-height:1.6; font-weight: 400;}
   
@@ -90,7 +94,7 @@
   }
   #iletisim form textarea{min-height:100px; resize:vertical;}
   
-  /* ===== YENİ EKLENEN PROFİL DÜZENLEME FORMU STİLLERİ ===== */
+  /* ===== PROFİL DÜZENLEME FORMU STİLLERİ ===== */
   .profil-form-kapsayici {
       background-color: var(--panel);
       border: 1px solid rgba(201, 162, 39, 0.3); 
@@ -102,11 +106,11 @@
   .form-grubu { display: flex; gap: 20px; flex-wrap: wrap; }
   .form-alani { flex: 1; min-width: 250px; display: flex; flex-direction: column; margin-bottom: 20px; }
   .form-alani label { margin-bottom: 8px; font-size: 14px; color: #cccccc; font-weight: 500; }
-  .form-alani input, .form-alani textarea {
+  .form-alani input, .form-alani textarea, .form-alani select {
       background-color: #2a2a2a; border: 1px solid #444; border-radius: 8px;
       padding: 12px; color: white; font-size: 15px; transition: all 0.3s ease;
   }
-  .form-alani input:focus, .form-alani textarea:focus {
+  .form-alani input:focus, .form-alani textarea:focus, .form-alani select:focus {
       outline: none; border-color: var(--accent); box-shadow: 0 0 8px rgba(201, 162, 39, 0.3);
   }
   .form-alani textarea { resize: vertical; min-height: 100px; font-family: inherit; }
@@ -134,12 +138,12 @@
 
   /* ===== MOBİL UYUMLULUK ===== */
   .menu-btn{display:none;position:fixed;top:16px;left:16px;z-index:1001;background:var(--accent);color:#111;border:none;width:44px;height:44px;border-radius:10px;font-size:1.3rem;cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,.5); text-shadow: none;}
-  .menu-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:998;}
+  .menu-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:995;}
   .menu-backdrop.active{display:block;}
   
   @media(max-width:900px){
     body { display: block !important; }
-    aside { transform: translateX(-100%) !important; z-index: 999; background: rgba(15, 17, 21, 0.96) !important; backdrop-filter: blur(5px); border-right: none; }
+    aside { transform: translateX(-100%) !important; z-index: 999; background: rgba(15, 17, 21, 0.98) !important; backdrop-filter: blur(5px); border-right: none; }
     aside.open { transform: translateX(0) !important; }
     main { margin-left: 0 !important; width: 100% !important; padding: 80px 15px 60px !important; }
     .menu-btn { display: block !important; }
@@ -199,13 +203,13 @@
 
   <div class="nav-group">
     <span>👤 Profil &amp; Hesap</span>
-    <a href="#" data-page="hesabim" data-topic="Profil düzenle">Profil düzenle</a>
-    <a href="#" data-page="hesabim" data-topic="Profil paylaş">Profil paylaş</a>
-    <a href="#" data-page="hesabim" data-topic="Güncelleme">Güncelleme</a>
-    <a href="#" data-page="hesabim" data-topic="Dosya yükleme">Dosya yükleme</a>
-    <a href="#" data-page="hesabim" data-topic="İçerik tercihleri">İçerik tercihleri</a>
-    <a href="#" data-page="hesabim" data-topic="Engellemeler">Engellemeler</a>
-    <a href="#" data-page="hesabim" data-topic="Paylaşım kabul onayı">Paylaşım kabul onayı</a>
+    <a href="#" data-page="hesabim" data-topic="Profil düzenle" data-card="kart-profil-duzenle">Profil düzenle</a>
+    <a href="#" data-page="hesabim" data-topic="Profil paylaş" data-card="kart-profil-paylas">Profil paylaş</a>
+    <a href="#" data-page="hesabim" data-topic="Güncelleme" data-card="kart-guncelleme">Güncelleme</a>
+    <a href="#" data-page="hesabim" data-topic="Dosya yükleme" data-card="kart-dosya-yukleme">Dosya yükleme</a>
+    <a href="#" data-page="hesabim" data-topic="İçerik tercihleri" data-card="kart-icerik-tercihleri">İçerik tercihleri</a>
+    <a href="#" data-page="hesabim" data-topic="Engellemeler" data-card="kart-engellemeler">Engellemeler</a>
+    <a href="#" data-page="hesabim" data-topic="Paylaşım kabul onayı" data-card="kart-paylasim-onayi">Paylaşım kabul onayı</a>
   </div>
 
   <div class="nav-group">
@@ -274,12 +278,12 @@
     </div>
   </section>
 
-  <!-- HESABIM (PROFİL DÜZENLEME FORMU) -->
+  <!-- HESABIM (PROFİL DÜZENLEME FORMU + TÜM HESAP KARTLARI) -->
   <section class="page" id="hesabim">
     <h2>Profil &amp; Hesap</h2>
     <p class="sub">Hesap bilgilerinizi ve tercihlerinizi buradan yönetin.</p>
     
-    <div class="profil-form-kapsayici">
+    <div class="profil-form-kapsayici" id="kart-profil-duzenle">
         <div class="profil-ust" style="text-align:center; margin-bottom: 30px;">
             <img src="https://i.hizliresim.com/d9n9co7y.jpg" alt="İlyas Şener Logo" class="ana-logo" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);">
             <h3 style="color: var(--accent2); margin-top: 15px; font-size: 1.5rem;">İLYAS ŞENER</h3>
@@ -320,17 +324,47 @@
         </form>
     </div>
 
-    <!-- ALT KARTLAR (Sadece Profil Paylaş ve Engellemeler kaldı) -->
-    <div class="grid" style="margin-top: 40px; opacity: 0.9;">
-      <div class="card">
+    <!-- HESAP & PAYLAŞIM KARTLARI -->
+    <div class="grid" style="margin-top: 40px; opacity: 0.95;">
+      <div class="card" id="kart-profil-paylas">
         <h3>Profil paylaş</h3>
         <p>Profil bağlantınızı kopyalayarak okuyucularınızla paylaşın.</p>
         <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-          <input type="text" id="profilLink" value="https://ilyassener.info" readonly style="flex: 1; min-width: 200px; background: #1e222b; color: white; border: 1px solid #444; padding: 10px; border-radius: 8px; font-size: 14px;">
+          <input type="text" id="profilLink" value="https://ilyassener.info" readonly style="flex: 1; min-width: 180px; background: #1e222b; color: white; border: 1px solid #444; padding: 10px; border-radius: 8px; font-size: 14px;">
           <button type="button" class="btn ghost" onclick="linkKopyala()" id="kopyalaBtn" style="margin-top: 0;">Kopyala</button>
         </div>
       </div>
-      <div class="card"><h3>Engellemeler</h3><p>Engellenen kullanıcıları görüntüleyin.</p><button type="button" class="btn ghost">Liste</button></div>
+
+      <div class="card" id="kart-guncelleme">
+        <h3>Güncelleme</h3>
+        <p>Sayfa ve içerik güncellemelerini kontrol edin.</p>
+        <button type="button" class="btn ghost">Güncellemeleri Kontrol Et</button>
+      </div>
+
+      <div class="card" id="kart-dosya-yukleme">
+        <h3>Dosya yükleme</h3>
+        <p>Yeni görsel, metin veya ses dosyası seçin ve ekleyin.</p>
+        <input type="file" id="dosyaYukleInput" style="width:100%; margin-top:10px; color:#ccc; font-size:0.85rem;">
+        <button type="button" class="btn ghost" onclick="dosyaYukleBilgi()">Dosyayı Hazırla</button>
+      </div>
+
+      <div class="card" id="kart-icerik-tercihleri">
+        <h3>İçerik tercihleri</h3>
+        <p>Varsayılan dil ve görünüm tercihlerinizi seçin.</p>
+        <button type="button" class="btn ghost">Tercihleri Düzenle</button>
+      </div>
+
+      <div class="card" id="kart-engellemeler">
+        <h3>Engellemeler</h3>
+        <p>Engellenen kullanıcıları görüntüleyin.</p>
+        <button type="button" class="btn ghost">Liste</button>
+      </div>
+
+      <div class="card" id="kart-paylasim-onayi">
+        <h3>Paylaşım kabul onayı</h3>
+        <p>Eserlerin paylaşım ve alıntılanma onay ayarları.</p>
+        <button type="button" class="btn ghost">Onay Ayarları</button>
+      </div>
     </div>
   </section>
 
@@ -464,7 +498,7 @@
 </main>
 
 <!-- ================= BÖLÜM BİLGİ / İŞLEM PENCERESİ ================= -->
-<div class="modal-backdrop" id="bolumModal" onclick="closeBolumModal(event)">
+<div class="modal-backdrop" id="bolumModal" onclick="closeBolumModal()">
   <div class="modal-box" onclick="event.stopPropagation()">
     <h3 id="modalBaslik">Bölüm</h3>
     <p id="modalAciklama">Bu alan yakında güncellenecek.</p>
@@ -497,6 +531,18 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  function highlightCard(cardId) {
+    document.querySelectorAll('.card, .profil-form-kapsayici').forEach(el => el.classList.remove('highlight-card'));
+    if (!cardId) return;
+    const targetCard = document.getElementById(cardId);
+    if (targetCard) {
+      targetCard.classList.add('highlight-card');
+      setTimeout(() => {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 150);
+    }
+  }
+
   function showBolumBilgi(baslik, aciklama) {
     document.getElementById('modalBaslik').textContent = baslik;
     document.getElementById('modalAciklama').textContent = aciklama;
@@ -512,11 +558,21 @@
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
+  function dosyaYukleBilgi() {
+    const input = document.getElementById('dosyaYukleInput');
+    if (input && input.files && input.files.length > 0) {
+      showBolumBilgi('Dosya Seçildi', `"${input.files[0].name}" dosyası seçildi. Kalıcı yayınlamak için dosyayı projenizin klasörüne ekleyebilirsiniz.`);
+    } else {
+      showBolumBilgi('Dosya Yükleme', 'Lütfen önce yüklemek istediğiniz dosyayı seçin.');
+    }
+  }
+
   document.querySelectorAll('aside a[data-page]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       const pageId = link.dataset.page;
       const topic = link.dataset.topic;
+      const cardId = link.dataset.card;
       openPage(pageId, link);
 
       if (topic && pageId !== 'hayat-hikayesi') {
@@ -528,6 +584,8 @@
         document.querySelector('#eserler h2').textContent = 'Eserlerim';
         document.querySelector('#eserler .sub').textContent = 'Roman, şiir, çocuk kitabı, şarkı, beste, klip, film ve resimlerinizi keşfedin.';
       }
+
+      highlightCard(cardId);
     });
   });
 
