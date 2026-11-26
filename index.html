@@ -63,7 +63,6 @@
   
   h2 + .sub{color:var(--accent2);margin-bottom:28px;font-size:.95rem; font-weight: 500;}
   
-  /* Kartlara hafif koyu cam efekti */
   .card{
     background: rgba(15, 17, 21, 0.78); 
     backdrop-filter: blur(5px);
@@ -109,7 +108,6 @@
   .admin-only-box{display:none; margin-top:12px;}
   body.admin-active .admin-only-box{display:block;}
 
-  /* İletişim formu alanları */
   #iletisim form input, #iletisim form textarea{
     width:100%; background:#1e222b; border:1px solid #444; border-radius:8px;
     padding:12px; color:#fff; font-size:15px; margin-bottom:12px; font-family:inherit;
@@ -123,7 +121,6 @@
   }
   .iletisim-liste a:hover{border-color:var(--accent); color:var(--accent2);}
   
-  /* ===== PROFİL DÜZENLEME FORMU STİLLERİ ===== */
   .profil-form-kapsayici {
       background-color: var(--panel);
       border: 1px solid rgba(201, 162, 39, 0.3); 
@@ -151,7 +148,6 @@
   }
   .kaydet-buton:hover { background-color: var(--accent); color: #111; box-shadow: 0 0 15px rgba(201, 162, 39, 0.5); }
 
-  /* ===== BÖLÜM / İŞLEM PENCERESİ (MODAL) ===== */
   .modal-backdrop{
     display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75);
     z-index:2000; align-items:center; justify-content:center; padding:20px;
@@ -166,7 +162,6 @@
   .modal-box p{color:#d4d7dd; font-size:0.95rem; line-height:1.6; margin-bottom:18px;}
   .modal-actions{display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;}
 
-  /* ===== MOBİL UYUMLULUK ===== */
   .menu-btn{display:none;position:fixed;top:16px;left:16px;z-index:1001;background:var(--accent);color:#111;border:none;width:44px;height:44px;border-radius:10px;font-size:1.3rem;cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,.5); text-shadow: none;}
   .menu-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:995;}
   .menu-backdrop.active{display:block;}
@@ -187,7 +182,6 @@
 <button class="menu-btn" type="button" onclick="toggleMenu()">☰</button>
 <div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu(false)"></div>
 
-<!-- ================= KENAR ÇUBUĞU ================= -->
 <aside id="sideMenu">
   <div class="logo-area">
     <img src="https://i.hizliresim.com/d9n9co7y.jpg" alt="İlyas Şener Logo">
@@ -257,10 +251,8 @@
   </div>
 </aside>
 
-<!-- ================= İÇERİK ================= -->
 <main>
 
-  <!-- ESERLER & GALERİ -->
   <section class="page active" id="eserler">
     <h2>Eserlerim</h2>
     <p class="sub">Roman, şiir, çocuk kitabı, şarkı, beste, klip, film ve resimlerinizi keşfedin.</p>
@@ -276,7 +268,6 @@
       <div class="card"><h3>Resimler</h3><p>Galeri ve illüstrasyonlar.</p><span class="badge">Galeri</span><br><button type="button" class="btn ghost" onclick="galeriAc()">Galeri</button></div>
     </div>
 
-    <!-- GALERİ (Sadece Eserlerim sekmesi içinde) -->
     <div id="galeri-bolumu" class="card" style="margin-top: 24px;">
       <h3>GALERİ</h3>
       <p>Fotoğraf ve çizim galerisini açıp kapatabilirsiniz.</p>
@@ -289,7 +280,6 @@
     </div>
   </section>
 
-  <!-- MAĞAZA -->
   <section class="page" id="magaza">
     <h2>Satış &amp; Sipariş</h2>
     <p class="sub">Eserlerinizi satışa sunun, siparişleri ve ödemeleri yönetin.</p>
@@ -302,7 +292,6 @@
     </div>
   </section>
 
-  <!-- TOPLULUK -->
   <section class="page" id="topluluk">
     <h2>Topluluk &amp; Etkileşim</h2>
     <p class="sub">Okuyucularınızla etkileşime geçin, geri bildirimleri yönetin.</p>
@@ -320,12 +309,10 @@
     </div>
   </section>
 
-  <!-- HESABIM (ZİYARETÇİ + YÖNETİCİ MODU) -->
   <section class="page" id="hesabim">
     <h2>Profil &amp; Hesap</h2>
     <p class="sub">Hesap bilgilerinizi ve tercihlerinizi buradan yönetin.</p>
     
-    <!-- ZİYARETÇİLERE AÇIK: PROFİL DÜZENLE / TALEP FORMU -->
     <div class="profil-form-kapsayici" id="kart-profil-duzenle">
         <div class="profil-ust" style="text-align:center; margin-bottom: 30px;">
             <img src="https://i.hizliresim.com/d9n9co7y.jpg" alt="İlyas Şener Logo" class="ana-logo" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);">
@@ -368,7 +355,6 @@
         </form>
     </div>
 
-    <!-- YÖNETİCİ MODU KONTROL ÇUBUĞU -->
     <div class="yonetici-bar">
       <div>
         <strong style="color:var(--accent2);">🔐 Yönetici İşlemleri</strong>
@@ -381,7 +367,6 @@
     </div>
 
     <div class="grid" style="margin-top: 24px; opacity: 0.98;">
-      <!-- ZİYARETÇİYE AÇIK: PROFİL PAYLAŞ -->
       <div class="card" id="kart-profil-paylas">
         <h3>Profil paylaş</h3>
         <p>Profil bağlantınızı kopyalayarak okuyucularınızla paylaşın.</p>
@@ -391,7 +376,6 @@
         </div>
       </div>
 
-      <!-- ZİYARETÇİYE AÇIK: İÇERİK TERCİHLERİ -->
       <div class="card" id="kart-icerik-tercihleri">
         <h3>İçerik tercihleri</h3>
         <p>Bu cihaz için dil ve galeri görünüm tercihinizi seçin.</p>
@@ -408,7 +392,6 @@
         <div id="tercihDurum" class="durum-notu"></div>
       </div>
 
-      <!-- YÖNETİCİYE ÖZEL: GÜNCELLEME -->
       <div class="card" id="kart-guncelleme">
         <h3>Güncelleme</h3>
         <p>Yönetici güncelleme notları (sadece yönetici modunda düzenlenebilir).</p>
@@ -419,7 +402,6 @@
         <ul id="guncellemeListesi" class="mini-list"></ul>
       </div>
 
-      <!-- YÖNETİCİYE ÖZEL: DOSYA YÜKLEME -->
       <div class="card" id="kart-dosya-yukleme">
         <h3>Dosya yükleme</h3>
         <p>Görsel veya dosya önizleme alanı (yalnızca yönetici modunda aktif).</p>
@@ -429,7 +411,6 @@
         </div>
       </div>
 
-      <!-- YÖNETİCİYE ÖZEL: ENGELLERMELER -->
       <div class="card" id="kart-engellemeler">
         <h3>Engellemeler</h3>
         <p>Yönetici engel listesi (yalnızca yönetici modunda düzenlenebilir).</p>
@@ -440,7 +421,6 @@
         <ul id="engelListesi" class="mini-list"></ul>
       </div>
 
-      <!-- YÖNETİCİYE ÖZEL: PAYLAŞIM KABUL ONAYI -->
       <div class="card" id="kart-paylasim-onayi">
         <h3>Paylaşım kabul onayı</h3>
         <p>Eser paylaşım ve alıntılama onay kuralı.</p>
@@ -457,7 +437,6 @@
     </div>
   </section>
 
-  <!-- HAKKINDA / HAYAT HİKÂYESİ -->
   <section class="page" id="hayat-hikayesi">
     <div style="background-color: #111111; border: 2px solid #d4af37; border-radius: 20px; max-width: 900px; margin: 10px auto 40px; padding: 40px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); text-align: center; position: relative; z-index: 10;">
       <div style="margin-bottom: 30px;">
@@ -495,7 +474,6 @@
     </div>
   </section>
 
-  <!-- İLETİŞİM -->
   <section class="page" id="iletisim">
     <h2>Hakkında &amp; İletişim</h2>
     <p class="sub">Kendinizi tanıtın, okuyucularınızla iletişim kurun.</p>
@@ -568,7 +546,6 @@
     </div>
   </section>
 
-  <!-- DİĞER -->
   <section class="page" id="diger">
     <h2>Diğer</h2>
     <p class="sub">Reklam ve kısayol işlemleri.</p>
@@ -580,7 +557,6 @@
 
 </main>
 
-<!-- ================= BÖLÜM BİLGİ / İŞLEM PENCERESİ ================= -->
 <div class="modal-backdrop" id="bolumModal" onclick="closeBolumModal()">
   <div class="modal-box" onclick="event.stopPropagation()">
     <h3 id="modalBaslik">Bölüm</h3>
@@ -592,9 +568,8 @@
   </div>
 </div>
 
-<!-- ================= SAYFA GEÇİŞ & ETKİLEŞİM SCRİPTİ ================= -->
 <script>
-  const YONETICI_SIFRESI = "ilyas2026";
+  const YONETICI_SIFRESI = "İlyas6157Yeter";
   let yoneticiAktif = false;
 
   function toggleMenu(forceState) {
@@ -705,7 +680,6 @@
     });
   });
 
-  /* ===== PROFİL & HESAP İŞLEVLERİ ===== */
   const profilForm = document.getElementById('profilDuzenleForm');
   function profilBilgileriniYukle() {
     const kayitli = JSON.parse(localStorage.getItem('ilyas_profil_bilgi') || 'null');
@@ -849,7 +823,6 @@
   paylasimOnayYukle();
 </script>
 
-<!-- ================= DİL ÇEVİRİ SCRİPTİ ================= -->
 <script type="text/javascript">
 function translatePage(lang) {
     if (lang === 'tr') {
@@ -870,7 +843,6 @@ function googleTranslateElementInit() {
 </script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<!-- ================= GALERİ SCRİPTİ ================= -->
 <script>
   function galeriAc() {
     const kapsayici = document.getElementById("galeri-kutulari");
@@ -913,7 +885,6 @@ function googleTranslateElementInit() {
   }
 </script>
 
-<!-- ================= KOPYALAMA FONKSİYONU ================= -->
 <script>
   function linkKopyala() {
     var kopyalanacakLink = document.getElementById("profilLink");
