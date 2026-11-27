@@ -879,4 +879,286 @@
     document.body.classList.remove('admin-active');
     document.getElementById('adminAcBtn').style.display = 'inline-block';
     document.getElementById('adminKapatBtn').style.display = 'none';
-    document.getElementById('yon
+    document.getElementById('yoneticiDurumMetni').textContent = 'Güncelleme, dosya yükleme, engellemeler ve onay ayarları yalnızca yöneticiye açıktır.';
+    guncellemeCiz();
+    engelCiz();
+  }
+
+  document.querySelectorAll('aside a[data-page]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const pageId = link.dataset.page;
+      const topic = link.dataset.topic;
+      const targetId = link.dataset.targetEl;
+      openPage(pageId, link);
+
+      if (topic && pageId !== 'hayat-hikayesi') {
+        const heading = document.querySelector(`#${pageId} h2`);
+        const sub = document.querySelector(`#${pageId} .sub`);
+        if (heading) heading.textContent = topic;
+        if (sub) sub.textContent = `"${topic}" bölümünü görüntülüyorsunuz.`;
+      } else if (pageId === 'eserler') {
+        document.querySelector('#eserler h2').textContent = 'Eserlerim';
+        document.querySelector('#eserler .sub').textContent = '8 roman, 14 şiir kitabı, 42 çocuk kitabı, 2.000’den fazla şiir/söz ve 400’ün üzerinde beste ile görsel çalışmalar.';
+      }
+
+      if (targetId === 'galeri-bolumu') {
+        galeriAc();
+      }
+      highlightTarget(targetId);
+    });
+  });
+
+  document.querySelectorAll('main .card a.btn, main .card button.btn').forEach(btn => {
+    const href = btn.getAttribute('href');
+    if (href && (href.startsWith('mailto:') || href.startsWith('http'))) return;
+    if (btn.id === 'kopyalaBtn') return;
+    if (btn.hasAttribute('onclick')) return;
+
+    btn.addEventListener('click', e => {
+      if (href === '#') e.preventDefault();
+      const card = btn.closest('.card');
+      const title = card ? card.querySelector('h3')?.textContent : 'Bölüm';
+      const desc = card ? card.querySelector('p')?.textContent : 'İçerik hazırlanıyor.';
+      showBolumBilgi(`${title} — ${btn.textContent.trim()}`, `${desc} Bu bölüm için yeni içerik veya düzenleme eklemek isterseniz İletişim formunu kullanabilirsiniz.`);
+    });
+  });
+
+  const profilForm = document.getElementById('profilDuzenleForm');
+  function profilBilgileriniYukle() {
+    const kayitli = JSON.parse(localStorage.getItem('ilyas_profil_bilgi') || 'null');
+    if (!kayitli) return;
+    if (kayitli.adsoyad) {
+      document.getElementById('adsoyad').value = kayitli.adsoyad;
+      document.getElementById('profilBaslikAd').textContent = kayitli.adsoyad.toUpperCase();
+      document.getElementById('sidebarLogoTitle').textContent = kayitli.adsoyad;
+    }
+    if (kayitli.kullaniciadi) document.getElementById('kullaniciadi').value = kayitli.kullaniciadi;
+    if (kayitli.biyografi) document.getElementById('biyografi').value = kayitli.biyografi;
+    if (kayitli.eposta) document.getElementById('eposta').value = kayitli.eposta;
+    if (kayitli.sosyalmedya) document.getElementById('sosyalmedya').value = kayitli.sosyalmedya;
+  }
+
+  profilForm.addEventListener('submit', () => {
+    const veri = {
+      adsoyad: document.getElementById('adsoyad').value.trim(),
+      kullaniciadi: document.getElementById('kullaniciadi').value.trim(),
+      biyografi: document.getElementById('biyografi').value.trim(),
+      eposta: document.getElementById('eposta').value.trim(),
+      sosyalmedya: document.getElementById('sosyalmedya').value.trim()
+    };
+    localStorage.setItem('ilyas_profil_bilgi', JSON.stringify(veri));
+    document.getElementById('profilBaslikAd').textContent = (veri.adsoyad || 'İLYAS ŞENER').toUpperCase();
+    document.getElementById('sidebarLogoTitle').textContent = veri.adsoyad || 'İlyas Şener';
+    document.getElementById('profilKayitDurumu').textContent = '✓ Bilgiler kaydedildi ve gönderiliyor.';
+  });
+
+  function guncellemeCiz() {
+    const liste = JSON.parse(localStorage.getItem('ilyas_guncellemeler') || '["Kalemin Dilinden yayında."]');
+    const ul = document.getElementById('guncellemeListesi');
+    ul.innerHTML = liste.map((item, idx) => {
+      const silBtn = yoneticiAktif
+        ? `<button type="button" class="btn ghost" style="margin-top:0;padding:4px 9px;font-size:0.75rem;" onclick="guncellemeSil(${idx})">Sil</button>`
+        : '';
+      return `<li><span>${item}</span>${silBtn}</li>`;
+    }).join('');
+  }
+  function guncellemeEkle() {
+    if (!yoneticiAktif) return;
+    const inp = document.getElementById('guncellemeNotInput');
+    const val = inp.value.trim();
+    if (!val) return;
+    const liste = JSON.parse(localStorage.getItem('ilyas_guncellemeler') || '[]');
+    liste.unshift(val);
+    localStorage.setItem('ilyas_guncellemeler', JSON.stringify(liste));
+    inp.value = '';
+    guncellemeCiz();
+  }
+  function guncellemeSil(idx) {
+    if (!yoneticiAktif) return;
+    const liste = JSON.parse(localStorage.getItem('ilyas_guncellemeler') || '[]');
+    liste.splice(idx, 1);
+    localStorage.setItem('ilyas_guncellemeler', JSON.stringify(liste));
+    guncellemeCiz();
+  }
+
+  function dosyaOnizle() {
+    if (!yoneticiAktif) return;
+    const input = document.getElementById('dosyaYukleInput');
+    const alan = document.getElementById('dosyaOnizlemeAlani');
+    if (!input.files || !input.files[0]) { alan.innerHTML = ''; return; }
+    const dosya = input.files[0];
+    const kb = (dosya.size / 1024).toFixed(1);
+    let html = `<div><strong>Dosya:</strong> ${dosya.name} (${kb} KB)</div>`;
+    if (dosya.type.startsWith('image/')) {
+      const url = URL.createObjectURL(dosya);
+      html += `<img src="${url}" alt="Önizleme" style="max-width:100%;max-height:150px;border-radius:8px;margin-top:8px;border:1px solid #444;">`;
+    }
+    alan.innerHTML = html;
+  }
+
+  function tercihYukle() {
+    const t = JSON.parse(localStorage.getItem('ilyas_tercihler') || 'null');
+    if (!t) return;
+    document.getElementById('tercihDil').value = t.dil || 'tr';
+    document.getElementById('tercihGaleri').value = t.galeri || 'kapali';
+    if (t.galeri === 'acik') galeriAc();
+  }
+  function tercihKaydet() {
+    const t = {
+      dil: document.getElementById('tercihDil').value,
+      galeri: document.getElementById('tercihGaleri').value
+    };
+    localStorage.setItem('ilyas_tercihler', JSON.stringify(t));
+    document.getElementById('tercihDurum').textContent = '✓ Tercihler bu cihazda kaydedildi.';
+  }
+
+  function engelCiz() {
+    const liste = JSON.parse(localStorage.getItem('ilyas_engeller') || '[]');
+    const ul = document.getElementById('engelListesi');
+    if (!yoneticiAktif) {
+      ul.innerHTML = `<li><span>Kayıtlı engel sayısı: ${liste.length}</span></li>`;
+      return;
+    }
+    ul.innerHTML = liste.length
+      ? liste.map((kisi, idx) => `<li><span>${kisi}</span><button type="button" class="btn ghost" style="margin-top:0;padding:4px 9px;font-size:0.75rem;" onclick="engelSil(${idx})">Kaldır</button></li>`).join('')
+      : '<li><span>Engellenen kullanıcı yok.</span></li>';
+  }
+  function engelEkle() {
+    if (!yoneticiAktif) return;
+    const inp = document.getElementById('engelInput');
+    const val = inp.value.trim();
+    if (!val) return;
+    const liste = JSON.parse(localStorage.getItem('ilyas_engeller') || '[]');
+    if (!liste.includes(val)) liste.push(val);
+    localStorage.setItem('ilyas_engeller', JSON.stringify(liste));
+    inp.value = '';
+    engelCiz();
+  }
+  function engelSil(idx) {
+    if (!yoneticiAktif) return;
+    const liste = JSON.parse(localStorage.getItem('ilyas_engeller') || '[]');
+    liste.splice(idx, 1);
+    localStorage.setItem('ilyas_engeller', JSON.stringify(liste));
+    engelCiz();
+  }
+
+  const onayEtiketleri = {
+    "kaynak-gostererek": "Durum: Kaynak gösterilerek paylaşıma açık",
+    "onay-gerekli": "Durum: Paylaşım öncesi yazılı onay gerekli",
+    "kapali": "Durum: Yeniden paylaşıma kapalı"
+  };
+  function paylasimOnayYukle() {
+    const kayit = localStorage.getItem('ilyas_paylasim_onay') || "kaynak-gostererek";
+    document.getElementById('paylasimOnaySecim').value = kayit;
+    document.getElementById('paylasimOnayOzeti').textContent = onayEtiketleri[kayit] || onayEtiketleri["kaynak-gostererek"];
+  }
+  function paylasimOnayKaydet() {
+    if (!yoneticiAktif) return;
+    const val = document.getElementById('paylasimOnaySecim').value;
+    localStorage.setItem('ilyas_paylasim_onay', val);
+    document.getElementById('paylasimOnayOzeti').textContent = onayEtiketleri[val] + " (Kaydedildi)";
+  }
+
+  profilBilgileriniYukle();
+  guncellemeCiz();
+  tercihYukle();
+  engelCiz();
+  paylasimOnayYukle();
+</script>
+
+<script type="text/javascript">
+function translatePage(lang) {
+    if (lang === 'tr') {
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.reload();
+    } else {
+        document.cookie = "googtrans=/tr/" + lang + "; path=/";
+        document.cookie = "googtrans=/tr/" + lang + "; domain=" + window.location.hostname + "; path=/";
+        window.location.reload(); 
+    }
+}
+</script>
+<div id="google_translate_element" style="display:none;"></div>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'tr'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+  function galeriAc() {
+    const kapsayici = document.getElementById("galeri-kutulari");
+    const fotograflar = [
+      "47e15afd-faca-401a-89d9-5bd8055c8928.jpeg", 
+      "IMG_0005.jpeg", "IMG_0042.jpeg", "IMG_0043.jpeg", "IMG_0047.jpeg", 
+      "IMG_0049.jpeg", "IMG_0050.jpeg", "IMG_0051.jpeg", 
+      "IMG_0058.png", "IMG_0082.png", "IMG_0083.jpeg", "IMG_0729.jpeg", "IMG_0739.jpeg", 
+      "IMG_0758.jpeg", "IMG_0759.jpeg", "IMG_9501.jpeg", "IMG_9606.jpeg", "IMG_9607.jpeg", "IMG_9997.jpeg", "IMG_9998.jpeg",  
+      "1795379949507.jpg", "1795434920066.jpg", 
+      "IMG_0178.jpg", "IMG_20260608_163735.jpg", "IMG_0111.png", 
+      "IMG_0048.jpeg", "IMG_0007.jpeg", "IMG_0010.jpeg", "IMG_0011.jpeg", 
+      "IMG_0012.jpeg", "IMG_0004.jpeg", "IMG_9500.jpeg", "IMG_9497.jpeg", 
+      "IMG_9496.jpeg", "IMG_9489.jpeg", "IMG_9474.jpeg", 
+      "IMG_9467.jpeg", "IMG_9468.jpeg", 
+      "IMG_0041.jpeg", "IMG_0179.jpeg"
+    ];
+    
+    let htmlIcerik = "";
+    for (let i = 0; i < fotograflar.length; i++) {
+      htmlIcerik += `
+        <div style="margin-bottom: 16px;">
+          <h3 style="color: #c9a227;">Galeri ${i + 1}</h3>
+          <img src="./resimler/${fotograflar[i]}" alt="Galeri ${i + 1}" style="max-width: 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+      `;
+    }
+
+    kapsayici.innerHTML = htmlIcerik;
+    
+    document.getElementById("galeri-icerik").style.display = "block";
+    document.getElementById("galeri-ac-btn").style.display = "none";
+    document.getElementById("galeri-kapat-btn").style.display = "inline-block";
+  }
+
+  function galeriKapat() {
+    document.getElementById("galeri-icerik").style.display = "none";
+    document.getElementById("galeri-ac-btn").style.display = "inline-block";
+    document.getElementById("galeri-kapat-btn").style.display = "none";
+  }
+</script>
+
+<script>
+  function linkKopyala() {
+    var kopyalanacakLink = document.getElementById("profilLink");
+    var buton = document.getElementById("kopyalaBtn");
+    
+    kopyalanacakLink.select();
+    kopyalanacakLink.setSelectionRange(0, 99999);
+
+    try {
+      var basarili = document.execCommand("copy");
+      
+      if (basarili) {
+        var eskiYazi = buton.innerHTML;
+        buton.innerHTML = "Kopyalandı! ✓";
+        buton.style.color = "#4CAF50";
+        buton.style.borderColor = "#4CAF50";
+        
+        setTimeout(function() {
+          buton.innerHTML = eskiYazi;
+          buton.style.color = "";
+          buton.style.borderColor = "";
+        }, 2000);
+      } else {
+        alert("Kopyalama başarısız oldu. Lütfen yazıyı manuel olarak seçip kopyalayın.");
+      }
+    } catch (err) {
+      alert("Tarayıcınız otomatik kopyalamayı desteklemiyor.");
+    }
+  }
+</script>
+
+</body>
+</html>
