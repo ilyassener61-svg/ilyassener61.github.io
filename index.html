@@ -454,11 +454,11 @@
         <h3>Resimler</h3>
         <p>Fotoğraf, çizim, kapak ve görsel tasarım çalışmalarının galerisi.</p>
         <span class="badge">Galeri</span><br>
-        <button type="button" class="btn ghost" onclick="galeriAc(); highlightTarget('galeri-bolumu');">Galeri</button>
+        <button type="button" class="btn ghost" onclick="galeriAc(); highlightTarget('galeri-icerik');">Galeri</button>
       </div>
     </div>
 
-    <div id="galeri-bolumu" class="card" style="margin-top: 24px;">
+    <div id="galeri-bolumu" class="card" style="margin-top: 24px; display: block;">
       <h3>GALERİ</h3>
       <p>Fotoğraf ve çizim galerisini açıp kapatabilirsiniz.</p>
       <button id="galeri-ac-btn" type="button" onclick="galeriAc()" class="btn">Galeriyi Aç</button>
@@ -753,7 +753,7 @@
           <button type="button" class="btn ghost" style="margin-top:0;" onclick="openPage('hesabim'); highlightTarget('kart-profil-duzenle');">Profil &amp; Hesap</button>
           <button type="button" class="btn ghost" style="margin-top:0;" onclick="openPage('hayat-hikayesi')">Hayat Hikâyesi</button>
           <button type="button" class="btn ghost" style="margin-top:0;" onclick="openPage('iletisim'); highlightTarget('iletisim-form-kutu');">İletişim</button>
-          <button type="button" class="btn ghost" style="margin-top:0;" onclick="openPage('eserler'); galeriAc(); highlightTarget('galeri-bolumu');">Galeri</button>
+          <button type="button" class="btn ghost" style="margin-top:0;" onclick="openPage('eserler'); galeriAc(); highlightTarget('galeri-icerik');">Galeri</button>
           <a href="mailto:ilyassener61@gmail.com?subject=Bağış%20/%20Destek" class="btn ghost" style="margin-top:0;">Bağış / Destek</a>
         </div>
       </div>
@@ -1178,10 +1178,12 @@
         document.querySelector('#eserler .sub').textContent = '7 roman, 15 şarkı ve şiir kitabı, 40 çocuk kitabı ile ön okuma metinleri ve görsel çalışmalar.';
       }
 
-      if (targetId === 'galeri-bolumu') {
+      if (targetId === 'galeri-bolumu' || targetId === 'galeri-icerik') {
         galeriAc();
+        highlightTarget('galeri-icerik');
+      } else {
+        highlightTarget(targetId);
       }
-      highlightTarget(targetId);
     });
   });
 
@@ -1414,6 +1416,9 @@ function googleTranslateElementInit() {
 
 <script>
   function galeriAc() {
+    const bolum = document.getElementById("galeri-bolumu");
+    if (bolum) bolum.style.display = "block";
+
     const kapsayici = document.getElementById("galeri-kutulari");
     const fotograflar = [
       "47e15afd-faca-401a-89d9-5bd8055c8928.jpeg", 
