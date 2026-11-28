@@ -158,12 +158,30 @@
   }
   .kitap-kapak{
     width: 100%;
-    height: 230px;
+    height: 240px;
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid rgba(201, 162, 39, 0.35);
     margin-bottom: 12px;
     background: #0f1115;
+    display: block;
+  }
+  .kapak-yer-tutucu{
+    width: 100%;
+    height: 180px;
+    border-radius: 8px;
+    border: 1px dashed rgba(201, 162, 39, 0.45);
+    background: rgba(15, 17, 21, 0.85);
+    margin-bottom: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    gap: 6px;
   }
   .kitap-kart h4{color:var(--accent2); font-size:1.05rem; margin-bottom:8px;}
   .kitap-anlatim{color:#d4d7dd; font-size:0.86rem; line-height:1.6; margin-bottom:14px; white-space:pre-line;}
@@ -382,7 +400,7 @@
 
     <div class="card" style="margin-bottom:22px;">
       <h3>📖 Eser Külliyatı Özeti</h3>
-      <p>Her kitabın altında ön okuma / aydınlatma metni ile <strong>Kitabı Satın Al</strong>, <strong>E-Satış Oku Satın Al</strong> ve <strong>Dinle Satın Al</strong> butonları yer alır. Roman kapak görselleri <code>./kapaklar/romanlar/</code> yoluna göre bağlanmıştır.</p>
+      <p>Her kitabın altında ön okuma / aydınlatma metni ile <strong>Kitabı Satın Al</strong>, <strong>E-Satış Oku Satın Al</strong> ve <strong>Dinle Satın Al</strong> butonları yer alır. Roman kapak görselleri <code>./resimler/</code> klasöründen yüklenir.</p>
       <div style="margin-top:12px;">
         <span class="badge">7 Roman</span>
         <span class="badge">15 Şarkı &amp; Şiir Kitabı</span>
@@ -800,43 +818,50 @@
   const ROMAN_KITAPLARI = [
     {
       baslik: "1. Hani Dönecektik: \"Ne Oldu Bize\"",
-      kapakUrl: "./kapaklar/romanlar/1000042101.jpg",
+      kapakDosya: "IMG_20261127_201924.jpg",
+      kapakUrl: "./resimler/IMG_20261127_201924.jpg",
       anlatim: "Bu kitap, yıllar önce “biraz çalışıp döneceğiz” diyerek gurbet yollarına çıkan insanların geride bıraktıkları hayatı, umutları ve zamanla içlerine çöken o derin özlemi anlatıyor.\n\"Sözler mi yalan oldu, yoksa biz mi değiştik?\"\nBir gün döneriz diye çıktığımız yolda, yıllar bizi bizden mi uzaklaştırdı?\nGöçün ardında bırakılan sevdalar, yarım kalan hayaller, yabancı diyarlarda verilen yaşam mücadelesi ve zamanla değişen hayatların duygusunu anlatan dokunaklı bir göç hikâyesi.\n“Hani dönecektik?” sorusu burada bir sitem değil, daha çok içten bir muhasebe. Bu eser, gurbete giden herkesin kalbinde saklı duran o duyguyu, sade ve gerçek hâliyle okuyucuya ulaştırmak için yazıldı.\nPeki, biz mi değiştik, yoksa dönmeyi hayal ettiğimiz memleket mi artık eskisi gibi değil?",
       satisUrl: "", okuUrl: "", dinleUrl: ""
     },
     {
       baslik: "2. Kavuşturan Tesadüf: \"Sırlarla dolu gizemli bir hayat\"",
-      kapakUrl: "./kapaklar/romanlar/1000042105.jpg",
+      kapakDosya: "IMG_20261127_202348.jpg",
+      kapakUrl: "./resimler/IMG_20261127_202348.jpg",
       anlatim: "Tesadüf diye bir şey var mıdır, yoksa bazı karşılaşmalar kaderin gizli bir planı mıdır?\nBeklenmedik karşılaşmalar, kesişen yollar ve birbirini arayan iki yürek…\nBazen tek bir an, iki hayatı birleştirir ve hiç beklenmeyen bir hikâyenin kapısını aralar.\nÇünkü bazı karşılaşmalar tesadüf değil, iki hayatın kesiştiği o ince çizgi, mucizenin adıdır.",
       satisUrl: "", okuUrl: "", dinleUrl: ""
     },
     {
       baslik: "3. Kaderinden Kaçamadım: \"Umudu bekleyenler\"",
-      kapakUrl: "./kapaklar/romanlar/1000042097.jpg",
+      kapakDosya: "IMG_20261127_201358.jpg",
+      kapakUrl: "./resimler/IMG_20261127_201358.jpg",
       anlatim: "İnsan kaderinden kaçabilir mi, yoksa her yol onu yazılmış olana mı götürür?\nHayatın sürprizleri, beklenmedik karşılaşmalar, yarım kalan hayaller ve kaçınılmaz gerçekler…\nBir insanın yaşam mücadelesini ve kaderle hesaplaşmasını anlatan çarpıcı bir hikâye.\nÇünkü bazen kaçtığın kader, seni beklediğin yerde bulur.",
       satisUrl: "", okuUrl: "", dinleUrl: ""
     },
     {
       baslik: "4. Hücrede 35 Yıl: \"Kaybolan yıllar\"",
-      kapakUrl: "./kapaklar/romanlar/1000042065.jpg",
+      kapakDosya: "IMG_20261128_112446.jpg",
+      kapakUrl: "./resimler/IMG_20261128_112446.jpg",
       anlatim: "Hücrede 35 yıl kitabı, Dört duvar arasında geçen koca bir ömür, sessizliğin çığlığıdır.\"\nYılların tüketemediği umutlar, sessizliğe gömülen çığlıklar ve özgürlüğe duyulan bitmeyen özlem…\nHücrede 35 Yıl, insanın yalnızca bedeninin değil, hayallerinin de hapsedildiği acı bir yaşamın izlerini taşıyor.",
       satisUrl: "", okuUrl: "", dinleUrl: ""
     },
     {
       baslik: "5. Adım Sokak Çocuğu",
-      kapakUrl: "./kapaklar/romanlar/1000042113.jpg",
+      kapakDosya: "IMG_20261127_203510.jpg",
+      kapakUrl: "./resimler/IMG_20261127_203510.jpg",
       anlatim: "O daha doğmadan terk edilmiş, bir cami avlusuna bırakılmış kimsesiz bir bebekti. Ne bir adı vardı ne de sığınacağı bir yuvası…\nOnu hayata bağlayan, merhametli insanların sevgisi oldu. Bir imam ve eşinin şefkati, onu korumak için mücadele eden yürekler ve evladına kavuşmak isteyen bir annenin feryadı…\nBu roman; bir çocuğun yaşam mücadelesini, bir annenin özlemini ve insanlığın vicdanıyla yüzleşmesini anlatıyor.\nÇünkü bazen bir çocuğun kaderini değiştirmek için tek gereken şey sevgidir.\nAdı yoktu, ama artık bir hikâyesi vardı: ADIM SOKAK ÇOCUĞU!\nHer çocuk sevilmeyi hak eder. Her sevgi, bir hayatı kurtarabilir.",
       satisUrl: "", okuUrl: "", dinleUrl: ""
     },
     {
       baslik: "6. Hayalet Köy",
-      kapakUrl: "./kapaklar/romanlar/1000042110.jpg",
+      kapakDosya: "IMG_20261127_202726.jpg",
+      kapakUrl: "./resimler/IMG_20261127_202726.jpg",
       anlatim: "Hayalet Köy, İmkansızlıklar yüzünden göçe zorlanan yalnızca terk edilmiş bir köyün değil; dağılan ailelerin, yarım kalan hayatların ve unutulmayan hatıraların hikâyesidir.\nBazı köyler terk edilir, ama bazı hatıralar insanın içinde yaşamaya devam eder.",
       satisUrl: "", okuUrl: "", dinleUrl: ""
     },
     {
       baslik: "7. Kalemin Büyüsü",
-      kapakUrl: "./kapaklar/romanlar/1000042039.jpg",
+      kapakDosya: "IMG_20261127_141945.jpg",
+      kapakUrl: "./resimler/IMG_20261127_141945.jpg",
       anlatim: "Bazen bir çocuk, gözyaşlarını mürekkebe;\nacılarını umuda dönüştürür…\nBazen bir kalem, anlatılamayan acıların sesi,\ntükenen umutların ışığı olur…\nBu kitapta bir çocuk hayatın ağır yükünü küçük yüreğinde taşırken kalemine sarılır. Her satırda acılarını anlatır, hayallerine tutunur ve umudun gücünü keşfeder.\nÇünkü bazı hikâyeler yalnızca okunmak için yazılmaz; insanın yüreğine dokunmak, düşüncelerini değiştirmek ve karanlığa bir ışık yakmak için anlatılır.",
       satisUrl: "", okuUrl: "", dinleUrl: ""
     }
@@ -903,6 +928,21 @@
     { baslik: "40. Yok olan dinazorlar", anlatim: "Yıllar sonra gökyüzünde süzülen ne olduğu belirsiz bazı yaratıkların yarattığı korku aynı ormanda dostça hep birlikte yaşayan dinazor kolonisinin içinde ayrışmaya yol açar. Bu ayrışma bir biri ile savaşmaya kadar gider. Bir hiç uğruna yapılan bu savaş onların yok olmalarına sebep olur.\nİşte bu hikâye, dostluğun ve barışın paha biçilmez değerini; savaşın ise ne denli yıkıcı sonuçlar doğurabileceğini anlatan acı bir ders niteliğinde. Açgözlülüğün, bencilliğin ve bölünmüşlüğün insan ruhunda açtığı derin yaraları hatırlatan bu öykü, gelecek nesillere aktarılacak bir uyarı olarak hafızalarda yerini aldı.", satisUrl: "", okuUrl: "", dinleUrl: "" }
   ];
 
+  function kapakHataYonet(imgEl, dosyaAdi) {
+    const asama = Number(imgEl.dataset.fallbackStep || "0");
+    if (asama === 0) {
+      imgEl.dataset.fallbackStep = "1";
+      imgEl.src = `./${dosyaAdi}`;
+    } else if (asama === 1) {
+      imgEl.dataset.fallbackStep = "2";
+      imgEl.src = `./kapaklar/romanlar/${dosyaAdi}`;
+    } else {
+      imgEl.style.display = "none";
+      const yerTutucu = imgEl.nextElementSibling;
+      if (yerTutucu) yerTutucu.style.display = "flex";
+    }
+  }
+
   function aktifParaBirimi() {
     const sel = document.getElementById('kitapParaBirimiSecim');
     const kod = sel ? sel.value : 'TRY';
@@ -968,8 +1008,15 @@
       const safeSatis = (kitap.satisUrl || "").replace(/'/g, "\\'");
       const safeOku = (kitap.okuUrl || "").replace(/'/g, "\\'");
       const safeDinle = (kitap.dinleUrl || "").replace(/'/g, "\\'");
+      const dosyaAdi = kitap.kapakDosya || (kitap.kapakUrl ? kitap.kapakUrl.split('/').pop() : '');
       const kapakHtml = kitap.kapakUrl
-        ? `<img src="${kitap.kapakUrl}" alt="${kitap.baslik} kapak" class="kitap-kapak" onerror="this.style.display='none'">`
+        ? `
+          <img src="${kitap.kapakUrl}" alt="${kitap.baslik} kapak" class="kitap-kapak" data-fallback-step="0" onerror="kapakHataYonet(this, '${dosyaAdi}')">
+          <div class="kapak-yer-tutucu" style="display:none;">
+            <span>🖼️ Kapak Görseli Henüz Yüklenmedi</span>
+            <code>./resimler/${dosyaAdi}</code>
+          </div>
+        `
         : '';
       return `
         <div class="kitap-kart">
