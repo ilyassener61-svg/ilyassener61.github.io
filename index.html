@@ -10,7 +10,22 @@
     --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e8eaed;
     --muted:#9aa0a6; --accent:#c9a227; --accent2:#e0b84c; --border:#2a2f3a;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
+  *{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    -webkit-touch-callout:none;
+  }
+  input, textarea, select{
+    -webkit-user-select:text;
+    -moz-user-select:text;
+    -ms-user-select:text;
+    user-select:text;
+  }
   
   body{
     font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
@@ -20,6 +35,11 @@
     display:flex;
     min-height:100vh;
     text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+  }
+  body.screen-guard-blur main,
+  body.screen-guard-blur aside{
+    filter: blur(10px);
+    transition: filter 0.15s ease;
   }
   
   a{color:inherit;text-decoration:none}
@@ -81,6 +101,81 @@
   .card p{color:#cccccc;font-size:.9rem;line-height:1.6; font-weight: 400;}
   .eser-liste{margin-top:10px; padding-left:18px; color:#e0e2e6; font-size:0.84rem; line-height:1.55;}
   .eser-liste li{margin-bottom:4px;}
+
+  .okuma-bar{
+    background: rgba(20, 23, 30, 0.9);
+    border: 1px solid rgba(201, 162, 39, 0.35);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    justify-content: space-between;
+    text-shadow: none;
+  }
+  .okuma-kontrol{
+    flex: 1;
+    min-width: 210px;
+  }
+  .okuma-kontrol label{
+    display: block;
+    font-size: 0.8rem;
+    color: var(--accent2);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .okuma-kontrol select{
+    width: 100%;
+    background: #171a21;
+    color: #fff;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 0.9rem;
+  }
+  .fiyat-satiri{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .fiyat-etiket{
+    background: rgba(201, 162, 39, 0.14);
+    border: 1px solid rgba(201, 162, 39, 0.4);
+    color: #f5e5b3;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  .koleksiyon-baslik{
+    margin:26px 0 14px;
+    padding-bottom:8px;
+    border-bottom:1px solid rgba(201,162,39,0.3);
+    color:var(--accent2);
+    font-size:1.25rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .kitap-kart{
+    background: rgba(20, 23, 30, 0.88);
+    border: 1px solid rgba(201, 162, 39, 0.32);
+    border-radius: 12px;
+    padding: 18px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    text-shadow:none;
+  }
+  .kitap-kart h4{color:var(--accent2); font-size:1.05rem; margin-bottom:6px;}
+  .kitap-anlatim{color:#d4d7dd; font-size:0.86rem; line-height:1.55; margin-bottom:12px;}
+  .kitap-aksiyonlar{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto;}
+  .kitap-aksiyonlar .btn{margin-top:0; padding:7px 12px; font-size:0.8rem;}
   
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
   .badge{display:inline-block;background:rgba(30, 34, 43, 0.6);border:1px solid var(--border);color:var(--accent2);font-size:.72rem;padding:3px 10px;border-radius:20px;margin:0 6px 6px 0}
@@ -195,9 +290,9 @@
 
   <div class="nav-group">
     <span>📚 Eserlerim</span>
-    <a href="#" data-page="eserler" data-topic="Romanlar">Romanlar</a>
-    <a href="#" data-page="eserler" data-topic="Şiirler">Şiirler</a>
-    <a href="#" data-page="eserler" data-topic="Çocuk kitapları">Çocuk kitapları</a>
+    <a href="#" data-page="eserler" data-topic="Romanlar" data-target-el="bolum-romanlar">Romanlar</a>
+    <a href="#" data-page="eserler" data-topic="Şiirler" data-target-el="bolum-siirler">Şiirler</a>
+    <a href="#" data-page="eserler" data-topic="Çocuk kitapları" data-target-el="bolum-cocuk-kitaplari">Çocuk kitapları</a>
     <a href="#" data-page="eserler" data-topic="Çocuk şarkıları">Çocuk şarkıları</a>
     <a href="#" data-page="eserler" data-topic="Çocuk filmleri">Çocuk filmleri</a>
     <a href="#" data-page="eserler" data-topic="Klipler">Klipler</a>
@@ -257,16 +352,46 @@
 
 <main>
 
-  <!-- ESERLER & GALERİ (TOPTAN DÜZENLENMİŞ BÖLÜM) -->
   <section class="page active" id="eserler">
     <h2>Eserlerim</h2>
-    <p class="sub">8 roman, 14 şiir kitabı, 42 çocuk kitabı, 2.000’den fazla şiir/söz ve 400’ün üzerinde beste ile görsel çalışmalar.</p>
+    <p class="sub">7 roman, 14 şiir kitabı, 42 çocuk kitabı, 2.000’den fazla şiir/söz ve 400’ün üzerinde beste ile görsel çalışmalar.</p>
+
+    <div class="okuma-bar">
+      <div class="okuma-kontrol">
+        <label for="kitapParaBirimiSecim">💱 Para Birimi Seçin</label>
+        <select id="kitapParaBirimiSecim" onchange="okumaAyarlariniUygula()">
+          <option value="TRY">TRY (₺) — Türk Lirası</option>
+          <option value="SEK">SEK (kr) — İsveç Kronu</option>
+          <option value="EUR">EUR (€) — Euro</option>
+          <option value="USD">USD ($) — Amerikan Doları</option>
+        </select>
+      </div>
+
+      <div class="okuma-kontrol">
+        <label for="kitapOkumaDiliSecim">📖 Kitap Okuma Dili Kolaylığı</label>
+        <select id="kitapOkumaDiliSecim" onchange="okumaDiliDegistir(this.value)">
+          <option value="tr">Türkçe (Orijinal)</option>
+          <option value="sv">Svenska (İsveççe)</option>
+          <option value="en">English (İngilizce)</option>
+          <option value="de">Deutsch (Almanca)</option>
+          <option value="fr">Français (Fransızca)</option>
+          <option value="es">Español (İspanyolca)</option>
+          <option value="ar">العربية (Arapça)</option>
+          <option value="ja">日本語 (Japonca)</option>
+        </select>
+      </div>
+
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button type="button" class="btn ghost" style="margin-top:0;" onclick="seciliDileSayfayiCevir()">Sayfayı Seçili Dile Çevir</button>
+      </div>
+      <div id="okumaAyarBilgi" class="durum-notu" style="width:100%; margin-top:4px;"></div>
+    </div>
 
     <div class="card" style="margin-bottom:22px;">
       <h3>📖 Eser Külliyatı Özeti</h3>
-      <p>Yıllar boyunca kaleme alınan eserlerin ana başlıkları aşağıda kategorilere ayrılmıştır. Her karttaki butonla ilgili bölümün eser detaylarını görüntüleyebilirsiniz.</p>
+      <p>Romanlar, şiirler ve çocuk kitapları bölümlerinde her eser için kısa anlatım, seçtiğiniz para biriminde fiyat bilgisi ve <strong>Kitabı Satın Al</strong>, <strong>E-Satış Oku Satın Al</strong> ve <strong>Dinle Satın Al</strong> seçenekleri yer alır.</p>
       <div style="margin-top:12px;">
-        <span class="badge">8 Roman</span>
+        <span class="badge">7 Roman</span>
         <span class="badge">14 Şiir Kitabı</span>
         <span class="badge">42 Çocuk Kitabı</span>
         <span class="badge">2.000+ Şiir &amp; Söz</span>
@@ -274,51 +399,32 @@
       </div>
     </div>
 
+    <div class="koleksiyon-baslik" id="bolum-romanlar">
+      <span>📚 Romanlar (7 Roman)</span>
+      <span class="badge">Kitap · E-Satış · Dinle</span>
+    </div>
+    <div id="romanlar-vitrin" class="grid"></div>
+
+    <div class="koleksiyon-baslik" id="bolum-siirler">
+      <span>✒️ Şiirler (14 Şiir Kitabı)</span>
+      <span class="badge">Kitap · E-Satış · Dinle</span>
+    </div>
+    <div id="siirler-vitrin" class="grid"></div>
+
+    <div class="koleksiyon-baslik" id="bolum-cocuk-kitaplari">
+      <span>🧸 Çocuk Kitapları (42 Çocuk Kitabı)</span>
+      <span class="badge">Kitap · E-Satış · Dinle</span>
+    </div>
+    <div id="cocuk-kitaplari-vitrin" class="grid"></div>
+
+    <div class="koleksiyon-baslik">
+      <span>🎵 Diğer Eser Bölümleri</span>
+      <span class="badge">Şarkı · Film · Klip · Beste · Müzik</span>
+    </div>
     <div class="grid">
-      <div class="card" data-eser-key="romanlar">
-        <h3>Romanlar</h3>
-        <p>Gurbet, insanlık, kader ve yaşam izlerini taşıyan roman serisi.</p>
-        <ul class="eser-liste">
-          <li>Kaderimden Kaçamadım</li>
-          <li>Hücrede 35 Yıl</li>
-          <li>Büyülü Yılan Kız ve Arabacı</li>
-        </ul>
-        <span class="badge">8 Roman</span><br>
-        <button type="button" class="btn ghost" onclick="eserDetayAc('romanlar')">İncele</button>
-      </div>
-
-      <div class="card" data-eser-key="siirler">
-        <h3>Şiirler</h3>
-        <p>Hasret, aşk, memleket ve insana dair şiir kitapları ile seçki şiirler.</p>
-        <ul class="eser-liste">
-          <li>Birini Sevdim</li>
-          <li>Gurbet ve Hasret Şiirleri</li>
-          <li>Seçilmiş Güfteler</li>
-        </ul>
-        <span class="badge">14 Kitap · 2.000+ Yazı</span><br>
-        <button type="button" class="btn ghost" onclick="eserDetayAc('siirler')">Oku</button>
-      </div>
-
-      <div class="card" data-eser-key="cocuk-kitaplari">
-        <h3>Çocuk Kitapları</h3>
-        <p>Çocukların hayal dünyasını besleyen öykü ve masal kitapları.</p>
-        <ul class="eser-liste">
-          <li>Yusuf’un Tayı Karayel</li>
-          <li>Göçmen Kuş Cikcik</li>
-          <li>Bilge Baykuş · Kuluçkadan Deve Kuşu Sürprizi</li>
-        </ul>
-        <span class="badge">42 Çocuk Kitabı</span><br>
-        <button type="button" class="btn ghost" onclick="eserDetayAc('cocuk-kitaplari')">İncele</button>
-      </div>
-
       <div class="card" data-eser-key="cocuk-sarkilari">
         <h3>Çocuk Şarkıları</h3>
         <p>Çocuk kitapları ve hikâyeleriyle uyumlu neşeli ve öğretici şarkılar.</p>
-        <ul class="eser-liste">
-          <li>Karayel ile Yolculuk Şarkısı</li>
-          <li>Cikcik’in Göç Türküsü</li>
-          <li>Bilge Baykuş’un Öğüdü</li>
-        </ul>
         <span class="badge">Çocuk Müziği</span><br>
         <button type="button" class="btn ghost" onclick="eserDetayAc('cocuk-sarkilari')">Dinle</button>
       </div>
@@ -326,10 +432,6 @@
       <div class="card" data-eser-key="cocuk-filmleri">
         <h3>Çocuk Filmleri</h3>
         <p>Minik izleyiciler için hazırlanan görsel hikâye ve kısa film çalışmaları.</p>
-        <ul class="eser-liste">
-          <li>Karayel’in Masalı (Kısa Film)</li>
-          <li>Göçmen Kuş Cikcik Görsel Anlatı</li>
-        </ul>
         <span class="badge">Görsel Anlatı</span><br>
         <button type="button" class="btn ghost" onclick="eserDetayAc('cocuk-filmleri')">İzle</button>
       </div>
@@ -337,10 +439,6 @@
       <div class="card" data-eser-key="klipler">
         <h3>Klipler</h3>
         <p>Şiir, türkü ve şarkı sözleri için hazırlanan video klip çalışmaları.</p>
-        <ul class="eser-liste">
-          <li>Birini Sevdim Klip Çalışması</li>
-          <li>Gurbetten Sesleniş Klipleri</li>
-        </ul>
         <span class="badge">Video Klip</span><br>
         <button type="button" class="btn ghost" onclick="eserDetayAc('klipler')">İzle</button>
       </div>
@@ -348,10 +446,6 @@
       <div class="card" data-eser-key="bestelerim">
         <h3>Bestelerim</h3>
         <p>Sözü ve müziğiyle öne çıkan özgün besteler ve ezgi çalışmaları.</p>
-        <ul class="eser-liste">
-          <li>400’ün Üzerinde Bestelenmiş Eser</li>
-          <li>Türkü ve Şarkı Formunda Besteler</li>
-        </ul>
         <span class="badge">400+ Beste</span><br>
         <button type="button" class="btn ghost" onclick="eserDetayAc('bestelerim')">İncele</button>
       </div>
@@ -359,10 +453,6 @@
       <div class="card" data-eser-key="muzik">
         <h3>Müzik</h3>
         <p>Ses kayıtları, albüm ve dijital müzik paylaşımları.</p>
-        <ul class="eser-liste">
-          <li>Suno ve Dijital Müzik Kayıtları</li>
-          <li>Şiir ve Müzik Dinletileri</li>
-        </ul>
         <span class="badge">Ses Kayıtları</span><br>
         <button type="button" class="btn ghost" onclick="eserDetayAc('muzik')">Dinle</button>
       </div>
@@ -370,10 +460,6 @@
       <div class="card" data-eser-key="resimler">
         <h3>Resimler</h3>
         <p>Fotoğraf, çizim, kapak ve görsel tasarım çalışmalarının galerisi.</p>
-        <ul class="eser-liste">
-          <li>40+ Görsel İçeren Galeri Arşivi</li>
-          <li>Kitap Kapak ve Sunum Görselleri</li>
-        </ul>
         <span class="badge">Galeri</span><br>
         <button type="button" class="btn ghost" onclick="galeriAc(); highlightTarget('galeri-bolumu');">Galeri</button>
       </div>
@@ -574,7 +660,7 @@
               <ul style="list-style-type: none; padding-left: 0;">
                   <li style="margin-bottom: 15px;">🖋️ Bugüne kadar <strong>2.000’in üzerinde</strong> şiir ve şarkı sözü kaleme aldım.</li>
                   <li style="margin-bottom: 15px;">🎵 <strong>400’ün üzerinde</strong> eserim bestelendi.</li>
-                  <li>📚 Edebiyat yolculuğumda <strong>8 roman</strong>, <strong>14 şiir kitabı</strong> ve <strong>42 çocuk kitabı</strong>yla okurlarımla buluştum.</li>
+                  <li>📚 Edebiyat yolculuğumda <strong>7 roman</strong>, <strong>14 şiir kitabı</strong> ve <strong>42 çocuk kitabı</strong>yla okurlarımla buluştum.</li>
               </ul>
           </div>
           <div style="margin-top: 60px; text-align: center;">
@@ -700,41 +786,232 @@
   let yoneticiAktif = false;
   let aktifModalKonu = "";
 
+  // Para birimi ayarları (TRY bazlı gösterim çarpanları)
+  const PARA_BIRIMLERI = {
+    "TRY": { sembol: "₺", carpan: 1, etiket: "TRY" },
+    "SEK": { sembol: "kr", carpan: 0.31, etiket: "SEK" },
+    "EUR": { sembol: "€", carpan: 0.027, etiket: "EUR" },
+    "USD": { sembol: "$", carpan: 0.029, etiket: "USD" }
+  };
+
+  const OKUMA_DILLERI = {
+    "tr": "Türkçe",
+    "sv": "Svenska",
+    "en": "English",
+    "de": "Deutsch",
+    "fr": "Français",
+    "es": "Español",
+    "ar": "العربية",
+    "ja": "日本語"
+  };
+
+  // Her eser için kısa anlatım, baz fiyat (TRY) ve dilerseniz doğrudan bağlantılar:
+  // satisUrl: "https://...", okuUrl: "https://...", dinleUrl: "https://..."
+  const ROMAN_KITAPLARI = [
+    {
+      baslik: "Kaderimden Kaçamadım",
+      anlatim: "Yaşamın sürüklediği yollarda insanın kaderle yüzleşmesini, umudu ve içsel direncini anlatan roman.",
+      fiyatTry: 250, satisUrl: "", okuUrl: "", dinleUrl: ""
+    },
+    {
+      baslik: "Hücrede 35 Yıl",
+      anlatim: "Uzun yıllara yayılan mahpusluk ve bekleyişin ardındaki insanlık hallerini, sabrı ve özgürlük özlemini işleyen eser.",
+      fiyatTry: 260, satisUrl: "", okuUrl: "", dinleUrl: ""
+    },
+    {
+      baslik: "Kavuşturan Tesadüf",
+      anlatim: "Yolları ayrılmış hayatların beklenmedik bir anda yeniden kesişmesini ve kırılan bağların onarılmasını konu alan roman.",
+      fiyatTry: 240, satisUrl: "", okuUrl: "", dinleUrl: ""
+    },
+    {
+      baslik: "Hani Dönecektik",
+      anlatim: "Gurbetin bıraktığı derin izleri, yarım kalan sözleri ve memlekete dönüş hasretini duygusal bir kurguyla aktaran eser.",
+      fiyatTry: 240, satisUrl: "", okuUrl: "", dinleUrl: ""
+    },
+    {
+      baslik: "Adım Sokak Çocuğu",
+      anlatim: "Sokakların sert rüzgârında büyümeye çalışan bir çocuğun gözünden hayatı, merhameti ve hayatta kalma mücadelesini anlatır.",
+      fiyatTry: 230, satisUrl: "", okuUrl: "", dinleUrl: ""
+    },
+    {
+      baslik: "Hayalet Köy",
+      anlatim: "Göçle sessizliğe bürünen bir köyün hatıralarını, geçmişin izlerini ve unutulmayan insan hikâyelerini bir araya getiren roman.",
+      fiyatTry: 240, satisUrl: "", okuUrl: "", dinleUrl: ""
+    },
+    {
+      baslik: "Kalemin Büyüsü",
+      anlatim: "Yazmanın dönüştürücü gücünü, kelimelerin insana tuttuğu aynayı ve bir ömürlük üretim yolculuğunu yansıtan eser.",
+      fiyatTry: 250, satisUrl: "", okuUrl: "", dinleUrl: ""
+    }
+  ];
+
+  const SIIR_KITAPLARI = [
+    {
+      baslik: "Birini Sevdim",
+      anlatim: "Saf sevginin, sadakatin ve yürekten kopan dizelerin yer aldığı seçkin şiir kitabı.",
+      fiyatTry: 180, satisUrl: "", okuUrl: "", dinleUrl: ""
+    },
+    {
+      baslik: "14 Şiir Kitabı Külliyatı (Seçki)",
+      anlatim: "Gurbet, memleket, hasret ve insanın iç dünyasına dokunan 14 şiir kitabından derlenen seçme eserler.",
+      fiyatTry: 220, satisUrl: "", okuUrl: "", dinleUrl: ""
+    }
+  ];
+
+  const COCUK_KITAPLARI = [
+    {
+      baslik: "Yusuf’un Tayı Karayel",
+      anlatim: "Yusuf ile tayı Karayel’in dostluğunu, doğa sevgisini ve birlikte yaşadıkları maceraları anlatan çocuk kitabı.",
+      fiyatTry: 170, satisUrl: "", okuUrl: "", dinleUrl: ""
+    },
+    {
+      baslik: "Göçmen Kuş Cikcik",
+      anlatim: "Mevsimler boyunca yol alan küçük kuş Cikcik’in dayanışma, merak ve keşif dolu yolculuğu.",
+      fiyatTry: 170, satisUrl: "", okuUrl: "", dinleUrl: ""
+    },
+    {
+      baslik: "Bilge Baykuş",
+      anlatim: "Ormandaki dostlara yol gösteren Bilge Baykuş’un öğütleri ve doğa hikâyeleriyle örülü çocuk kitabı.",
+      fiyatTry: 170, satisUrl: "", okuUrl: "", dinleUrl: ""
+    },
+    {
+      baslik: "Kuluçkadan Deve Kuşu Sürprizi",
+      anlatim: "Beklenmedik bir yumurtadan çıkan sürprizle başlayan eğlenceli, merak uyandırıcı ve öğretici çocuk öyküsü.",
+      fiyatTry: 170, satisUrl: "", okuUrl: "", dinleUrl: ""
+    },
+    {
+      baslik: "42 Çocuk Kitabı Serisi (Diğer Öyküler)",
+      anlatim: "Çocukların hayal dünyasını geliştiren, paylaşmayı ve doğayı sevdiren 42 kitaplık serinin diğer eserleri.",
+      fiyatTry: 190, satisUrl: "", okuUrl: "", dinleUrl: ""
+    }
+  ];
+
+  function aktifParaBirimi() {
+    const sel = document.getElementById('kitapParaBirimiSecim');
+    const kod = sel ? sel.value : 'TRY';
+    return PARA_BIRIMLERI[kod] || PARA_BIRIMLERI['TRY'];
+  }
+
+  function aktifOkumaDili() {
+    const sel = document.getElementById('kitapOkumaDiliSecim');
+    const kod = sel ? sel.value : 'tr';
+    return { kod, ad: OKUMA_DILLERI[kod] || 'Türkçe' };
+  }
+
+  function formatFiyat(fiyatTry) {
+    const pb = aktifParaBirimi();
+    const tutar = (fiyatTry || 200) * pb.carpan;
+    const yuvarlanmis = pb.kod === 'TRY' ? Math.round(tutar) : tutar.toFixed(2);
+    return pb.kod === 'SEK' ? `${yuvarlanmis} ${pb.sembol}` : `${pb.sembol}${yuvarlanmis}`;
+  }
+
+  function okumaAyarlariniUygula() {
+    const pb = aktifParaBirimi();
+    const dil = aktifOkumaDili();
+    localStorage.setItem('ilyas_kitap_ayarlari', JSON.stringify({ paraBirimi: pb.kod, okumaDili: dil.kod }));
+
+    koleksiyonKartlariniCiz('romanlar-vitrin', ROMAN_KITAPLARI, 'Roman');
+    koleksiyonKartlariniCiz('siirler-vitrin', SIIR_KITAPLARI, 'Şiir Kitabı');
+    koleksiyonKartlariniCiz('cocuk-kitaplari-vitrin', COCUK_KITAPLARI, 'Çocuk Kitabı');
+
+    const bilgiEl = document.getElementById('okumaAyarBilgi');
+    if (bilgiEl) {
+      bilgiEl.textContent = `✓ Aktif Para Birimi: ${pb.etiket} (${pb.sembol}) · Okuma Dili: ${dil.ad}`;
+    }
+  }
+
+  function okumaDiliDegistir(langCode) {
+    okumaAyarlariniUygula();
+    const selYan = document.getElementById('language-select');
+    if (selYan) selYan.value = langCode;
+  }
+
+  function seciliDileSayfayiCevir() {
+    const dil = aktifOkumaDili();
+    translatePage(dil.kod);
+  }
+
+  function kitapSecenekIslem(kategoriEtiketi, kitapBasligi, secenekAdi, dogrudanUrl, fiyatTry) {
+    if (dogrudanUrl && dogrudanUrl.trim()) {
+      window.open(dogrudanUrl.trim(), "_blank", "noopener");
+      return;
+    }
+    const pb = aktifParaBirimi();
+    const dil = aktifOkumaDili();
+    const fiyatMetni = formatFiyat(fiyatTry);
+    const taslak = `${kategoriEtiketi} — "${kitapBasligi}" için "${secenekAdi}" talebi:\n- Para Birimi: ${pb.etiket} (${fiyatMetni})\n- Tercih Edilen Okuma Dili: ${dil.ad}\n- Ad Soyad: \n- İletişim / E-posta: \n- Not: `;
+    showBolumBilgi(
+      `${kitapBasligi} — ${secenekAdi}`,
+      `"${kitapBasligi}" (${kategoriEtiketi}) için ${secenekAdi} seçeneğini seçtiniz. Tahmini tutar: ${fiyatMetni} · Okuma Dili: ${dil.ad}. Talebinizi doğrudan İletişim formuna aktarabilirsiniz.`,
+      taslak
+    );
+  }
+
+  function koleksiyonKartlariniCiz(hedefId, liste, kategoriEtiketi) {
+    const kapsayici = document.getElementById(hedefId);
+    if (!kapsayici) return;
+    const pb = aktifParaBirimi();
+    const dil = aktifOkumaDili();
+
+    kapsayici.innerHTML = liste.map((kitap, idx) => {
+      const safeKat = kategoriEtiketi.replace(/'/g, "\\'");
+      const safeBaslik = kitap.baslik.replace(/'/g, "\\'");
+      const safeSatis = (kitap.satisUrl || "").replace(/'/g, "\\'");
+      const safeOku = (kitap.okuUrl || "").replace(/'/g, "\\'");
+      const safeDinle = (kitap.dinleUrl || "").replace(/'/g, "\\'");
+      const fiyatEtiketi = formatFiyat(kitap.fiyatTry);
+      const eFiyatEtiketi = formatFiyat(Math.max(90, Math.round((kitap.fiyatTry || 200) * 0.65)));
+      const sesFiyatEtiketi = formatFiyat(Math.max(110, Math.round((kitap.fiyatTry || 200) * 0.75)));
+
+      return `
+        <div class="kitap-kart">
+          <div>
+            <span class="badge">${kategoriEtiketi} #${idx + 1}</span>
+            <span class="badge">Dil: ${dil.ad}</span>
+            <h4>${kitap.baslik}</h4>
+            <p class="kitap-anlatim">${kitap.anlatim}</p>
+            <div class="fiyat-satiri">
+              <span class="fiyat-etiket">Kitap (${pb.etiket}): ${fiyatEtiketi}</span>
+              <span class="fiyat-etiket">E-Satış Oku: ${eFiyatEtiketi}</span>
+              <span class="fiyat-etiket">Dinle: ${sesFiyatEtiketi}</span>
+            </div>
+          </div>
+          <div class="kitap-aksiyonlar">
+            <button type="button" class="btn ghost" onclick="kitapSecenekIslem('${safeKat}','${safeBaslik}','Kitabı Satın Al','${safeSatis}',${kitap.fiyatTry || 200})">Kitabı Satın Al</button>
+            <button type="button" class="btn ghost" onclick="kitapSecenekIslem('${safeKat}','${safeBaslik}','E-Satış Oku Satın Al','${safeOku}',${kitap.fiyatTry || 200})">E-Satış Oku Satın Al</button>
+            <button type="button" class="btn ghost" onclick="kitapSecenekIslem('${safeKat}','${safeBaslik}','Dinle Satın Al','${safeDinle}',${kitap.fiyatTry || 200})">Dinle Satın Al</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
   const ESER_DETAYLARI = {
     "romanlar": {
       baslik: "Romanlar (7 Roman)",
-      aciklama: "Edebiyat yolculuğunda kaleme alınan romanlar, yaşamın ve insan hallerinin izlerini taşır.",
-      maddeler: [
-        "Kaderimden Kaçamadım",
-        "Hücrede 35 Yıl",
-        "Kavuşturan Tesadüf",
-        "Hani Dönecektik",
-        "Adım Sokak Çocuğu",
-        "Hayalet Köy",
-        "Kalemin Büyüsü",
-        "Diğer roman çalışmalarınız için iletişim üzerinden talep veya bilgi alabilirsiniz."
-      ],
+      aciklama: "Edebiyat yolculuğunda kaleme alınan 7 roman için kısa anlatım ve satın alma / okuma / dinleme seçenekleri aşağıdadır.",
+      maddeler: ROMAN_KITAPLARI.map(k => `${k.baslik} — ${k.anlatim}`),
       konu: "Romanlar hakkında bilgi / temin talebi: "
     },
     "siirler": {
-      baslik: "Şiirler (15 Şiir Kitabı · 2.000+ Şiir ve Söz)",
+      baslik: "Şiirler (14 Şiir Kitabı · 2.000+ Şiir ve Söz)",
       aciklama: "Gurbet, memleket hasreti, sevda ve insan duygularını işleyen şiir kitapları ve güfteler.",
       maddeler: [
         "Birini Sevdim",
-        "15 Şiir Kitabı Külliyatı",
+        "14 Şiir Kitabı Külliyatı",
         "2.000’in üzerinde şiir ve şarkı sözü"
       ],
       konu: "Şiir kitapları ve şiirler hakkında bilgi talebi: "
     },
     "cocuk-kitaplari": {
-      baslik: "Çocuk Kitapları (40 Çocuk Kitabı)",
+      baslik: "Çocuk Kitapları (42 Çocuk Kitabı)",
       aciklama: "Çocuklara doğayı, dostluğu ve hayal gücünü sevdiren öykü kitapları.",
       maddeler: [
         "Yusuf’un Tayı Karayel",
         "Göçmen Kuş Cikcik",
         "Bilge Baykuş",
         "Kuluçkadan Deve Kuşu Sürprizi",
-        "Toplam 40 çocuk kitabı serisi"
+        "Toplam 42 çocuk kitabı serisi"
       ],
       konu: "Çocuk kitapları serisi hakkında bilgi / sipariş talebi: "
     },
@@ -806,7 +1083,7 @@
   }
 
   function highlightTarget(targetId) {
-    document.querySelectorAll('.card, .profil-form-kapsayici').forEach(el => el.classList.remove('highlight-card'));
+    document.querySelectorAll('.card, .profil-form-kapsayici, .kitap-kart, .koleksiyon-baslik').forEach(el => el.classList.remove('highlight-card'));
     if (!targetId) return;
     const targetEl = document.getElementById(targetId);
     if (targetEl) {
@@ -903,7 +1180,7 @@
         if (sub) sub.textContent = `"${topic}" bölümünü görüntülüyorsunuz.`;
       } else if (pageId === 'eserler') {
         document.querySelector('#eserler h2').textContent = 'Eserlerim';
-        document.querySelector('#eserler .sub').textContent = '8 roman, 14 şiir kitabı, 42 çocuk kitabı, 2.000’den fazla şiir/söz ve 400’ün üzerinde beste ile görsel çalışmalar.';
+        document.querySelector('#eserler .sub').textContent = '7 roman, 14 şiir kitabı, 42 çocuk kitabı, 2.000’den fazla şiir/söz ve 400’ün üzerinde beste ile görsel çalışmalar.';
       }
 
       if (targetId === 'galeri-bolumu') {
@@ -1064,6 +1341,56 @@
     document.getElementById('paylasimOnayOzeti').textContent = onayEtiketleri[val] + " (Kaydedildi)";
   }
 
+  function okumaAyarlariniYukle() {
+    const kayit = JSON.parse(localStorage.getItem('ilyas_kitap_ayarlari') || 'null');
+    if (kayit) {
+      if (kayit.paraBirimi && PARA_BIRIMLERI[kayit.paraBirimi]) {
+        document.getElementById('kitapParaBirimiSecim').value = kayit.paraBirimi;
+      }
+      if (kayit.okumaDili && OKUMA_DILLERI[kayit.okumaDili]) {
+        document.getElementById('kitapOkumaDiliSecim').value = kayit.okumaDili;
+      }
+    }
+    okumaAyarlariniUygula();
+  }
+
+  // Kopyalama ve ekran yakalama kısayollarını engelleme
+  document.addEventListener('contextmenu', e => {
+    const tag = e.target.tagName;
+    if (tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
+      e.preventDefault();
+    }
+  });
+  ['copy', 'cut', 'dragstart'].forEach(evt => {
+    document.addEventListener(evt, e => {
+      const tag = e.target.tagName;
+      if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+        e.preventDefault();
+      }
+    });
+  });
+  document.addEventListener('keydown', e => {
+    const key = (e.key || '').toLowerCase();
+    const tag = document.activeElement ? document.activeElement.tagName : '';
+    const yazilabilirAlan = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
+
+    if (e.key === 'PrintScreen') {
+      document.body.classList.add('screen-guard-blur');
+      setTimeout(() => document.body.classList.remove('screen-guard-blur'), 1400);
+    }
+    if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'a', 's', 'u', 'p'].includes(key)) {
+      if (!yazilabilirAlan || !['c', 'x', 'a'].includes(key)) {
+        e.preventDefault();
+      }
+    }
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i', 'j', 'c', 's'].includes(key)) {
+      e.preventDefault();
+    }
+  });
+  window.addEventListener('blur', () => document.body.classList.add('screen-guard-blur'));
+  window.addEventListener('focus', () => document.body.classList.remove('screen-guard-blur'));
+
+  okumaAyarlariniYukle();
   profilBilgileriniYukle();
   guncellemeCiz();
   tercihYukle();
