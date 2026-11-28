@@ -460,7 +460,7 @@
 
     <div id="galeri-bolumu" class="card" style="margin-top: 24px; display: block;">
       <h3>GALERİ</h3>
-      <p>Fotoğraf ve çizim galerisini açıp kapatabilirsiniz.</p>
+      <p>Fotoğraf ve çizim galerisini açıp kapatabilirsiniz. Görseller <code>./resimler/</code> klasöründen yüklenir.</p>
       <button id="galeri-ac-btn" type="button" onclick="galeriAc()" class="btn">Galeriyi Aç</button>
       <button id="galeri-kapat-btn" type="button" onclick="galeriKapat()" class="btn" style="display: none;">Galeriyi Kapat</button>
 
@@ -1437,10 +1437,12 @@ function googleTranslateElementInit() {
     
     let htmlIcerik = "";
     for (let i = 0; i < fotograflar.length; i++) {
+      const dosyaYolu = `./resimler/${fotograflar[i]}`;
       htmlIcerik += `
         <div style="margin-bottom: 16px;">
           <h3 style="color: #c9a227;">Galeri ${i + 1}</h3>
-          <img src="./resimler/${fotograflar[i]}" alt="Galeri ${i + 1}" style="max-width: 100%; height: auto; display: block; border-radius: 8px;">
+          <img src="${dosyaYolu}" alt="Galeri ${i + 1}" style="max-width: 100%; height: auto; display: block; border-radius: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <p style="display:none; color:#f28b82; font-size:0.85rem; margin-top:6px;">Görsel yüklenemedi: <code>${dosyaYolu}</code> (dosya adını veya büyük/küçük harf yazımını kontrol edin).</p>
         </div>
       `;
     }
